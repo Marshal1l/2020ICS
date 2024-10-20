@@ -49,7 +49,7 @@ void isa_reg_display()
   for (int i = 0; i < length; i++)
   {
     uint32_t val = reg_l(i);
-    printf("reg$:%s 0x%08x\t%20d\n", regsl[i], val, val);
+    printf("%s 0x%08x\t%20d\n", regsl[i], val, val);
   }
 }
 
