@@ -582,7 +582,7 @@ word_t expr(char *e, bool *success)
   res = eval(0, tokens_len - 1);
   //    printf("%d\n", tokens[i].t   printf("check flag = %d\n",check_parentheses(0, tokens_len - 1));
   if (!division_zero)
-    printf("the val = %x\n", res);
+    printf("the input val = %08x\n", res);
   else
     printf("Your input have an error: can't division zeor\n");
   memset(tokens, 0, sizeof(tokens));
