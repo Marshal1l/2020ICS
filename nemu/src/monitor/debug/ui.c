@@ -146,14 +146,16 @@ static int cmd_x(char *args)
 // p
 static int cmd_p(char *args)
 {
-  // if (args == NULL)
-  // {
-  //   printf("No args\n");
-  //   return 0;
-  // }
-  // bool flag = false;
-  // expr(args, &flag);
-  return 0;
+  if (args == NULL)
+  {
+    printf("No args\n");
+    return 0;
+  }
+  bool flag = false;
+  expr(args, &flag);
+  if (false)
+    return 0;
+  return -1;
 };
 static int cmd_w(char *args) { return -1; };
 static int cmd_dw(char *args) { return -1; };
