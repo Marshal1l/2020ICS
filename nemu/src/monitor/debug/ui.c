@@ -187,9 +187,9 @@ static int cmd_b(char *args)
     printf("No args\n");
     return 0;
   }
-  char *tmp = strcat(strpc, args);
-  printf("%s\n", tmp);
-  new_wp(tmp);
+  // char *tmp = strcat(strpc, args);
+  // printf("%s\n", tmp);
+  // new_wp(tmp);
   return 0;
 };
 
