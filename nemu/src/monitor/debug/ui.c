@@ -6,7 +6,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <memory/vaddr.h>
-char strpc[] = "$pc==";
+char strpc[5] = "$pc==";
 void cpu_exec(uint64_t);
 int is_batch_mode();
 
