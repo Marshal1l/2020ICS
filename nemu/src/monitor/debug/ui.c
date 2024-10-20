@@ -100,18 +100,18 @@ static int cmd_info(char *args)
     isa_reg_display();
     return 0;
   }
-  // else if (rw == 'w')
-  // {
-  //   // info w
-  //   info_w_display();
-  //   return 0;
-  // }
-  // else if (rw == 'f')
-  // {
-  //   // info w
-  //   info_fw_display();
-  //   return 0;
-  // }
+  else if (rw == 'w')
+  {
+    // info w
+    info_w_display();
+    return 0;
+  }
+  else if (rw == 'f')
+  {
+    // info w
+    info_fw_display();
+    return 0;
+  }
   printf("invalid input\n");
   return 0;
 }
@@ -155,8 +155,27 @@ static int cmd_p(char *args)
   expr(args, &flag);
   return 0;
 };
-static int cmd_w(char *args) { return -1; };
-static int cmd_dw(char *args) { return -1; };
+static int cmd_w(char *args)
+{
+  if (args == NULL)
+  {
+    printf("No args\n");
+    return 0;
+  }
+  new_wp(args);
+  return 0;
+};
+static int cmd_dw(char *args)
+{
+  if (args == NULL)
+  {
+    printf("No args\n");
+    return 0;
+  }
+  uint32_t no_delete = char2int(args);
+  free_wp(no_delete);
+  return 0;
+};
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
