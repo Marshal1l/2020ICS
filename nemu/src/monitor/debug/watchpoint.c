@@ -158,7 +158,11 @@ int check_wp()
       assert(0);
     if (result != tmp_head->old_val)
     {
-      flag = true;
+      if (flag == false)
+      {
+        printf("some watchpoints val are changed as follows\n");
+        flag = true;
+      }
       tmp_head->old_val = result;
       printf("NO:%d\t expr:  %s\t val: %x\n", tmp_head->NO, tmp_head->wp_expr, tmp_head->old_val);
       break;
