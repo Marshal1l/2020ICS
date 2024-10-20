@@ -146,25 +146,30 @@ void free_wp(int no_delete)
     return;
   }
 };
-// void check_wp()
-// {
-//   WP *tmp_head = head;
-//   bool success = true;
-//   while (tmp_head != NULL)
-//   {
-//     uint32_t result = expr(tmp_head->wp_expr, &success);
-//     if (!success)
-//       assert(0);
-//     if (result != tmp_head->old_val)
-//     {
-//       tmp_head->old_val = result;
-//       printf("NO:%d\t expr:  %s\t val: %x\n", tmp_head->NO, tmp_head->wp_expr, tmp_head->old_val);
-//       nemu_state.state = NEMU_STOP;
-//       break;
-//     }
-//     tmp_head = tmp_head->next;
-//   }
-// }
+int check_wp()
+{
+  WP *tmp_head = head;
+  bool success = true;
+  bool flag = false;
+  while (tmp_head != NULL)
+  {
+    uint32_t result = expr(tmp_head->wp_expr, &success);
+    if (!success)
+      assert(0);
+    if (result != tmp_head->old_val)
+    {
+      flag = true;
+      tmp_head->old_val = result;
+      printf("NO:%d\t expr:  %s\t val: %x\n", tmp_head->NO, tmp_head->wp_expr, tmp_head->old_val);
+      break;
+    }
+    tmp_head = tmp_head->next;
+  }
+  if (flag)
+    return 1;
+  else
+    return 0;
+}
 void init_wp_pool()
 {
   int i;

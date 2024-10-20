@@ -18,6 +18,6 @@ void free_wp(int no_delete);
 int char2int(char s[]);
 void info_w_display();
 void info_fw_display();
-void check_wp();
+int check_wp();
 
 #endif
