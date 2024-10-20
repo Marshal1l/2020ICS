@@ -139,6 +139,8 @@ void free_wp(int no_delete)
         delete_wp(find, prev_find);
       }
     }
+    printf("no such a watchpoint\n");
+    return;
   }
 };
 // void check_wp()
