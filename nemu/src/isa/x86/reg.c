@@ -55,5 +55,109 @@ void isa_reg_display()
 
 word_t isa_reg_str2val(const char *s, bool *success)
 {
+  printf("input ->%s\n", s);
+  *success = true;
+
+  if (!strcmp(s + 1, "eax"))
+  {
+    return cpu.eax;
+  }
+  else if (!strcmp(s + 1, "pc"))
+  {
+    return cpu.pc;
+  }
+  else if (!strcmp(s + 1, "ecx"))
+  {
+    return cpu.ecx;
+  }
+  else if (!strcmp(s + 1, "edx"))
+  {
+    return cpu.edx;
+  }
+  else if (!strcmp(s + 1, "ebx"))
+  {
+    return cpu.ebx;
+  }
+  else if (!strcmp(s + 1, "esp"))
+  {
+    return cpu.esp;
+  }
+  else if (!strcmp(s + 1, "ebp"))
+  {
+    return cpu.ebp;
+  }
+  else if (!strcmp(s + 1, "esi"))
+  {
+    return cpu.esi;
+  }
+  else if (!strcmp(s + 1, "edi"))
+  {
+    return cpu.edi;
+  }
+  else if (!strcmp(s + 1, "ax"))
+  {
+    return cpu.gpr[R_AX]._16;
+  }
+  else if (!strcmp(s + 1, "cx"))
+  {
+    return cpu.gpr[R_CX]._16;
+  }
+  else if (!strcmp(s + 1, "dx"))
+  {
+    return cpu.gpr[R_DX]._16;
+  }
+  else if (!strcmp(s + 1, "bx"))
+  {
+    return cpu.gpr[R_BX]._16;
+  }
+  else if (!strcmp(s + 1, "sp"))
+  {
+    return cpu.gpr[R_SP]._16;
+  }
+  else if (!strcmp(s + 1, "bp"))
+  {
+    return cpu.gpr[R_BP]._16;
+  }
+  else if (!strcmp(s + 1, "si"))
+  {
+    return cpu.gpr[R_SI]._16;
+  }
+  else if (!strcmp(s + 1, "di"))
+  {
+    return cpu.gpr[R_DI]._16;
+  }
+  else if (!strcmp(s + 1, "ah"))
+  {
+    return cpu.gpr[R_EAX]._8[1];
+  }
+  else if (!strcmp(s + 1, "ch"))
+  {
+    return cpu.gpr[R_ECX]._8[1];
+  }
+  else if (!strcmp(s + 1, "dh"))
+  {
+    return cpu.gpr[R_EDX]._8[1];
+  }
+  else if (!strcmp(s + 1, "bh"))
+  {
+    return cpu.gpr[R_EBX]._8[1];
+  }
+  else if (!strcmp(s + 1, "al"))
+  {
+    return cpu.gpr[R_EAX]._8[0];
+  }
+  else if (!strcmp(s + 1, "cl"))
+  {
+    return cpu.gpr[R_ECX]._8[0];
+  }
+  else if (!strcmp(s + 1, "dl"))
+  {
+    return cpu.gpr[R_EDX]._8[0];
+  }
+  else if (!strcmp(s + 1, "bl"))
+  {
+    return cpu.gpr[R_EBX]._8[0];
+  }
+  *success = false;
   return 0;
 }
