@@ -71,6 +71,7 @@ static struct
     /* TODO: Add more commands */
 
 };
+// si
 static int cmd_si(char *args)
 {
   int n_step = 1;
@@ -83,7 +84,38 @@ static int cmd_si(char *args)
   cpu_exec(n_step);
   return 0;
 }
-static int cmd_info(char *args) { return -1; };
+// info
+static int cmd_info(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL)
+  {
+    printf("No args\n");
+    return 0;
+  }
+  char rw;
+  sscanf(arg, "%c", &rw);
+  if (rw == 'r')
+  {
+    isa_reg_display();
+    return 0;
+  }
+  // else if (rw == 'w')
+  // {
+  //   // info w
+  //   info_w_display();
+  //   return 0;
+  // }
+  // else if (rw == 'f')
+  // {
+  //   // info w
+  //   info_fw_display();
+  //   return 0;
+  // }
+  printf("invalid input\n");
+  return 0;
+}
+// x
 static int cmd_x(char *args) { return -1; };
 static int cmd_p(char *args) { return -1; };
 static int cmd_w(char *args) { return -1; };

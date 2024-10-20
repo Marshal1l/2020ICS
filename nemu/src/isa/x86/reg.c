@@ -7,14 +7,16 @@ const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 const char *regsw[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 const char *regsb[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 
-void reg_test() {
+void reg_test()
+{
   srand(time(0));
   word_t sample[8];
   word_t pc_sample = rand();
   cpu.pc = pc_sample;
 
   int i;
-  for (i = R_EAX; i <= R_EDI; i ++) {
+  for (i = R_EAX; i <= R_EDI; i++)
+  {
     sample[i] = rand();
     reg_l(i) = sample[i];
     assert(reg_w(i) == (sample[i] & 0xffff));
@@ -41,9 +43,17 @@ void reg_test() {
   assert(pc_sample == cpu.pc);
 }
 
-void isa_reg_display() {
+void isa_reg_display()
+{
+  int length = sizeof(regsl) / sizeof(regsl[0]);
+  for (int i = 0; i < length; i++)
+  {
+    uint32_t val = reg_l(i);
+    printf("reg$:%s 0x%08x\t%20d\n", regsl[i], val, val);
+  }
 }
 
-word_t isa_reg_str2val(const char *s, bool *success) {
+word_t isa_reg_str2val(const char *s, bool *success)
+{
   return 0;
 }
