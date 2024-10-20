@@ -137,7 +137,10 @@ void free_wp(int no_delete)
       if (find->NO == no_delete)
       {
         delete_wp(find, prev_find);
+        return;
       }
+      prev_find = prev_find->next;
+      find = find->next;
     }
     printf("no such a watchpoint\n");
     return;
