@@ -105,7 +105,7 @@ void cpu_exec(uint64_t n)
     if (check_wp())
     {
       asm_print(this_pc, seq_pc - this_pc, true);
-      nemu_state.state = NEMU_STOP;
+      // nemu_state.state = NEMU_STOP;
     }
     /* TODO: check watchpoints here. */
 #endif
