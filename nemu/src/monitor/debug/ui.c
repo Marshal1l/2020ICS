@@ -6,6 +6,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <memory/vaddr.h>
+char strpc[] = "$pc==";
 void cpu_exec(uint64_t);
 int is_batch_mode();
 
@@ -186,7 +187,7 @@ static int cmd_b(char *args)
     printf("No args\n");
     return 0;
   }
-  char *tmp = strcat("$pc==", args);
+  char *tmp = strcat(strpc, args);
   printf("%s\n", tmp);
   new_wp(tmp);
   return 0;
