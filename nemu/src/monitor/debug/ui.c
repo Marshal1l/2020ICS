@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include <memory/vaddr.h>
 void cpu_exec(uint64_t);
 int is_batch_mode();
 
@@ -116,8 +116,45 @@ static int cmd_info(char *args)
   return 0;
 }
 // x
-static int cmd_x(char *args) { return -1; };
-static int cmd_p(char *args) { return -1; };
+static int cmd_x(char *args)
+{
+  char *n = strtok(args, " ");
+  if (n == NULL)
+  {
+    printf("No args\n");
+    return 0;
+  }
+  char *baseaddr = strtok(NULL, " ");
+  if (baseaddr == NULL)
+  {
+    printf("No second args\n");
+    return 0;
+  }
+  int len = 0;
+  paddr_t addr = 0;
+  sscanf(n, "%d", &len);
+  sscanf(baseaddr, "%x", &addr);
+  int val = 0;
+  for (int i = 0; i < len; i++)
+  {
+    val = vaddr_read(addr, 4);
+    printf("0x%x\t%08x\t%20d\n", addr, val, val); // addr len
+    addr = addr + 4;
+  }
+  return 0;
+}
+// p
+static int cmd_p(char *args)
+{
+  // if (args == NULL)
+  // {
+  //   printf("No args\n");
+  //   return 0;
+  // }
+  // bool flag = false;
+  // expr(args, &flag);
+  return 0;
+};
 static int cmd_w(char *args) { return -1; };
 static int cmd_dw(char *args) { return -1; };
 
