@@ -12,7 +12,7 @@ void info_w_display()
   WP *tmp_wp = head;
   while (tmp_wp != NULL)
   {
-    printf("NO:%d\t expr:  %s\n", tmp_wp->NO, tmp_wp->wp_expr);
+    printf("NO:%d\t expr:  %s\t val: 0x%08x\n", tmp_wp->NO, tmp_wp->wp_expr, tmp_wp->old_val);
 
     tmp_wp = tmp_wp->next;
   }
