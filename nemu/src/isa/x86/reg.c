@@ -55,7 +55,7 @@ void isa_reg_display()
 
 word_t isa_reg_str2val(const char *s, bool *success)
 {
-  printf("input ->%s\n", s);
+  // printf("input ->%s\n", s);
   *success = true;
 
   if (!strcmp(s + 1, "eax"))
