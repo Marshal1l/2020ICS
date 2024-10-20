@@ -187,6 +187,7 @@ static int cmd_b(char *args)
     return 0;
   }
   char *tmp = strcat("$pc==", args);
+  printf("%s\n", tmp);
   new_wp(tmp);
   return 0;
 };
