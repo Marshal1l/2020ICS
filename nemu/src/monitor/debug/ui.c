@@ -48,6 +48,7 @@ static int cmd_x(char *args);
 static int cmd_p(char *args);
 static int cmd_w(char *args);
 static int cmd_dw(char *args);
+static int cmd_b(char *args);
 static struct
 {
   char *name;
@@ -67,6 +68,7 @@ static struct
     {"w", "add watch point", cmd_w},
     {"delete", "delete watch point", cmd_dw},
     {"d", "delete watch point", cmd_dw},
+    {"b", "set the  breakpoint", cmd_b},
 
     /* TODO: Add more commands */
 
@@ -174,6 +176,18 @@ static int cmd_dw(char *args)
   }
   uint32_t no_delete = char2int(args);
   free_wp(no_delete);
+  return 0;
+};
+
+static int cmd_b(char *args)
+{
+  if (args == NULL)
+  {
+    printf("No args\n");
+    return 0;
+  }
+  char *tmp = strcat("$pc==", args);
+  new_wp(tmp);
   return 0;
 };
 
