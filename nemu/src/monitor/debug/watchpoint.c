@@ -163,8 +163,8 @@ int check_wp()
         printf("some watchpoints val are changed as follows\n");
         flag = true;
       }
+      printf("NO:%d\t expr:  %s\t val: 0x%08x -> 0x%08x\n", tmp_head->NO, tmp_head->wp_expr, tmp_head->old_val, result);
       tmp_head->old_val = result;
-      printf("NO:%d\t expr:  %s\t val: %x\n", tmp_head->NO, tmp_head->wp_expr, tmp_head->old_val);
       break;
     }
     tmp_head = tmp_head->next;
