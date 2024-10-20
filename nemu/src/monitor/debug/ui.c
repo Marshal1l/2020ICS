@@ -6,7 +6,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <memory/vaddr.h>
-char strpc[5] = "$pc==";
+#define STRPC_LEN 30
+char strpc[STRPC_LEN] = "$pc==";
 void cpu_exec(uint64_t);
 int is_batch_mode();
 
@@ -187,9 +188,9 @@ static int cmd_b(char *args)
     printf("No args\n");
     return 0;
   }
-  // char *tmp = strcat(strpc, args);
+  strcat(strpc, args);
   printf("%s\n", strpc);
-  // new_wp(tmp);
+  new_wp(strpc);
   return 0;
 };
 
