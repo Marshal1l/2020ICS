@@ -1,6 +1,6 @@
 #include <isa.h>
 #include "expr.h"
-#include "watchpoint.h"
+#include <monitor/watchpoint.h>
 
 #include <stdlib.h>
 #include <readline/readline.h>
