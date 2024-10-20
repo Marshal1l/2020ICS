@@ -75,7 +75,7 @@ WP *new_wp(char *s)
   }
   if (success)
   {
-    printf("new watchpoint:NO %d\texpr: %s\n", new_wp->NO, new_wp->wp_expr);
+    printf("new watchpoint:\nNO %d\texpr: %s  val: 0x%08x\n", new_wp->NO, new_wp->wp_expr, new_wp->old_val);
     return new_wp;
   }
   else
