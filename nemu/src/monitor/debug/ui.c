@@ -191,6 +191,7 @@ static int cmd_b(char *args)
   strcat(strpc, args);
   printf("%s\n", strpc);
   new_wp(strpc);
+  strpc[5] = '\0';
   return 0;
 };
 
