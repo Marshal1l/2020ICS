@@ -153,9 +153,7 @@ static int cmd_p(char *args)
   }
   bool flag = false;
   expr(args, &flag);
-  if (false)
-    return 0;
-  return -1;
+  return 0;
 };
 static int cmd_w(char *args) { return -1; };
 static int cmd_dw(char *args) { return -1; };
