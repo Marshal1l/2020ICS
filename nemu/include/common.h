@@ -1,21 +1,21 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
-//#define DEBUG
-//#define DIFF_TEST
+// #define DEBUG
+// #define DIFF_TEST
 
 #ifdef __ISA_riscv64__
-# define ISA64
+#define ISA64
 #endif
 
 #if _SHARE
 // do not enable these features while building a reference design
 #undef DIFF_TEST
-#undef DEBUG
+#define DEBUG
 #endif
 
 /* You will define this macro in PA2 */
-//#define HAS_IOE
+// #define HAS_IOE
 
 #include <stdint.h>
 #include <assert.h>
