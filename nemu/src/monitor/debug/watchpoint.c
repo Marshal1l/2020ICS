@@ -107,7 +107,7 @@ void delete_wp(WP *find, WP *prev_find)
     else
       head = NULL;
   }
-  printf("del watchpoint NO:%d\texpr:%s  val: 0x%08x\n", find->NO, find->wp_expr, find->old_val);
+  printf("del watchpoint:\n NO:%d\texpr:%s  val: 0x%08x\n", find->NO, find->wp_expr, find->old_val);
   // 清空数据
   for (int i = 0; i < WPEXPRLEN; i++)
     find->wp_expr[i] = '\0';
