@@ -138,6 +138,13 @@ again:
     EX(0x0f, 2byte_esc)
     // push
     IDEX(0x50, push_Reg, push_Reg)
+    IDEX(0x51, push_Reg, push_Reg)
+    IDEX(0x52, push_Reg, push_Reg)
+    IDEX(0x53, push_Reg, push_Reg)
+    IDEX(0x54, push_Reg, push_Reg)
+    IDEX(0x55, push_Reg, push_Reg)
+    IDEX(0x56, push_Reg, push_Reg)
+    IDEX(0x57, push_Reg, push_Reg)
     // imm->reg/mem
     //
     IDEXW(0x80, I2E, gp1, 1)
