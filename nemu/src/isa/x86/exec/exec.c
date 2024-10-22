@@ -137,7 +137,7 @@ again:
   {
     EX(0x0f, 2byte_esc)
     // push
-    IDEXW(0x55, push_SI, push, 1)
+    IDEX(0x50, push_Reg, push_Reg)
     // imm->reg/mem
     //
     IDEXW(0x80, I2E, gp1, 1)

@@ -6,9 +6,9 @@ static inline def_EHelper(mov)
   print_asm_template2(mov);
 }
 
-static inline def_EHelper(push)
+static inline def_EHelper(push_Reg)
 {
-  rtl_push(s, ddest);
+  rtl_push(s, id_dest->preg);
   print_asm_template1(push);
 }
 
@@ -18,10 +18,10 @@ static inline def_EHelper(pop)
   print_asm_template1(pop);
 }
 
-static inline def_EHelper(pusha)
+static inline def_EHelper(push_SI)
 {
-  TODO();
-  print_asm("pusha");
+  rtl_push(s, ddest);
+  print_asm("pushSI");
 }
 
 static inline def_EHelper(popa)
