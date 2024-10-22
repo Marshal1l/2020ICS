@@ -136,6 +136,13 @@ again:
   switch (opcode)
   {
     EX(0x0f, 2byte_esc)
+    // xor
+    IDEXW(0x30, G2E, xor, 1)
+    IDEX(0x31, G2E, xor)
+    IDEXW(0x32, E2G, xor, 1)
+    IDEX(0x33, E2G, xor)
+    IDEXW(0x34, I2a, xor, 1)
+    IDEX(0x35, I2a, xor)
     // push
     IDEX(0x50, push_Reg, push_Reg)
     IDEX(0x51, push_Reg, push_Reg)
