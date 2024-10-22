@@ -34,7 +34,15 @@ static inline def_EHelper(call)
 
 static inline def_EHelper(ret)
 {
-  TODO();
+  if (s->isa.is_operand_size_16 == true)
+  {
+    rtl_pop(s, &s->seq_pc);
+    s->seq_pc &= 0x0000FFFF;
+  }
+  else
+  {
+    rtl_pop(s, &s->seq_pc);
+  }
   print_asm("ret");
 }
 
