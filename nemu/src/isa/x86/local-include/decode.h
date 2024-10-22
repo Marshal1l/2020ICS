@@ -69,7 +69,8 @@ static inline def_DopHelper(SI)
    *
    operand_imm(s, op, load_val, ???, op->width);
    */
-  int si_imm = instr_fetch(&s->seq_pc, op->width);
+  word_t si_imm = instr_fetch(&s->seq_pc, op->width);
+  rtl_sext(s, &si_imm, &si_imm, op->width);
   operand_imm(s, op, load_val, si_imm, op->width);
 }
 
