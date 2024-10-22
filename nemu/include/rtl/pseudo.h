@@ -45,14 +45,27 @@ static inline def_rtl(sext, rtlreg_t *dest, const rtlreg_t *src1, int width)
     *dest = *(int *)src1;
     break;
   default:
-    assert(0);
+    assert(0 && "Unsupported width for sign extension");
   }
 }
 
 static inline def_rtl(zext, rtlreg_t *dest, const rtlreg_t *src1, int width)
 {
   // dest <- zeroext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  switch (width)
+  {
+  case 1:
+    *dest = *(uint8_t *)src1;
+    break;
+  case 2:
+    *dest = *(uint16_t *)src1;
+    break;
+  case 4:
+    *dest = *(uint32_t *)src1;
+    break;
+  default:
+    assert(0);
+  }
 }
 
 static inline def_rtl(msb, rtlreg_t *dest, const rtlreg_t *src1, int width)
