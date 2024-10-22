@@ -209,7 +209,7 @@ again:
     IDEXW(0xc0, gp2_Ib2E, gp2, 1)
     IDEX(0xc1, gp2_Ib2E, gp2)
     // ret
-    EX(0xc3, ret)
+    // EX(0xc3, ret)
     //
     IDEXW(0xc6, mov_I2E, mov, 1)
     IDEX(0xc7, mov_I2E, mov)
