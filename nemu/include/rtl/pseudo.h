@@ -52,7 +52,6 @@ static inline def_rtl(sext, rtlreg_t *dest, const rtlreg_t *src1, int width)
   default:
     assert(0);
   }
-  TODO();
 }
 
 static inline def_rtl(zext, rtlreg_t *dest, const rtlreg_t *src1, int width)
