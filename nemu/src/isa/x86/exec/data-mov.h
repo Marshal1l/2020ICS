@@ -6,9 +6,25 @@ static inline def_EHelper(mov)
   print_asm_template2(mov);
 }
 
-static inline def_EHelper(push_Reg)
+static inline def_EHelper(push)
 {
-  rtl_push(s, id_dest->preg);
+  // TODO();
+  rtl_push(s, ddest);
+  print_asm_template1(push);
+}
+
+static inline def_EHelper(push_esp)
+{
+  // TODO();
+  rtl_mv(s, s0, ddest);
+  rtl_push(s, s0);
+  print_asm_template1(push);
+}
+
+static inline def_EHelper(push_ib)
+{
+  rtl_sext(s, ddest, ddest, id_dest->width);
+  rtl_push(s, ddest);
   print_asm_template1(push);
 }
 
@@ -18,10 +34,19 @@ static inline def_EHelper(pop)
   print_asm_template1(pop);
 }
 
-static inline def_EHelper(push_SI)
+static inline def_EHelper(pusha)
 {
-  rtl_push(s, ddest);
-  print_asm("pushSI");
+  // TODO();
+  rtl_mv(s, t0, &reg_l(R_ESP));
+  rtl_push(s, &reg_l(R_EAX));
+  rtl_push(s, &reg_l(R_ECX));
+  rtl_push(s, &reg_l(R_EDX));
+  rtl_push(s, &reg_l(R_EBX));
+  rtl_push(s, t0);
+  rtl_push(s, &reg_l(R_EBP));
+  rtl_push(s, &reg_l(R_ESI));
+  rtl_push(s, &reg_l(R_EDI));
+  print_asm("pusha");
 }
 
 static inline def_EHelper(popa)
