@@ -8,7 +8,7 @@ static inline def_EHelper(mov)
 
 static inline def_EHelper(push)
 {
-  TODO();
+  rtl_push(s, id_dest->preg);
   print_asm_template1(push);
 }
 
