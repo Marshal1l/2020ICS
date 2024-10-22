@@ -344,7 +344,12 @@ static inline def_DHelper(out_a2dx)
   decode_op_a(s, id_src1, true);
   operand_reg(s, id_dest, true, R_DX, 2);
 }
-
+// static inline def_DHelper(call_rel32)
+// {
+// }
+// static inline def_DHelper(jmp)
+// {
+// }
 static inline void operand_write(DecodeExecState *s, Operand *op, rtlreg_t *src)
 {
   if (op->type == OP_TYPE_REG)
