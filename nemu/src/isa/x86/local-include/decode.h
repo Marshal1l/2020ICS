@@ -71,7 +71,6 @@ static inline def_DopHelper(SI)
    */
   int si_imm = instr_fetch(&s->seq_pc, op->width);
   operand_imm(s, op, load_val, si_imm, op->width);
-  TODO();
 }
 
 /* I386 manual does not contain this abbreviation.
