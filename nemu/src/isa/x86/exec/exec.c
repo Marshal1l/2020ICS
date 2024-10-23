@@ -218,8 +218,8 @@ again:
     IDEX(0xd1, gp2_1_E, gp2)
     IDEXW(0xd2, gp2_cl2E, gp2, 1)
     IDEX(0xd3, gp2_cl2E, gp2)
-    // EX(0xd6, nemu_trap)
-    //  call
+    EX(0xd6, nemu_trap)
+    // call
     IDEX(0xe8, J, call)
     IDEX(0xeb, J, jmp)
     // f
