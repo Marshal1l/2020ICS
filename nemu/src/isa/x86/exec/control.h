@@ -38,10 +38,12 @@ static inline def_EHelper(ret)
   {
     rtl_pop(s, &s->seq_pc);
     s->seq_pc &= 0x0000FFFF;
+    print_asm("ret to%x", s->jmp_pc);
   }
   else
   {
     rtl_pop(s, &s->seq_pc);
+    print_asm("ret to%x", s->jmp_pc);
   }
   print_asm("ret");
 }
