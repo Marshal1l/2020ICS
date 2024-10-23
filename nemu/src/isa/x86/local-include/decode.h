@@ -37,13 +37,7 @@ static inline void operand_imm(DecodeExecState *s, Operand *op, bool load_val, w
 
 // decode operand helper
 #define def_DopHelper(name) void concat(decode_op_, name)(DecodeExecState * s, Operand * op, bool load_val)
-//
-// 函数声明
-// load_val参数, 用于控制是否需要将该操作数读出到译码信息s中供后续使用.
-//
-// void decode_op_xxx(DecodeExecState *s, Operand *op, bool load_val){}
-//
-//
+
 /* Refer to Appendix A in i386 manual for the explanations of these abbreviations */
 
 /* Ib, Iv */
@@ -69,9 +63,19 @@ static inline def_DopHelper(SI)
    *
    operand_imm(s, op, load_val, ???, op->width);
    */
-  word_t si_imm = instr_fetch(&s->seq_pc, op->width);
-  rtl_sext(s, &si_imm, &si_imm, op->width);
-  operand_imm(s, op, load_val, si_imm, op->width);
+  // TODO();
+  word_t imm = instr_fetch(&s->seq_pc, op->width);
+  sword_t tmp = 0;
+  switch (op->width)
+  {
+  case 1:
+    tmp = (int8_t)imm;
+    break;
+  case 4:
+    tmp = (int32_t)imm;
+    break;
+  }
+  operand_imm(s, op, load_val, (word_t)tmp, op->width);
 }
 
 /* I386 manual does not contain this abbreviation.
@@ -282,6 +286,7 @@ static inline def_DHelper(gp2_Ib2E)
  * use for shld/shrd */
 static inline def_DHelper(Ib_G2E)
 {
+  // id_dest is E, id_drc2 is G, id_src1 is Ib
   operand_rm(s, id_dest, true, id_src2, true);
   id_src1->width = 1;
   decode_op_I(s, id_src1, true);
@@ -291,6 +296,7 @@ static inline def_DHelper(Ib_G2E)
  * use for shld/shrd */
 static inline def_DHelper(cl_G2E)
 {
+  // id_dest is E, id_src2 is G, id_src1 is cl
   operand_rm(s, id_dest, true, id_src2, true);
   // shift instructions will eventually use the lower
   // 5 bits of %cl, therefore it is OK to load %ecx
@@ -315,10 +321,7 @@ static inline def_DHelper(J)
   // the target address can be computed in the decode stage
   s->jmp_pc = id_dest->simm + s->seq_pc;
 }
-static inline def_DHelper(push_Reg)
-{
-  decode_op_r(s, id_dest, true);
-}
+
 static inline def_DHelper(push_SI)
 {
   decode_op_SI(s, id_dest, true);
@@ -349,12 +352,25 @@ static inline def_DHelper(out_a2dx)
   decode_op_a(s, id_src1, true);
   operand_reg(s, id_dest, true, R_DX, 2);
 }
-// static inline def_DHelper(call_rel32)
-// {
-// }
-// static inline def_DHelper(jmp)
-// {
-// }
+
+static inline def_DHelper(Ew2Gv)
+{
+  id_src1->width = 2;
+  operand_rm(s, id_src1, true, id_dest, false);
+}
+
+static inline def_DHelper(Eb2Gv)
+{
+  id_src1->width = 1;
+  operand_rm(s, id_src1, true, id_dest, false);
+}
+
+static inline def_DHelper(Y2X)
+{
+  operand_reg(s, id_src1, true, R_ESI, 4);
+  operand_reg(s, id_dest, true, R_EDI, 4);
+}
+
 static inline void operand_write(DecodeExecState *s, Operand *op, rtlreg_t *src)
 {
   if (op->type == OP_TYPE_REG)
