@@ -153,6 +153,7 @@ again:
     IDEX(0x56, r, push)
     IDEX(0x57, r, push)
     //
+    IDEX(0x68, I, push)
     // imm->reg/mem
     IDEXW(0x80, I2E, gp1, 1)
     IDEX(0x81, I2E, gp1)
