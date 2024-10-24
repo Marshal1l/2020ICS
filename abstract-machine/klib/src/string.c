@@ -6,9 +6,9 @@
 size_t strlen(const char *s)
 {
   const char *tmp = s;
-  while (*s != '\0')
+  while (*tmp != '\0')
   {
-    s++;
+    tmp++;
   }
   return tmp - s;
 }
