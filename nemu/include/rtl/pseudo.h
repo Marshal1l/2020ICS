@@ -21,57 +21,52 @@ static inline def_rtl(mv, rtlreg_t *dest, const rtlreg_t *src1)
 static inline def_rtl(not, rtlreg_t *dest, const rtlreg_t *src1)
 {
   // dest <- ~src1
-  TODO();
+  // TODO();
+  *dest = ~(*src1);
 }
 
 static inline def_rtl(neg, rtlreg_t *dest, const rtlreg_t *src1)
 {
   // dest <- -src1
-  TODO();
+  // TODO();
+  *dest = -(*src1);
 }
 
 static inline def_rtl(sext, rtlreg_t *dest, const rtlreg_t *src1, int width)
 {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
+  // TODO();
+  assert(width > 0 && width <= 4);
   switch (width)
   {
   case 1:
-    *dest = *(int8_t *)src1;
+    *dest = *(int8_t *)(src1);
     break;
   case 2:
-    *dest = *(int16_t *)src1;
+    *dest = *(int16_t *)(src1);
     break;
   case 4:
-    *dest = *(int *)src1;
-    break;
-  default:
-    assert(0 && "Unsupported width for sign extension");
-  }
-}
-
-static inline def_rtl(zext, rtlreg_t *dest, const rtlreg_t *src1, int width)
-{
-  // dest <- zeroext(src1[(width * 8 - 1) .. 0])
-  switch (width)
-  {
-  case 1:
-    *dest = *(uint8_t *)src1;
-    break;
-  case 2:
-    *dest = *(uint16_t *)src1;
-    break;
-  case 4:
-    *dest = *(uint32_t *)src1;
+    *dest = *(int32_t *)(src1);
     break;
   default:
     assert(0);
   }
 }
 
+static inline def_rtl(zext, rtlreg_t *dest, const rtlreg_t *src1, int width)
+{
+  // dest <- zeroext(src1[(width * 8 - 1) .. 0])
+  // TODO();
+  assert(width > 0 && width <= 4);
+  uint32_t val = *src1;
+  *dest = val;
+}
+
 static inline def_rtl(msb, rtlreg_t *dest, const rtlreg_t *src1, int width)
 {
   // dest <- src1[width * 8 - 1]
-  TODO();
+  // TODO();
+  *dest = (*src1 >> (width * 8 - 1)) & 0x01;
 }
 
 #endif
