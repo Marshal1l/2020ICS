@@ -15,7 +15,7 @@ size_t strlen(const char *s)
 //
 char *strcpy(char *dst, const char *src)
 {
-  return memcpy((void *)dst, (void *)src, strlen(src) + 1);
+  return memcpy((void *)dst, (const void *)src, strlen(src) + 1);
 }
 
 char *strncpy(char *dst, const char *src, size_t n)
@@ -30,7 +30,8 @@ char *strncpy(char *dst, const char *src, size_t n)
 
 char *strcat(char *dst, const char *src)
 {
-  return strcpy(dst + strlen(dst), src);
+  strcpy(dst + strlen(dst), src);
+  return dst;
 }
 // strcmp
 int strcmp(const char *s1, const char *s2)
