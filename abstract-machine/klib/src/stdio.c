@@ -13,7 +13,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
 {
   char *buf_ptr = out;
   const char *fmt_ptr = fmt;
-  putstr("into vsprintf\n");
+  // putstr("into vsprintf\n");
   while (*fmt_ptr != '\0')
   {
     if (*fmt_ptr == '%' && *(fmt_ptr + 1) != '\0')
