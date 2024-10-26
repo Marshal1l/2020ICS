@@ -48,8 +48,6 @@ int vsprintf(char *out, const char *fmt, va_list ap)
 
 int sprintf(char *out, const char *fmt, ...)
 {
-  putch('d');
-  putch('\n');
   va_list args;
   va_start(args, fmt);
   vsprintf(out, fmt, args);
