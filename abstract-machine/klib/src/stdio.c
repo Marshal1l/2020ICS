@@ -12,7 +12,7 @@
 int vsprintf(char *out, const char *fmt, va_list ap)
 {
   char *buf_ptr = out;
-  char *fmt_ptr = (char *)fmt;
+  const char *fmt_ptr = fmt;
 
   while (*fmt_ptr != '\0')
   {
