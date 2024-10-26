@@ -2,7 +2,6 @@
 #include <klib.h>
 #include <klib-macros.h>
 #include <stdarg.h>
-#include <stdio.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
@@ -52,7 +51,8 @@ int sprintf(char *out, const char *fmt, ...)
   va_list args;
   va_start(args, fmt);
   // assert(0);
-
+  putch('d');
+  putch('\n');
   vsprintf(out, fmt, args);
   va_end(args);
   return 0;
