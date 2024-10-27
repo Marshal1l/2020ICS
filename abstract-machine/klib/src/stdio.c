@@ -44,7 +44,9 @@ int i2s(int num)
 }
 int vsprintf(char *out, const char *fmt, va_list ap)
 {
+
   char *buf_ptr = out;
+  putstr(buf_ptr);
   const char *fmt_ptr = fmt;
   int print_count = 0;
   // putstr("into vsprintf\n")
@@ -69,7 +71,6 @@ int vsprintf(char *out, const char *fmt, va_list ap)
           buf_len++;
           print_count++;
         }
-        putstr(buf_ptr);
         break;
       }
       case 's':
