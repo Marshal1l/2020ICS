@@ -51,6 +51,7 @@ void add2ring(const char *fmt, ...)
     head_node = head_node->next;
   }
   strcat(free_node->log_asm, tempbuf);
+  printf("save\n");
   free_node = free_node->next;
   // printf("Ring buffer list:\n");
   // for (Log_ring_node *tmp = head_node; (!if_emptynode(tmp)) && tmp->next != head_node; tmp = tmp->next)
