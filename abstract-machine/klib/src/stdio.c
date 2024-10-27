@@ -74,15 +74,16 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       }
       case 's':
       {
-        // char *t_str = va_arg(ap, char *);
-        // int start = 0;
-        // for (; t_str[start] != '\0'; t_str++)
-        // {
-        //   *(char *)buf_ptr = t_str[start];
-        //   buf_ptr += sizeof(char);
-        // }
-        // buf_len += sizeof(char) * start;
-        // break;
+        char *t_str = va_arg(ap, char *);
+        int start = 0;
+        for (; t_str[start] != '\0'; t_str++)
+        {
+          *(char *)buf_ptr = t_str[start];
+          buf_ptr += sizeof(char);
+        }
+        buf_len += sizeof(char) * start;
+        print_count += sizeof(char) * start;
+        break;
       }
       default:
         *(char *)buf_ptr = *fmt_ptr;
