@@ -24,6 +24,7 @@ int if_emptynode(Log_ring_node *node)
   }
   return 0;
 }
+
 void init_log(const char *log_file)
 {
   if (log_file == NULL)

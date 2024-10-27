@@ -5,11 +5,12 @@
 #include <stdlib.h>
 
 void init_log(const char *log_file);
+void init_ftrase(const char *elf_file);
 void init_mem();
 void init_regex();
 void init_wp_pool();
 void init_difftest(char *ref_so_file, long img_size, int port);
-
+static char *elf_file = NULL;
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
 static char *img_file = NULL;
@@ -66,6 +67,7 @@ static inline void parse_args(int argc, char *argv[])
       {"diff", required_argument, NULL, 'd'},
       {"port", required_argument, NULL, 'p'},
       {"help", no_argument, NULL, 'h'},
+      {"elfn", required_argument, NULL, 'e'},
       {0, 0, NULL, 0},
   };
   int o;
@@ -85,6 +87,8 @@ static inline void parse_args(int argc, char *argv[])
     case 'd':
       diff_so_file = optarg;
       break;
+    case 'e':
+      elf_file = optarg;
     case 1:
       if (img_file != NULL)
         Log("too much argument '%s', ignored", optarg);
@@ -97,6 +101,7 @@ static inline void parse_args(int argc, char *argv[])
       printf("\t-l,--log=FILE           output log to FILE\n");
       printf("\t-d,--diff=REF_SO        run DiffTest with reference REF_SO\n");
       printf("\t-p,--port=PORT          run DiffTest with port PORT\n");
+      printf("\t-e,--elfn=FILE          run elf\n");
       printf("\n");
       exit(0);
     }
