@@ -103,7 +103,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
     }
     fmt_ptr++;
   }
-  *(buf_ptr + 1) = '\0';
+  *(buf_ptr) = '\0';
   return 0;
 }
 
