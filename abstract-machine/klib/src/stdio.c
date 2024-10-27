@@ -61,8 +61,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         // fommat int->s then put in
         if (!i2s(i))
           return -1;
-        // var
-
+        // get value
         for (int index = 0; tmp_int[index] != '\0'; index++)
         {
           *(char *)buf_ptr = tmp_int[index];
@@ -70,6 +69,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
           buf_len++;
           print_count++;
         }
+        putstr(buf_ptr);
         break;
       }
       case 's':
