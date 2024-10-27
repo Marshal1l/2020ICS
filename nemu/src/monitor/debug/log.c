@@ -33,7 +33,7 @@ void init_log(const char *log_file)
   // 连接环形链表
   for (int i = 0; i < RING_SIZE - 1; i++)
   {
-    log_ring[i].next = log_ring[i + 1].next;
+    log_ring[i].next = &log_ring[i + 1];
   }
   log_ring[RING_SIZE - 1].next = &log_ring[0];
   head_node = &log_ring[0];
@@ -51,7 +51,6 @@ void add2ring(const char *fmt, ...)
     head_node = head_node->next;
   }
   strcat(free_node->log_asm, tempbuf);
-  printf("save\n");
   free_node = free_node->next;
   // printf("Ring buffer list:\n");
   // for (Log_ring_node *tmp = head_node; (!if_emptynode(tmp)) && tmp->next != head_node; tmp = tmp->next)
