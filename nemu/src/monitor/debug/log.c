@@ -54,7 +54,8 @@ void add2ring(const char *fmt, ...)
   printf("Ring buffer list:\n");
   for (Log_ring_node *tmp = head_node; !if_emptynode(tmp) && tmp->next != head_node; tmp = tmp->next)
   {
-    printf("%s\n", tmp->log_asm);
+    // printf("-------------%s\n", tmp->log_asm);
+    printf("-------------\n");
   }
 }
 void strcatf(char *buf, const char *fmt, ...)
