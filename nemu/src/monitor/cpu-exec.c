@@ -123,7 +123,7 @@ void cpu_exec(uint64_t n)
 
   uint64_t timer_end = get_time();
   g_timer += timer_end - timer_start;
-
+  extern void print_ring();
   switch (nemu_state.state)
   {
   case NEMU_RUNNING:
@@ -131,6 +131,7 @@ void cpu_exec(uint64_t n)
     break;
 
   case NEMU_END:
+    print_ring();
   case NEMU_ABORT:
     // abort then immediately print ring
     // extern void print_ring();
