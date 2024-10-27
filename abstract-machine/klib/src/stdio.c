@@ -39,9 +39,9 @@ int i2s(int num)
     all_count++;
     div *= 10;
   }
-  while (num / 10 != 0)
+  for (int index = 0; index < all_count; index++)
   {
-    tmp_int[all_count - int_count] = num % 10;
+    tmp_int[all_count - int_count] = '0' + num % 10;
     int_count++;
     num = num / 10;
   }
