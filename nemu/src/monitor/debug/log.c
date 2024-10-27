@@ -47,10 +47,10 @@ void print_ring()
   {
     if (tmp->next == head_node)
     {
-      printf("%08x\t%s\n", tmp->addr, tmp->log_asm);
+      printf("0x%08x\t%s\n", tmp->addr, tmp->log_asm);
       break;
     }
-    printf("%08x\t%s\n", tmp->addr, tmp->log_asm);
+    printf("0x%08x\t%s\n", tmp->addr, tmp->log_asm);
     tmp = tmp->next;
   }
 }
