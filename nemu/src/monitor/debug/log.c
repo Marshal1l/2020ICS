@@ -49,6 +49,7 @@ void add2ring(const char *fmt, ...)
   {
     head_node = head_node->next;
   }
+  printf("insert\n");
   strcat(free_node->log_asm, tempbuf);
   free_node = free_node->next;
 }
