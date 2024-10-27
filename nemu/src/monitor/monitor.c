@@ -115,6 +115,8 @@ void init_monitor(int argc, char *argv[])
   /* Parse arguments. */
   parse_args(argc, argv);
 
+  // init ftrace
+  init_ftrase(elf_file);
   /* Open the log file. */
   init_log(log_file);
 
