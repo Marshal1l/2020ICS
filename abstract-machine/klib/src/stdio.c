@@ -47,15 +47,11 @@ int vsprintf(char *out, const char *fmt, va_list ap)
   char *buf_ptr = out;
   const char *fmt_ptr = fmt;
   int print_count = 0;
-  // putstr("into vsprintf\n");
-  while ((*fmt_ptr) != '\0')
+  // putstr("into vsprintf\n")
+  while ((*fmt_ptr) != '\0' && check_buflen(buf_len)) // check if buffer out of range
   {
-    // check if buffer out of range
-    if (!check_buflen(buf_len))
-      break;
     if (*fmt_ptr == '%' && *(fmt_ptr + 1) != '\0')
     {
-      fmt_ptr++;
       switch (*fmt_ptr)
       {
       case 'd':
@@ -90,6 +86,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       default:
         break;
       }
+      fmt_ptr++;
     }
   }
   return 0;
