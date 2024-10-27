@@ -56,7 +56,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
   // putstr("into vsprintf\n")
   while ((*fmt_ptr) != '\0' && check_buflen(buf_len)) // check if buffer out of range
   {
-    if (*fmt_ptr == '%' && *(fmt_ptr + 1) != '\0')
+    if (*fmt_ptr == '%' && *(fmt_ptr + 1) != '\0') // is var
     {
       ++fmt_ptr;
       switch (*fmt_ptr)
@@ -86,15 +86,15 @@ int vsprintf(char *out, const char *fmt, va_list ap)
           *(char *)buf_ptr = t_str[start];
           buf_ptr += sizeof(char);
         }
-        buf_len += sizeof(char) * start;
-        print_count += sizeof(char) * start;
+        buf_len += start;
+        print_count += start;
         break;
       }
       default:
         break;
       }
     }
-    else
+    else // normal
     {
       *(char *)buf_ptr = *fmt_ptr;
       buf_ptr += sizeof(char);
