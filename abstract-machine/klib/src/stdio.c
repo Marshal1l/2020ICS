@@ -12,7 +12,7 @@ char tmp_int[TMP_INT_LEN];
 // buf char len
 int buf_len = 0;
 // 1 for ok 0 for out
-int check_len(int len)
+int check_buflen(int len)
 {
   if (len > MAX_BUF)
   {
@@ -50,6 +50,9 @@ int vsprintf(char *out, const char *fmt, va_list ap)
   // putstr("into vsprintf\n");
   while ((*fmt_ptr) != '\0')
   {
+    // check if buffer out of range
+    if (!check_buflen(buf_len))
+      break;
     if (*fmt_ptr == '%' && *(fmt_ptr + 1) != '\0')
     {
       fmt_ptr++;
@@ -58,9 +61,6 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       case 'd':
       {
         int i = va_arg(ap, int);
-        // check if buffer out of range
-        if (!check_len(buf_len))
-          return -1;
         // fommat int->s then put in
         if (!i2s(i))
           return -1;
@@ -81,8 +81,6 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         // int start = 0;
         // for (; t_str[start] != '\0'; t_str++)
         // {
-        //   if (!check_len(buf_len))
-        //     return -1;
         //   *(char *)buf_ptr = t_str[start];
         //   buf_ptr += sizeof(char);
         // }
