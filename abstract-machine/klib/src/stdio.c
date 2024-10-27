@@ -84,6 +84,10 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         // break;
       }
       default:
+        *(char *)buf_ptr = *fmt_ptr;
+        buf_ptr += sizeof(char);
+        buf_len++;
+        print_count++;
         break;
       }
     }
