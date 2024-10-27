@@ -52,6 +52,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
   {
     if (*fmt_ptr == '%' && *(fmt_ptr + 1) != '\0')
     {
+      ++fmt_ptr;
       switch (*fmt_ptr)
       {
       case 'd':
