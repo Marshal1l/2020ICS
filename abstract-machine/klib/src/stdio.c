@@ -46,7 +46,6 @@ int vsprintf(char *out, const char *fmt, va_list ap)
 {
 
   char *buf_ptr = out;
-  putstr(buf_ptr);
   const char *fmt_ptr = fmt;
   int print_count = 0;
   // putstr("into vsprintf\n")
