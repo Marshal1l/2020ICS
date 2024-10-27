@@ -132,6 +132,7 @@ void cpu_exec(uint64_t n)
 
   case NEMU_END:
   case NEMU_ABORT:
+    // abort then immediately print ring
     extern void print_ring();
     print_ring();
     Log("nemu: %s\33[0m at pc = " FMT_WORD "\n\n",
