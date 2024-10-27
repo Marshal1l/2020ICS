@@ -14,6 +14,10 @@ void init_ftrase(const char *elf_file)
         fprintf(stderr, "Usage: %s <elf-file>\n", elf_file);
         // exit(1);
     }
-
+    Elf64_Ehdr ehdr;
+    if (read(fd, &ehdr, sizeof(ehdr)) != sizeof(ehdr))
+    {
+        fprintf(stderr, "read ehdr\n");
+    }
     close(fd);
 }
