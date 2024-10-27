@@ -47,6 +47,7 @@ void add2ring(const char *fmt, ...)
   va_end(ap);
   if (!if_emptynode(free_node))
   {
+    printf("out\n");
     head_node = head_node->next;
   }
   strcat(free_node->log_asm, tempbuf);
