@@ -62,6 +62,7 @@ void add2ring(vaddr_t tmp_pc, const char *fmt, ...)
   va_end(ap);
   if (!if_emptynode(free_node))
   {
+    memset(head_node->log_asm, '\0', sizeof(head_node->log_asm));
     head_node = head_node->next;
   }
   // var
