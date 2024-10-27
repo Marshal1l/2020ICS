@@ -6,7 +6,7 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 #define MAX_BUF 2048
-#define TMP_INT_LEN 20
+#define TMP_INT_LEN 32
 #define is_digit(ch) ((ch) >= '0' && (ch) <= '9')
 char tmp_int[TMP_INT_LEN];
 // buf char len
@@ -30,14 +30,19 @@ int i2s(int num)
   {
     tmp_int[i] = '\0';
   }
-  int single = 0;
-  int int_count = 0;
-  while (num != 0)
+  int all_count = 1;
+  int int_count = 1;
+  // int 153->"153" tmp_int
+  int div = 10;
+  while (num / div != 0)
   {
-    if (int_count >= TMP_INT_LEN)
-      return 0;
-    single = num % 10;
-    tmp_int[int_count++] = '0' + single;
+    all_count++;
+    div *= 10;
+  }
+  while (num / 10 != 0)
+  {
+    tmp_int[all_count - int_count] = num % 10;
+    int_count++;
     num = num / 10;
   }
   return 1;
