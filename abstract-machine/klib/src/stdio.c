@@ -86,8 +86,8 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       default:
         break;
       }
-      fmt_ptr++;
     }
+    fmt_ptr++;
   }
   return 0;
 }
