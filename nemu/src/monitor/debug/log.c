@@ -56,6 +56,7 @@ void print_ring()
 }
 void add2ring(vaddr_t tmp_pc, const char *fmt, ...)
 {
+  memset(tempbuf, '\0', sizeof(tempbuf));
   va_list ap;
   va_start(ap, fmt);
   vsnprintf(tempbuf, sizeof(tempbuf), fmt, ap);
