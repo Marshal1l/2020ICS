@@ -68,7 +68,6 @@ void add2ring(vaddr_t tmp_pc, const char *fmt, ...)
   strcat(free_node->log_asm, tempbuf);
   free_node->addr = tmp_pc;
   free_node = free_node->next;
-  print_ring();
 }
 void strcatf(char *buf, const char *fmt, ...)
 {
