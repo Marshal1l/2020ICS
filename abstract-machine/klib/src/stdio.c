@@ -62,8 +62,8 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         if (!i2s(i))
           return -1;
         // var
-        int index = 0;
-        while (tmp_int[index] != '\0')
+
+        for (int index = 0; tmp_int[index] != '\0'; index++)
         {
           *(char *)buf_ptr = tmp_int[index];
           buf_ptr += sizeof(char);
