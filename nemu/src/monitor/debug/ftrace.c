@@ -12,7 +12,6 @@ void init_ftrase(const char *elf_file)
     if (fd < 0)
     {
         fprintf(stderr, "Usage: %s <elf-file>\n", elf_file);
-        exit(EXIT_FAILURE);
     }
 
     close(fd);
