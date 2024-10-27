@@ -51,12 +51,12 @@ void add2ring(const char *fmt, ...)
   }
   strcat(free_node->log_asm, tempbuf);
   free_node = free_node->next;
-  printf("Ring buffer list:\n");
-  for (Log_ring_node *tmp = head_node; !if_emptynode(tmp) && tmp->next != head_node; tmp = tmp->next)
-  {
-    // printf("-------------%s\n", tmp->log_asm);
-    printf("-------------\n");
-  }
+  // printf("Ring buffer list:\n");
+  // for (Log_ring_node *tmp = head_node; !if_emptynode(tmp) && tmp->next != head_node; tmp = tmp->next)
+  // {
+  //   // printf("-------------%s\n", tmp->log_asm);
+  //   printf("-------------\n");
+  // }
 }
 void strcatf(char *buf, const char *fmt, ...)
 {
