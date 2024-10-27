@@ -1,6 +1,6 @@
 #include <common.h>
 #include <stdarg.h>
-#define RING_SIZE 4
+#define RING_SIZE 20
 FILE *log_fp = NULL;
 typedef struct Log_ring_node Log_ring_node;
 typedef struct Log_ring_node
@@ -53,7 +53,7 @@ void print_ring()
     tmp = tmp->next;
   }
 }
-void add2ring(const char *fmt, ...)
+void add2ring(vaddr_t tmp_pc, const char *fmt, ...)
 {
   va_list ap;
   va_start(ap, fmt);
@@ -61,7 +61,6 @@ void add2ring(const char *fmt, ...)
   va_end(ap);
   if (!if_emptynode(free_node))
   {
-    printf("out\n");
     head_node = head_node->next;
   }
   strcat(free_node->log_asm, tempbuf);

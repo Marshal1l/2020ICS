@@ -53,7 +53,7 @@ static inline void update_pc(DecodeExecState *s)
     extern char log_asmbuf[];         \
     strcatf(log_asmbuf, __VA_ARGS__); \
     extern void add2ring();           \
-    add2ring(__VA_ARGS__);            \
+    add2ring(cpu.pc, __VA_ARGS__);    \
   } while (0)
 #else
 #define print_asm(...)
