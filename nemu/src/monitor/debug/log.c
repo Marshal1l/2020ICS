@@ -1,6 +1,6 @@
 #include <common.h>
 #include <stdarg.h>
-#define RING_SIZE 20
+#define RING_SIZE 4
 FILE *log_fp = NULL;
 typedef struct Log_ring_node Log_ring_node;
 typedef struct Log_ring_node
@@ -38,7 +38,14 @@ void init_log(const char *log_file)
   log_ring[RING_SIZE - 1].next = &log_ring[0];
   head_node = &log_ring[0];
 }
-
+void print_ring()
+{
+  printf("Ring buffer list:\n");
+  for (Log_ring_node *tmp = head_node; (!if_emptynode(tmp)) && tmp->next != head_node; tmp = tmp->next)
+  {
+    printf("--%s\n", tmp->log_asm);
+  }
+}
 void add2ring(const char *fmt, ...)
 {
   va_list ap;
@@ -52,11 +59,7 @@ void add2ring(const char *fmt, ...)
   }
   strcat(free_node->log_asm, tempbuf);
   free_node = free_node->next;
-  printf("Ring buffer list:\n");
-  for (Log_ring_node *tmp = head_node; (!if_emptynode(tmp)) && tmp->next != head_node; tmp = tmp->next)
-  {
-    printf("---%s\n", tmp->log_asm);
-  }
+  print_ring();
 }
 void strcatf(char *buf, const char *fmt, ...)
 {
