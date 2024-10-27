@@ -7,6 +7,7 @@ typedef struct Log_ring_node
 {
   char log_asm[80];
   Log_ring_node *next;
+  vaddr_t addr;
 } Log_ring_node;
 
 char log_bytebuf[80] = {};
@@ -46,10 +47,10 @@ void print_ring()
   {
     if (tmp->next == head_node)
     {
-      printf("--%s\n", tmp->log_asm);
+      printf("%08x\t%s\n", tmp->addr, tmp->log_asm);
       break;
     }
-    printf("--%s\n", tmp->log_asm);
+    printf("%08x\t%s\n", tmp->addr, tmp->log_asm);
     tmp = tmp->next;
   }
 }
@@ -63,9 +64,10 @@ void add2ring(vaddr_t tmp_pc, const char *fmt, ...)
   {
     head_node = head_node->next;
   }
+  // var
   strcat(free_node->log_asm, tempbuf);
+  free_node->addr = tmp_pc;
   free_node = free_node->next;
-  printf("%x\n", tmp_pc);
   print_ring();
 }
 void strcatf(char *buf, const char *fmt, ...)
