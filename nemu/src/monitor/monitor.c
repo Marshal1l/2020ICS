@@ -118,7 +118,7 @@ void init_monitor(int argc, char *argv[])
   printf("elf:\t%s\n", elf_file);
   printf("log:\t%s\n", log_file);
   // init ftrace
-  // init_ftrase(elf_file);
+  init_ftrase(elf_file);
   /* Open the log file. */
   init_log(log_file);
 
