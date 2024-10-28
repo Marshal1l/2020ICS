@@ -4,7 +4,7 @@ static int func_num = 0;
 const char *check_func_call(paddr_t insta_addr)
 {
     if (symbol == NULL)
-        return "";
+        return "NULL";
     Symbol *tmpsymbol = symbol;
     while (tmpsymbol != NULL)
     {
