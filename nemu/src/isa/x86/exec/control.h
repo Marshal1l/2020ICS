@@ -31,7 +31,7 @@ static inline def_EHelper(call)
   // TODO();
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, &s->jmp_pc);
-  print_asm("call %s<%x>", s->jmp_pc, check_func_call(s->jmp_pc));
+  print_asm("call %s<%x>", check_func_call(s->jmp_pc), s->jmp_pc);
 }
 
 static inline def_EHelper(ret)
