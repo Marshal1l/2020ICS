@@ -81,12 +81,13 @@ void init_ftrace(const char *elf_file)
         }
         if (shdr.sh_type == SHT_SYMTAB)
         {
-            printf("sh_type%d\n", shdr.sh_type);
-            pause();
+
             fseek(fd, shdr.sh_offset, SEEK_SET);
             // enter symtab
             Elf32_Sym sym;
             size_t sym_count = shdr.sh_size / shdr.sh_entsize;
+            printf("sh_type%ld\n", sym_count);
+            pause();
             symbol = malloc(sizeof(Symbol) * sym_count);
             for (int i = 0; i < sym_count; i++)
             {
