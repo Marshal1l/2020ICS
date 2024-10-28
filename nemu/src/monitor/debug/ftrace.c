@@ -104,7 +104,7 @@ void init_ftrase(const char *elf_file)
     Symbol *tmpsymbol = symbol;
     while (tmpsymbol != NULL)
     {
-        printf("%s\n", symbol->name);
+        printf("symbol:%s\n", symbol->name);
         tmpsymbol++;
     }
 }
