@@ -90,6 +90,7 @@ void init_ftrase(const char *elf_file)
                 }
                 if (ELF32_ST_TYPE(sym.st_info) == STT_FUNC) // if st_info ->func
                 {
+                    printf("find func!\n");
                     const char *name = string_table + sym.st_name;
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
                     symbol[func_num].addr = sym.st_value;
