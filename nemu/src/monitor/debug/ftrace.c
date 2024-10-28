@@ -108,6 +108,7 @@ void init_ftrace(const char *elf_file)
     }
     fclose(fd);
     free(string_table);
+    printf("all func list:\n");
     for (int i = 0; i < func_num; i++)
     {
         printf("%s\n", symbol[i].name);
