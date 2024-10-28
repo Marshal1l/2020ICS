@@ -40,13 +40,13 @@ void init_ftrase(const char *elf_file)
         assert(0);
     }
     Elf64_Ehdr ehdr;
-    ssize_t x = fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd);
-    printf("x=\t%lx\n", x);
-    // if (fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd)>0)
-    // {
-    //     fprintf(stderr, "read ehdr failed\n");
-    //     assert(0);
-    // }
+    // ssize_t x = fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd);
+    // printf("x=\t%lx\n", x);
+    if (fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd) > 0)
+    {
+        fprintf(stderr, "read ehdr failed\n");
+        assert(0);
+    }
     if (ehdr.e_ident[0] != 0x7f || ehdr.e_ident[1] != 'E' ||
         ehdr.e_ident[2] != 'L' || ehdr.e_ident[3] != 'F')
     {
