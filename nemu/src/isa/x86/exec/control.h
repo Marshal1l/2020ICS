@@ -29,7 +29,7 @@ static inline def_EHelper(call)
 {
   // the target address is calculated at the decode stage
   // TODO();
-  check_func_call(s->jmp_pc);
+  printf("%s", check_func_call(s->jmp_pc));
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, &s->jmp_pc);
   print_asm("call %x", s->jmp_pc);
