@@ -86,8 +86,7 @@ void init_ftrace(const char *elf_file)
             // enter symtab
             Elf32_Sym sym;
             size_t sym_count = shdr.sh_size / shdr.sh_entsize;
-            printf("sh_type%ld\n", sym_count);
-            pause();
+
             symbol = malloc(sizeof(Symbol) * sym_count);
             for (int i = 0; i < sym_count; i++)
             {
@@ -103,6 +102,8 @@ void init_ftrace(const char *elf_file)
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
                     symbol[func_num].addr = sym.st_value;
                     symbol[func_num].size = sym.st_size;
+                    printf("func_name%s\n", name);
+                    pause();
                     func_num++;
                 }
             }
