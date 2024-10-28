@@ -114,14 +114,14 @@ void init_monitor(int argc, char *argv[])
 
   /* Parse arguments. */
   parse_args(argc, argv);
-
-  // init ftrace
-  init_ftrase(elf_file);
-  /* Open the log file. */
-  init_log(log_file);
   printf("img:\t%s\n", img_file);
   printf("elf:\t%s\n", elf_file);
   printf("log:\t%s\n", log_file);
+  // init ftrace
+  // init_ftrase(elf_file);
+  /* Open the log file. */
+  init_log(log_file);
+
   /* Fill the memory with garbage content. */
   init_mem();
 
