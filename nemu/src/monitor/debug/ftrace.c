@@ -1,5 +1,6 @@
 
 #include "ftrace.h"
+#include "debug.h"
 Symbol *symbol = NULL;
 static int func_num = 0;
 const char *check_func_call(paddr_t insta_addr)
@@ -17,8 +18,9 @@ const char *check_func_call(paddr_t insta_addr)
     }
     return "???";
 }
-void init_ftrase(const char *elf_file)
+void init_ftrace(const char *elf_file)
 {
+    Log("init ftace\n");
     if (elf_file == NULL)
     {
         return;
@@ -74,7 +76,6 @@ void init_ftrase(const char *elf_file)
             printf("fail to read the shdr\n");
             assert(0);
         }
-        printf("sh_type%u", shdr.sh_type);
         if (shdr.sh_type == SHT_SYMTAB)
         {
             fseek(fd, shdr.sh_offset, SEEK_SET);

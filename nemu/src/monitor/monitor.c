@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 void init_log(const char *log_file);
-void init_ftrase(const char *elf_file);
+void init_ftrace(const char *elf_file);
 void init_mem();
 void init_regex();
 void init_wp_pool();
@@ -118,7 +118,7 @@ void init_monitor(int argc, char *argv[])
   printf("elf:\t%s\n", elf_file);
   printf("log:\t%s\n", log_file);
   // init ftrace
-  init_ftrase(elf_file);
+  init_ftrace(elf_file);
   /* Open the log file. */
   init_log(log_file);
 
