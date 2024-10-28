@@ -90,7 +90,7 @@ app: $(BINARY)
 
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
 override ARGS += --diff=$(DIFF_REF_SO)
-override ARGS += --elf=$(BUILD_DIR)/nemu-log.txt
+override ARGS += --elf=$(BINARY)
 # Command to execute NEMU
 IMG :=
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
