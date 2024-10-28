@@ -12,4 +12,3 @@ typedef struct
     paddr_t addr; // the function head address
     Elf64_Xword size;
 } Symbol;
-Symbol *symbol = NULL;

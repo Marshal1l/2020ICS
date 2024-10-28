@@ -1,5 +1,6 @@
 
 #include "ftrace.h"
+Symbol *symbol = NULL;
 static int func_num = 0;
 const char *check_func_call(paddr_t insta_addr)
 {
