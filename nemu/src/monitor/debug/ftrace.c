@@ -6,6 +6,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <elf.h>
+typedef struct
+{
+    char name[64];
+    paddr_t addr; // the function head address
+    Elf64_Xword size;
+} Symbol;
+Symbol *symbol = NULL;
+static int func_num = 0;
 void init_ftrase(const char *elf_file)
 {
     if (elf_file == NULL)
@@ -53,6 +61,38 @@ void init_ftrase(const char *elf_file)
             }
         }
     }
-
+    fseek(fd, ehdr.e_shoff, SEEK_SET);
+    for (int i = 0; i < ehdr.e_shnum; i++)
+    {
+        if (fread(&shdr, sizeof(Elf64_Shdr), 1, fd) <= 0)
+        {
+            printf("fail to read the shdr\n");
+            assert(0);
+        }
+        if (shdr.sh_type == SHT_SYMTAB)
+        {
+            fseek(fd, shdr.sh_offset, SEEK_SET);
+            // enter symtab
+            Elf64_Sym sym;
+            size_t sym_count = shdr.sh_size / shdr.sh_entsize;
+            symbol = malloc(sizeof(Symbol) * sym_count);
+            for (int i = 0; i < sym_count; i++)
+            {
+                if (fread(&sym, sizeof(Elf64_Sym), 1, fd) <= 0)
+                {
+                    printf("fail to read the symtab\n");
+                    return;
+                }
+                if (ELF32_ST_TYPE(sym.st_info) == STT_FUNC)
+                {
+                    const char *name = string_table + sym.st_name;
+                    strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
+                    symbol[func_num].addr = sym.st_value;
+                    symbol[func_num].size = sym.st_size;
+                    func_num++;
+                }
+            }
+        }
+    }
     fclose(fd);
 }
