@@ -32,8 +32,8 @@ void init_ftrace(const char *elf_file)
         fprintf(stderr, "Usage: %s <elf-file>\n", elf_file);
         assert(0);
     }
-    Elf64_Ehdr ehdr;
-    if (fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd) <= 0)
+    Elf32_Ehdr ehdr;
+    if (fread(&ehdr, sizeof(Elf32_Ehdr), 1, fd) <= 0)
     {
         fprintf(stderr, "read ehdr failed\n");
         assert(0);
@@ -46,11 +46,11 @@ void init_ftrace(const char *elf_file)
     }
     printf("1111111111111:::::::::%i\n", ehdr.e_shnum);
     fseek(fd, ehdr.e_shoff, SEEK_SET);
-    Elf64_Shdr shdr;
+    Elf32_Shdr shdr;
     char *string_table = NULL;
     for (int i = 0; i < ehdr.e_shnum; i++)
     {
-        if (fread(&shdr, sizeof(Elf64_Shdr), 1, fd) <= 0)
+        if (fread(&shdr, sizeof(Elf32_Shdr), 1, fd) <= 0)
         {
             printf("fail to read the shdr\n");
             assert(0);
@@ -72,7 +72,7 @@ void init_ftrace(const char *elf_file)
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     for (int i = 0; i < ehdr.e_shnum; i++)
     {
-        if (fread(&shdr, sizeof(Elf64_Shdr), 1, fd) <= 0)
+        if (fread(&shdr, sizeof(Elf32_Shdr), 1, fd) <= 0)
         {
             printf("fail to read the shdr\n");
             assert(0);
@@ -81,12 +81,12 @@ void init_ftrace(const char *elf_file)
         {
             fseek(fd, shdr.sh_offset, SEEK_SET);
             // enter symtab
-            Elf64_Sym sym;
+            Elf32_Sym sym;
             size_t sym_count = shdr.sh_size / shdr.sh_entsize;
             symbol = malloc(sizeof(Symbol) * sym_count);
             for (int i = 0; i < sym_count; i++)
             {
-                if (fread(&sym, sizeof(Elf64_Sym), 1, fd) <= 0)
+                if (fread(&sym, sizeof(Elf32_Sym), 1, fd) <= 0)
                 {
                     printf("fail to read the symtab\n");
                     return;
