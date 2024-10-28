@@ -4,6 +4,7 @@ int is_exit_status_bad();
 #include <stdio.h>
 int main(int argc, char *argv[])
 {
+  printf("main argv:\n");
   for (int i = 0; argv[i] != NULL; i++)
     printf("%s\n", argv[i]);
   /* Initialize the monitor. */
