@@ -1,8 +1,10 @@
 
 #include "ftrace.h"
 static int func_num = 0;
-const char *check_func(vaddr_t insta_addr)
+const char *check_func_call(paddr_t insta_addr)
 {
+    if (symbol == NULL)
+        return "";
     Symbol *tmpsymbol = symbol;
     while (tmpsymbol != NULL)
     {
