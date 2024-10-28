@@ -101,7 +101,6 @@ void init_ftrace(const char *elf_file)
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
                     symbol[func_num].addr = sym.st_value;
                     symbol[func_num].size = sym.st_size;
-                    printf("func_name%s\n", name);
                     // pause();
                     func_num++;
                 }
@@ -111,4 +110,8 @@ void init_ftrace(const char *elf_file)
     }
     fclose(fd);
     free(string_table);
+    for (int i = 0; i < func_num; i++)
+    {
+        printf("%s\t", symbol[i].name);
+    }
 }
