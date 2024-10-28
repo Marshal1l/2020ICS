@@ -8,6 +8,10 @@
 #include <elf.h>
 void init_ftrase(const char *elf_file)
 {
+    if (elf_file == NULL)
+    {
+        return;
+    }
     int fd = open(elf_file, O_RDONLY);
     if (fd < 0)
     {
