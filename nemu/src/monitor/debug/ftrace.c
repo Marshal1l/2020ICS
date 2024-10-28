@@ -113,4 +113,5 @@ void init_ftrace(const char *elf_file)
     {
         printf("%s\n", symbol[i].name);
     }
+    printf("all func list:\n");
 }
