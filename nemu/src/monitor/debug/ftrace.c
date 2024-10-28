@@ -96,12 +96,10 @@ void init_ftrace(const char *elf_file)
                 }
                 if (ELF32_ST_TYPE(sym.st_info) == STT_FUNC) // if st_info ->func
                 {
-                    printf("find func!\n");
                     const char *name = string_table + sym.st_name;
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
                     symbol[func_num].addr = sym.st_value;
                     symbol[func_num].size = sym.st_size;
-                    // pause();
                     func_num++;
                 }
             }
@@ -112,6 +110,6 @@ void init_ftrace(const char *elf_file)
     free(string_table);
     for (int i = 0; i < func_num; i++)
     {
-        printf("%s\t", symbol[i].name);
+        printf("%s\n", symbol[i].name);
     }
 }
