@@ -68,11 +68,6 @@ void init_ftrace(const char *elf_file)
                 printf("fail to read the strtab\n");
                 exit(0);
             }
-            for (int i = 0; i < shdr.sh_size / sizeof(char); i++)
-            {
-                printf("string table:%c\n", string_table[i]);
-            }
-            pause();
         }
     }
 
@@ -86,6 +81,7 @@ void init_ftrace(const char *elf_file)
         }
         if (shdr.sh_type == SHT_SYMTAB)
         {
+            printf("sh_type%d\n", shdr.sh_type);
             fseek(fd, shdr.sh_offset, SEEK_SET);
             // enter symtab
             Elf32_Sym sym;
