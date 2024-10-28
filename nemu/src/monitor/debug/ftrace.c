@@ -42,7 +42,7 @@ void init_ftrase(const char *elf_file)
     Elf64_Ehdr ehdr;
     // ssize_t x = fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd);
     // printf("x=\t%lx\n", x);
-    if (fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd) > 0)
+    if (fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd) <= 0)
     {
         fprintf(stderr, "read ehdr failed\n");
         assert(0);
