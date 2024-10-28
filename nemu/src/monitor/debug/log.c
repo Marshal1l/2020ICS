@@ -1,6 +1,6 @@
 #include <common.h>
 #include <stdarg.h>
-#define RING_SIZE 20
+#define RING_SIZE 10
 FILE *log_fp = NULL;
 typedef struct Log_ring_node Log_ring_node;
 typedef struct Log_ring_node
