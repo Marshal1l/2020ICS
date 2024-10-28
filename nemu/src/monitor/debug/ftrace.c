@@ -47,6 +47,7 @@ void init_ftrace(const char *elf_file)
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     Elf64_Shdr shdr;
     char *string_table = NULL;
+    printf("shdr.sh_type:%u\n", ehdr.e_shnum);
     for (int i = 0; i < ehdr.e_shnum; i++)
     {
         if (fread(&shdr, sizeof(Elf64_Shdr), 1, fd) <= 0)
@@ -54,7 +55,7 @@ void init_ftrace(const char *elf_file)
             printf("fail to read the shdr\n");
             assert(0);
         }
-        printf("shdr.sh_type:%u\n", shdr.sh_type);
+
         if (shdr.sh_type == SHT_STRTAB)
         {
             // get string table
