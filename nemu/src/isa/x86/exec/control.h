@@ -46,7 +46,7 @@ static inline def_EHelper(ret)
   {
     rtl_pop(s, &s->seq_pc);
   }
-  print_asm("ret");
+  print_asm("ret %s", check_func_call(s->seq_pc));
 }
 
 static inline def_EHelper(ret_imm)
