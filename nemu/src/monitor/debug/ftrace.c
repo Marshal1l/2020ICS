@@ -86,7 +86,6 @@ void init_ftrace(const char *elf_file)
             // enter symtab
             Elf32_Sym sym;
             size_t sym_count = shdr.sh_size / shdr.sh_entsize;
-
             symbol = malloc(sizeof(Symbol) * sym_count);
             for (int i = 0; i < sym_count; i++)
             {
@@ -107,6 +106,7 @@ void init_ftrace(const char *elf_file)
                     func_num++;
                 }
             }
+            break;
         }
     }
     fclose(fd);
