@@ -14,6 +14,18 @@ typedef struct
 } Symbol;
 Symbol *symbol = NULL;
 static int func_num = 0;
+const char *check_func(vaddr_t insta_addr)
+{
+    Symbol *tmpsymbol = symbol;
+    while (tmpsymbol != NULL)
+    {
+        if (insta_addr >= tmpsymbol->addr && insta_addr < tmpsymbol->addr + tmpsymbol->size)
+        {
+            return (const char *)tmpsymbol->name;
+        }
+    }
+    return "???";
+}
 void init_ftrase(const char *elf_file)
 {
     if (elf_file == NULL)
@@ -83,7 +95,7 @@ void init_ftrase(const char *elf_file)
                     printf("fail to read the symtab\n");
                     return;
                 }
-                if (ELF32_ST_TYPE(sym.st_info) == STT_FUNC)
+                if (ELF32_ST_TYPE(sym.st_info) == STT_FUNC) // if st_info ->func
                 {
                     const char *name = string_table + sym.st_name;
                     strncpy(symbol[func_num].name, name, sizeof(symbol[func_num].name) - 1);
@@ -95,4 +107,5 @@ void init_ftrase(const char *elf_file)
         }
     }
     fclose(fd);
+    free(string_table);
 }
