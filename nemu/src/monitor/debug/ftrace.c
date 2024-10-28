@@ -13,6 +13,7 @@ const char *check_func_call(paddr_t insta_addr)
         {
             return (const char *)tmpsymbol->name;
         }
+        tmpsymbol++;
     }
     return "???";
 }
@@ -100,4 +101,10 @@ void init_ftrase(const char *elf_file)
     }
     fclose(fd);
     free(string_table);
+    Symbol *tmpsymbol = symbol;
+    while (tmpsymbol != NULL)
+    {
+        printf("%s\n", symbol->name);
+        tmpsymbol++;
+    }
 }
