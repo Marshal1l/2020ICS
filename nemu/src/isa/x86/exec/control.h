@@ -1,5 +1,5 @@
 #include "cc.h"
-
+#include "../../../src/monitor/debug/ftrace.h"
 static inline def_EHelper(jmp)
 {
   // the target address is calculated at the decode stage
