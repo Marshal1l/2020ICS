@@ -68,10 +68,11 @@ void init_ftrace(const char *elf_file)
                 printf("fail to read the strtab\n");
                 exit(0);
             }
-            // for (int i = 0; i < shdr.sh_size / sizeof(char); i++)
-            // {
-            //     printf("string table:%c\n", string_table[i]);
-            // }
+            for (int i = 0; i < shdr.sh_size / sizeof(char); i++)
+            {
+                printf("string table:%c\n", string_table[i]);
+            }
+            pause();
         }
     }
 
