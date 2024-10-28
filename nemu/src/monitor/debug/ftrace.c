@@ -54,6 +54,7 @@ void init_ftrace(const char *elf_file)
             printf("fail to read the shdr\n");
             assert(0);
         }
+        printf("shdr.sh_type:%u\n", shdr.sh_type);
         if (shdr.sh_type == SHT_STRTAB)
         {
             // get string table
