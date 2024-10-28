@@ -68,8 +68,12 @@ void init_ftrace(const char *elf_file)
             }
         }
     }
-    printf("string table:%c\n", string_table[0]);
-    fflush(stdout);
+    for (int i = 0; i < shdr.sh_size; i++)
+    {
+        printf("string table:%c\n", string_table[0]);
+        fflush(stdout);
+    }
+
     pause();
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     for (int i = 0; i < ehdr.e_shnum; i++)
