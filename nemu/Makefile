@@ -94,7 +94,7 @@ override ARGS += --diff=$(DIFF_REF_SO)
 # Command to execute NEMU
 IMG :=
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
-override ARGS += --elf=$(IMG)
+
 $(BINARY): $(OBJS)
 	$(call git_commit, "compile")
 	@echo + LD $@
