@@ -68,8 +68,8 @@ void init_ftrace(const char *elf_file)
             }
         }
     }
-    printf("shdr_sh_size:%u\n", shdr.sh_size);
-    // for (int i = 0; i < shdr.sh_size; i++)
+    printf("shdr_sh_size:%i\n", shdr.sh_size);
+    // for (int i = 0; i < shdr.sh_size/sizeof(char); i++)
     // {
     //     printf("string table:%c\n", string_table[0]);
     //     fflush(stdout);
