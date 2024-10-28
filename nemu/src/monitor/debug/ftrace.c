@@ -58,8 +58,8 @@ void init_ftrace(const char *elf_file)
 
         if (shdr.sh_type == SHT_STRTAB)
         {
-            printf("shdr_sh_size:%x\n", shdr.sh_size);
-            pause();
+            // printf("shdr_sh_size:%x\n", shdr.sh_size);
+            // pause();
             // get string table
             string_table = (char *)malloc(shdr.sh_size);
             fseek(fd, shdr.sh_offset, SEEK_SET);
@@ -71,11 +71,10 @@ void init_ftrace(const char *elf_file)
         }
     }
 
-    // for (int i = 0; i < shdr.sh_size/sizeof(char); i++)
-    // {
-    //     printf("string table:%c\n", string_table[0]);
-    //     fflush(stdout);
-    // }
+    for (int i = 0; i < shdr.sh_size / sizeof(char); i++)
+    {
+        printf("string table:%c\n", string_table[0]);
+    }
 
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     for (int i = 0; i < ehdr.e_shnum; i++)
