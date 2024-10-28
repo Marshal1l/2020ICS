@@ -119,9 +119,9 @@ void init_monitor(int argc, char *argv[])
   init_ftrase(elf_file);
   /* Open the log file. */
   init_log(log_file);
-  printf("img%s\n", img_file);
-  printf("elf%s\n", elf_file);
-  printf("log%s\n", log_file);
+  printf("img:\t%s\n", img_file);
+  printf("elf:\t%s\n", elf_file);
+  printf("log:\t%s\n", log_file);
   /* Fill the memory with garbage content. */
   init_mem();
 
