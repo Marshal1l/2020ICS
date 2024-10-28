@@ -111,10 +111,4 @@ void init_ftrace(const char *elf_file)
     }
     fclose(fd);
     free(string_table);
-    Symbol *tmpsymbol = symbol;
-    while (tmpsymbol != NULL)
-    {
-        printf("symbol:%s\n", symbol->name);
-        tmpsymbol++;
-    }
 }
