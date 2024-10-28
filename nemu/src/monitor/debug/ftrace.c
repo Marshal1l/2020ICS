@@ -19,5 +19,10 @@ void init_ftrase(const char *elf_file)
     {
         fprintf(stderr, "read ehdr\n");
     }
+    // off_t shstrndx;
+    if (ehdr.e_shstrndx >= ehdr.e_shnum)
+    {
+        fprintf(stderr, "Invalid section header string table index\n");
+    }
     close(fd);
 }
