@@ -45,6 +45,7 @@ void init_ftrace(const char *elf_file)
         assert(0);
     }
     printf("1111111111111:::::::::%i\n", ehdr.e_shnum);
+    pause();
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     Elf32_Shdr shdr;
     char *string_table = NULL;
