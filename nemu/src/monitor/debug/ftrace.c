@@ -1,5 +1,5 @@
 
-#include <monitor/monitor.h>
+#include "ftrace.h"
 static int func_num = 0;
 const char *check_func(vaddr_t insta_addr)
 {
