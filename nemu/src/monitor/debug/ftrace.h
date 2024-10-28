@@ -10,5 +10,5 @@ typedef struct
 {
     char name[64];
     paddr_t addr; // the function head address
-    Elf64_Xword size;
+    Elf32_Xword size;
 } Symbol;
