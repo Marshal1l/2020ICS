@@ -44,7 +44,7 @@ void init_ftrace(const char *elf_file)
         printf("The opened file isn't a elf file!\n");
         assert(0);
     }
-    printf("shdr.sh_type:%s\n", ehdr.e_ident);
+    printf("1111111111111:::::::::%i\n", ehdr.e_shnum);
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     Elf64_Shdr shdr;
     char *string_table = NULL;
