@@ -33,8 +33,6 @@ void init_ftrace(const char *elf_file)
         assert(0);
     }
     Elf64_Ehdr ehdr;
-    // ssize_t x = fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd);
-    // printf("x=\t%lx\n", x);
     if (fread(&ehdr, sizeof(Elf64_Ehdr), 1, fd) <= 0)
     {
         fprintf(stderr, "read ehdr failed\n");
@@ -68,6 +66,7 @@ void init_ftrace(const char *elf_file)
             }
         }
     }
+    printf("string table:%s\n", string_table);
     fseek(fd, ehdr.e_shoff, SEEK_SET);
     for (int i = 0; i < ehdr.e_shnum; i++)
     {
