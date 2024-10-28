@@ -314,6 +314,7 @@ again:
     IDEX(0xbf, mov_I2r, mov)
     IDEXW(0xc0, gp2_Ib2E, gp2, 1)
     IDEX(0xc1, gp2_Ib2E, gp2)
+    //
     EX(0xc3, ret)
     EX(0xc9, leave)
     IDEXW(0xc6, mov_I2E, mov, 1)
@@ -325,6 +326,7 @@ again:
     IDEXW(0xd2, gp2_cl2E, gp2, 1)
     IDEX(0xd3, gp2_cl2E, gp2)
     EX(0xd6, nemu_trap)
+    //
     IDEX(0xe8, J, call)
     IDEX(0xe9, J, jmp)
     IDEXW(0xeb, J, jmp, 1)
