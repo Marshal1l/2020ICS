@@ -102,7 +102,7 @@ void init_ftrace(const char *elf_file)
                     symbol[func_num].addr = sym.st_value;
                     symbol[func_num].size = sym.st_size;
                     printf("func_name%s\n", name);
-                    pause();
+                    // pause();
                     func_num++;
                 }
             }
