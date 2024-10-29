@@ -36,13 +36,14 @@ void add_call_ret(const char *fmt, ...)
 
   va_list ap;
   va_start(ap, fmt);
-  memset(crbuf, '\0', TMP_SIZE);
-  vsprintf(crbuf, fmt, ap);
-  printf("instuction:\t%s\n", crbuf);
-  fwrite(crbuf, TMP_SIZE, 1, log_cr);
+  char *tmpcr = &crbuf[0];
+  memset(tmpcr, '\0', TMP_SIZE);
+  vsprintf(tmpcr, fmt, ap);
+  printf("instuction:\t%s\n", tmpcr);
+  fwrite(tmpcr, TMP_SIZE, 1, log_cr);
   printf("111111111111111111111111\n");
   va_end(ap);
-  strcat(crbuf, tempbuf);
+  strcat(tmpcr, tempbuf);
 }
 void init_log(const char *log_file)
 {
