@@ -47,6 +47,7 @@ int i2s(int num)
   }
   return 1;
 }
+
 int vsprintf(char *out, const char *fmt, va_list ap)
 {
   char *buf_ptr = out;
@@ -127,5 +128,15 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap)
 {
   return 0;
 }
-
+int printf(const char *format, ...)
+{
+  va_list args;
+  va_start(args, format);
+  char tmp_buffer[MAX_BUF];
+  int res = 0;
+  res = vsprintf(tmp_buffer, format, args);
+  putstr(tmp_buffer);
+  va_end(args);
+  return res;
+}
 #endif
