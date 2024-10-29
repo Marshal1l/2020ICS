@@ -11,7 +11,6 @@ typedef struct Log_ring_node
   Log_ring_node *next;
   vaddr_t addr;
 } Log_ring_node;
-static const char *Logfile_cr = "../build/call_ret.txt";
 char log_bytebuf[80] = {};
 char log_asmbuf[80] = {};
 static char crbuf[256] = {};
@@ -27,9 +26,9 @@ int if_emptynode(Log_ring_node *node)
   }
   return 0;
 }
-void init_logcall_ret()
+void init_logcall_ret(const char *logfile_cr)
 {
-  log_cr = fopen(Logfile_cr, "w");
+  log_cr = fopen(logfile_cr, "w");
   if (log_cr == NULL)
   {
     Log("read log_cr failed!\n");

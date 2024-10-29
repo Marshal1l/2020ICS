@@ -3,7 +3,7 @@
 #include <monitor/monitor.h>
 #include <getopt.h>
 #include <stdlib.h>
-void init_logcall_ret();
+void init_logcall_ret(const char *logfile_cr);
 void init_log(const char *log_file);
 void init_ftrace(const char *elf_file);
 void init_mem();
@@ -12,6 +12,7 @@ void init_wp_pool();
 void init_difftest(char *ref_so_file, long img_size, int port);
 static char *elf_file = NULL;
 static char *log_file = NULL;
+static char *log_crfile = NULL;
 static char *diff_so_file = NULL;
 static char *img_file = NULL;
 static int batch_mode = false;
@@ -64,6 +65,7 @@ static inline void parse_args(int argc, char *argv[])
   const struct option table[] = {
       {"batch", no_argument, NULL, 'b'},
       {"log", required_argument, NULL, 'l'},
+      {"cr", required_argument, NULL, 'c'},
       {"diff", required_argument, NULL, 'd'},
       {"port", required_argument, NULL, 'p'},
       {"help", no_argument, NULL, 'h'},
@@ -84,6 +86,9 @@ static inline void parse_args(int argc, char *argv[])
     case 'l':
       log_file = optarg;
       break;
+    case 'c':
+      log_crfile = optarg;
+      break;
     case 'd':
       diff_so_file = optarg;
       break;
@@ -102,6 +107,7 @@ static inline void parse_args(int argc, char *argv[])
       printf("\t-d,--diff=REF_SO        run DiffTest with reference REF_SO\n");
       printf("\t-p,--port=PORT          run DiffTest with port PORT\n");
       printf("\t-e,--elf=FILE          run elf\n");
+      printf("\t-c,--cr=FILE           output call and ret to FILE\n");
       printf("\n");
       exit(0);
     }
@@ -118,7 +124,7 @@ void init_monitor(int argc, char *argv[])
   printf("elf:\t%s\n", elf_file);
   printf("log:\t%s\n", log_file);
   // init call ret logfile
-  init_logcall_ret();
+  init_logcall_ret(log_crfile);
   // init ftrace
   init_ftrace(elf_file);
   /* Open the log file. */
