@@ -29,11 +29,7 @@ int if_emptynode(Log_ring_node *node)
 void init_logcall_ret(const char *logfile_cr)
 {
   log_cr = fopen(logfile_cr, "w");
-  if (log_cr == NULL)
-  {
-    Log("read log_cr failed!\n");
-    assert(0);
-  }
+  Assert(log_cr, "Can not open '%s'", logfile_cr);
 }
 void add_call_ret(const char *fmt, ...)
 {
