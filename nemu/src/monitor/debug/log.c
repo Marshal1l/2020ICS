@@ -45,8 +45,11 @@ void add_call_ret(const char *fmt, ...)
   memset(tmpcr, '\0', TMP_SIZE);
   vsprintf(tmpcr, fmt, ap);
   printf("instuction:\t%s\n", tmpcr);
-  fprintf(log_cr, "%s", tmpcr);
-  printf("111111111111111111111111\n");
+  if (log_cr != NULL)
+  {
+    fprintf(log_cr, "%s", tmpcr);
+    printf("111111111111111111111111\n");
+  }
   va_end(ap);
   strcat(tmpcr, tempbuf);
 }
