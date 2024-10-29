@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #define RING_SIZE 10
 FILE *log_fp = NULL;
+FILE *log_cr = NULL;
 typedef struct Log_ring_node Log_ring_node;
 typedef struct Log_ring_node
 {
@@ -9,9 +10,10 @@ typedef struct Log_ring_node
   Log_ring_node *next;
   vaddr_t addr;
 } Log_ring_node;
-
+static const char *Logfile_cr = "../build/call_ret.txt";
 char log_bytebuf[80] = {};
 char log_asmbuf[80] = {};
+static char crbuf[256] = {};
 static char tempbuf[256] = {};
 static Log_ring_node log_ring[RING_SIZE];
 static Log_ring_node *head_node = &log_ring[0];
@@ -24,7 +26,19 @@ int if_emptynode(Log_ring_node *node)
   }
   return 0;
 }
-
+void init_logcall_ret()
+{
+  log_cr = fopen(Logfile_cr, "w");
+}
+void add_call_ret(const char *fmt, ...)
+{
+  va_list ap;
+  va_start(ap, fmt);
+  vsnprintf(crbuf, sizeof(crbuf), fmt, ap);
+  fwrite(crbuf, sizeof(crbuf), 1, log_cr);
+  va_end(ap);
+  strcat(crbuf, tempbuf);
+}
 void init_log(const char *log_file)
 {
   if (log_file == NULL)
