@@ -52,7 +52,7 @@ static inline def_EHelper(ret)
   {
     rtl_pop(s, &s->seq_pc);
   }
-  const char *tmp_cr = check_func_call(s->seq_pc, 0);
+  const char *tmp_cr = check_func_call(s->seq_pc, 1);
   if (!strcmp(tmp_cr, "???"))
   {
     assert(0);
