@@ -3,16 +3,26 @@
 #include "debug.h"
 Symbol *symbol = NULL;
 static int func_num = 0;
-const char *check_func_call(paddr_t insta_addr)
+const char *check_func_call(paddr_t insta_addr, int iscall)
 {
     if (symbol == NULL)
         return "NULL";
     Symbol *tmpsymbol = symbol;
     while (tmpsymbol != NULL)
     {
-        if (insta_addr >= tmpsymbol->addr && insta_addr < tmpsymbol->addr + tmpsymbol->size)
+        if (iscall == 0)
         {
-            return (const char *)tmpsymbol->name;
+            if (insta_addr >= tmpsymbol->addr && insta_addr < tmpsymbol->addr + tmpsymbol->size)
+            {
+                return (const char *)tmpsymbol->name;
+            }
+        }
+        else
+        {
+            if (insta_addr == tmpsymbol->addr)
+            {
+                return (const char *)tmpsymbol->name;
+            }
         }
         tmpsymbol++;
     }

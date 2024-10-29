@@ -1,6 +1,6 @@
 #include "cc.h"
 
-const char *check_func_call(paddr_t insta_addr);
+const char *check_func_call(paddr_t insta_addr, int iscall);
 static inline def_EHelper(jmp)
 {
   // the target address is calculated at the decode stage
@@ -32,7 +32,7 @@ static inline def_EHelper(call)
   // TODO();
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, &s->jmp_pc);
-  const char *tmp_cr = check_func_call(s->jmp_pc);
+  const char *tmp_cr = check_func_call(s->jmp_pc, 1);
   //++func_deepth;
   add_call_ret("call %s<%x>", tmp_cr, s->jmp_pc);
   print_asm("call %s<%x>", tmp_cr, s->jmp_pc);
@@ -51,7 +51,7 @@ static inline def_EHelper(ret)
     rtl_pop(s, &s->seq_pc);
   }
   //--func_deepth;
-  const char *tmp_cr = check_func_call(s->seq_pc);
+  const char *tmp_cr = check_func_call(s->seq_pc, 0);
   add_call_ret("ret %s<%x>", tmp_cr, s->seq_pc);
   print_asm("ret %s<%x>", tmp_cr, s->seq_pc);
 }
