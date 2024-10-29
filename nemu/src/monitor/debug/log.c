@@ -41,8 +41,7 @@ void add_call_ret(const char *fmt, ...)
   vsprintf(tmpcr, fmt, ap);
   if (log_cr != NULL)
   {
-    fprintf(log_cr, "%s", tmpcr);
-    printf("111111111111111111111111\n");
+    fprintf(log_cr, "%s\n", tmpcr);
   }
   va_end(ap);
   strcat(tmpcr, tempbuf);
