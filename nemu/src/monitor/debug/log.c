@@ -1,6 +1,7 @@
 #include <common.h>
 #include <stdarg.h>
 #define RING_SIZE 10
+#define TMP_LEN 256
 FILE *log_fp = NULL;
 FILE *log_cr = NULL;
 typedef struct Log_ring_node Log_ring_node;
@@ -13,8 +14,8 @@ typedef struct Log_ring_node
 static const char *Logfile_cr = "../build/call_ret.txt";
 char log_bytebuf[80] = {};
 char log_asmbuf[80] = {};
-static char crbuf[256] = {};
-static char tempbuf[256] = {};
+static char crbuf[TMP_LEN] = {};
+static char tempbuf[TMP_LEN] = {};
 static Log_ring_node log_ring[RING_SIZE];
 static Log_ring_node *head_node = &log_ring[0];
 static Log_ring_node *free_node = &log_ring[0];
@@ -89,7 +90,8 @@ void strcatf(char *buf, const char *fmt, ...)
 {
   va_list ap;
   va_start(ap, fmt);
-  vsnprintf(tempbuf, sizeof(tempbuf), fmt, ap);
+  memset(tempbuf, '0', TMP_LEN);
+  vsnprintf(tempbuf, TMP_LEN, fmt, ap);
   va_end(ap);
   strcat(buf, tempbuf);
 }
