@@ -89,7 +89,7 @@ $(OBJ_DIR)/%.o: src/%.c
 app: $(BINARY)
 
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
-override ARGS ?= --cr=$(BUILD_DIR)/nemu-call-ret.txt
+override ARGS += --cr=$(BUILD_DIR)/nemu-call-ret.txt
 override ARGS += --diff=$(DIFF_REF_SO)
 
 # Command to execute NEMU
