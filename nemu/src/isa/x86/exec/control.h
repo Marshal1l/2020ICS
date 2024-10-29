@@ -32,7 +32,6 @@ static inline def_EHelper(call)
   // TODO();
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, &s->jmp_pc);
-
   const char *tmp_cr = check_func_call(s->jmp_pc);
   //++func_deepth;
   add_call_ret("call %s<%x>", tmp_cr, s->jmp_pc);
@@ -53,7 +52,6 @@ static inline def_EHelper(ret)
   }
   //--func_deepth;
   const char *tmp_cr = check_func_call(s->seq_pc);
-
   add_call_ret("ret %s<%x>", tmp_cr, s->seq_pc);
   print_asm("ret %s<%x>", tmp_cr, s->seq_pc);
 }
