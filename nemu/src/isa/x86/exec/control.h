@@ -29,6 +29,7 @@ static inline def_EHelper(jmp_rm)
 static inline def_EHelper(call)
 {
   // the target address is calculated at the decode stage
+
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, &s->jmp_pc);
   const char *tmp_cr = check_func_call(s->jmp_pc, 1);
@@ -71,14 +72,10 @@ static inline def_EHelper(ret_imm)
 
 static inline def_EHelper(call_rm)
 {
+  // TODO();
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, ddest);
-  const char *tmp_cr = check_func_call(s->seq_pc, 1);
-  if (!strcmp(tmp_cr, "???"))
-  {
-    assert(0);
-  }
-  //++func_deepth;
-  add_call_ret("call %s<%x>", tmp_cr, id_dest->str);
-  print_asm("call %s<%x>", tmp_cr, id_dest->str);
+  const char *tmp_cr = check_func_call(*ddest, 1);
+  add_call_ret("call *%s<%x>", id_dest->str, tmp_cr);
+  print_asm("call *%s<%x>", id_dest->str, tmp_cr);
 }
