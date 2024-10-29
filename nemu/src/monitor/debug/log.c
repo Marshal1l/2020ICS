@@ -91,7 +91,7 @@ void strcatf(char *buf, const char *fmt, ...)
   va_list ap;
   va_start(ap, fmt);
   memset(tempbuf, '0', TMP_LEN);
-  vsnprintf(tempbuf, TMP_LEN, fmt, ap);
+  vsprintf(tempbuf, fmt, ap);
   va_end(ap);
   strcat(buf, tempbuf);
 }
