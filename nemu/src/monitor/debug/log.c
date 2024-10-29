@@ -33,13 +33,14 @@ void init_logcall_ret()
 }
 void add_call_ret(const char *fmt, ...)
 {
-  printf("111111111111111111111111\n");
+
   va_list ap;
   va_start(ap, fmt);
   memset(crbuf, '\0', TMP_SIZE);
   vsprintf(crbuf, fmt, ap);
   printf("instuction:\t%s\n", crbuf);
   fwrite(crbuf, TMP_SIZE, 1, log_cr);
+  printf("111111111111111111111111\n");
   va_end(ap);
   strcat(crbuf, tempbuf);
 }
