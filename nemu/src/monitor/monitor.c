@@ -123,6 +123,7 @@ void init_monitor(int argc, char *argv[])
   printf("img:\t%s\n", img_file);
   printf("elf:\t%s\n", elf_file);
   printf("log:\t%s\n", log_file);
+  printf("cr:\t%s\n", log_crfile);
   // init call ret logfile
   init_logcall_ret(log_crfile);
   // init ftrace
