@@ -1,5 +1,4 @@
 #include "cc.h"
-#include "common.h"
 const char *check_func_call(paddr_t insta_addr);
 static inline def_EHelper(jmp)
 {
