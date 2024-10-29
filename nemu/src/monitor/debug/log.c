@@ -44,7 +44,6 @@ void add_call_ret(const char *fmt, ...)
   char *tmpcr = &crbuf[0];
   memset(tmpcr, '\0', TMP_SIZE);
   vsprintf(tmpcr, fmt, ap);
-  printf("instuction:\t%s\n", tmpcr);
   if (log_cr != NULL)
   {
     fprintf(log_cr, "%s", tmpcr);

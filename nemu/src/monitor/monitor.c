@@ -3,7 +3,7 @@
 #include <monitor/monitor.h>
 #include <getopt.h>
 #include <stdlib.h>
-
+void init_logcall_ret();
 void init_log(const char *log_file);
 void init_ftrace(const char *elf_file);
 void init_mem();
@@ -117,6 +117,8 @@ void init_monitor(int argc, char *argv[])
   printf("img:\t%s\n", img_file);
   printf("elf:\t%s\n", elf_file);
   printf("log:\t%s\n", log_file);
+  // init call ret logfile
+  init_logcall_ret();
   // init ftrace
   init_ftrace(elf_file);
   /* Open the log file. */
