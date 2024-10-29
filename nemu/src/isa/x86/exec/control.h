@@ -1,4 +1,5 @@
 #include "cc.h"
+uint32_t func_deepth = 0;
 const char *check_func_call(paddr_t insta_addr);
 static inline def_EHelper(jmp)
 {

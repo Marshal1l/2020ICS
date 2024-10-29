@@ -22,7 +22,7 @@
 #include <string.h>
 
 typedef uint8_t bool;
-uint32_t func_deepth = 0;
+
 #ifdef ISA64
 typedef uint64_t word_t;
 typedef int64_t sword_t;
