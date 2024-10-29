@@ -81,6 +81,6 @@ static inline def_EHelper(call_rm)
   {
     assert(0);
   }
-  add_call_ret("call *%s<%x>", tmp_cr, (paddr_t)(*ddest));
-  // print_asm("call *%s<%x>", id_dest->str, tmp_cr);
+  add_call_ret("call %s<%x>", tmp_cr, (paddr_t)(*ddest));
+  print_asm("call %s<%x>", id_dest->str, tmp_cr);
 }
