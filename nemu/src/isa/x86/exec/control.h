@@ -75,7 +75,11 @@ static inline def_EHelper(call_rm)
   // TODO();
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, ddest);
-  const char *tmp_cr = check_func_call(*id_dest->str, 1);
+  const char *tmp_cr = check_func_call(*ddest, 1);
+  if (!strcmp(tmp_cr, "???"))
+  {
+    assert(0);
+  }
   add_call_ret("call *%s<%x>", id_dest->str, tmp_cr);
   print_asm("call *%s<%x>", id_dest->str, tmp_cr);
 }
