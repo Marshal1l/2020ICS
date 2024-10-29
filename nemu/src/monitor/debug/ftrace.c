@@ -10,7 +10,7 @@ const char *check_func_call(paddr_t insta_addr)
     Symbol *tmpsymbol = symbol;
     while (tmpsymbol != NULL)
     {
-        if (insta_addr >= tmpsymbol->addr && insta_addr < tmpsymbol->addr + tmpsymbol->size)
+        if (insta_addr == tmpsymbol->addr)
         {
             return (const char *)tmpsymbol->name;
         }

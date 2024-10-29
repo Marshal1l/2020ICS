@@ -1,4 +1,5 @@
 #include "cc.h"
+#include "common.h"
 const char *check_func_call(paddr_t insta_addr);
 static inline def_EHelper(jmp)
 {
@@ -31,9 +32,11 @@ static inline def_EHelper(call)
   // TODO();
   rtl_push(s, &s->seq_pc);
   rtl_jr(s, &s->jmp_pc);
-  // Log("call %s<%x>", check_func_call(s->jmp_pc), s->jmp_pc);
-  add_call_ret("call %s<%x>", check_func_call(s->jmp_pc), s->jmp_pc);
-  print_asm("call %s<%x>", check_func_call(s->jmp_pc), s->jmp_pc);
+
+  const char *tmp_cr = check_func_call(s->jmp_pc);
+  ++func_deepth;
+  add_call_ret("call %s<%x>", tmp_cr, s->jmp_pc);
+  print_asm("call %s<%x>", tmp_cr, s->jmp_pc);
 }
 
 static inline def_EHelper(ret)
@@ -48,9 +51,11 @@ static inline def_EHelper(ret)
   {
     rtl_pop(s, &s->seq_pc);
   }
-  // Log("ret %s<%x>", check_func_call(s->seq_pc), s->seq_pc);
-  add_call_ret("ret %s<%x>", check_func_call(s->seq_pc), s->seq_pc);
-  print_asm("ret %s<%x>", check_func_call(s->seq_pc), s->seq_pc);
+  --func_deepth;
+  const char *tmp_cr = check_func_call(s->seq_pc);
+
+  add_call_ret("ret %s<%x>", tmp_cr, s->seq_pc);
+  print_asm("ret %s<%x>", tmp_cr, s->seq_pc);
 }
 
 static inline def_EHelper(ret_imm)
