@@ -38,7 +38,7 @@ static inline def_EHelper(int)
   rtl_mv(s, t0, ddest);
   void raise_intr(DecodeExecState * s, uint32_t NO, vaddr_t ret_addr);
   raise_intr(s, *t0, s->seq_pc);
-  printf("int %s", id_dest->str);
+  printf("int %x\n", s->seq_pc);
   print_asm("int %s", id_dest->str);
 
 #ifndef __DIFF_REF_NEMU__
