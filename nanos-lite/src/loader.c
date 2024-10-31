@@ -23,7 +23,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
     ramdisk_read(&phdr, ehdr.e_phoff + i * sizeof(Elf_Phdr), sizeof(Elf_Phdr));
     if (phdr.p_type == PT_LOAD)
     {
-      printf("read=%d\n", phdr.p_type);
+      // printf("read=%d\n", phdr.p_type);
       ramdisk_read((void *)phdr.p_vaddr, phdr.p_offset, phdr.p_filesz);
       memset((void *)(phdr.p_vaddr + phdr.p_filesz), 0, (phdr.p_memsz - phdr.p_filesz));
     }
