@@ -24,10 +24,10 @@ static uintptr_t loader(PCB *pcb, const char *filename)
     ramdisk_read(&phdr, ehdr.e_phoff, sizeof(Elf_Phdr));
     if (phdr.p_type == PT_LOAD)
     {
+      printf("read=%d\n", phdr.p_type);
       uint32_t v_s = phdr.p_vaddr;
       ramdisk_read((uint8_t *)v_s, phdr.p_offset, phdr.p_filesz);
       memset((uint8_t *)(v_s + phdr.p_filesz), 0, (phdr.p_memsz - phdr.p_filesz));
-      printf("read=%d\n", phdr.p_type);
     }
   }
   return 0;
