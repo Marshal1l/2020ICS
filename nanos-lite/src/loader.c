@@ -14,8 +14,10 @@ static uintptr_t loader(PCB *pcb, const char *filename)
 {
   Elf_Ehdr ehdr;
   size_t ehdr_size = ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
-  printf("ehdr_size=%u\n", ehdr_size);
+  printf("ehdr_size=%d\n", ehdr_size);
+  assert(*(uint32_t *)ehdr.e_ident == 0x7f454c46);
   return 0;
+
   // const char *file_name = filename;
   // file_name = "/home/mzh/2020PA/ics2020/nanos-lite/build/ramdisk.img";
   // if (file_name == NULL)
