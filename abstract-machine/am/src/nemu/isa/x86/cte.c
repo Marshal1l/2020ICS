@@ -16,18 +16,18 @@ void __am_vecnull();
 Context *__am_irq_handle(Context *c)
 {
   printf("c->eflags=\t%d\n", c->eflags);
-  printf("c->cs\t%d\n", c->cs);
-  printf("c->eip=\t%x\n", c->eip);
+  printf("c->cs=\t%d\n", c->cs);
+  printf("c->eip=\t%d\n", c->eip);
   printf("c->error_code=\t%x\n", c->error_code);
-  printf("c->irq=\t%x\n", c->irq);
-  printf("c->eax=\t%x\n", c->eax);
-  printf("c->ecx=\t%x\n", c->ecx);
-  printf("c->edx=\t%x\n", c->edx);
-  printf("c->ebx=\t%x\n", c->ebx);
-  printf("c->esp=\t%x\n", c->esp);
-  printf("c->ebp=\t%x\n", c->ebp);
-  printf("c->esi=\t%x\n", c->esi);
-  printf("c->edi=\t%x\n", c->edi);
+  printf("c->irq=\t%d\n", c->irq);
+  printf("c->eax=\t%d\n", c->eax);
+  printf("c->ecx=\t%d\n", c->ecx);
+  printf("c->edx=\t%d\n", c->edx);
+  printf("c->ebx=\t%d\n", c->ebx);
+  printf("c->esp=\t%d\n", c->esp);
+  printf("c->ebp=\t%d\n", c->ebp);
+  printf("c->esi=\t%d\n", c->esi);
+  printf("c->edi=\t%d\n", c->edi);
   if (user_handler)
   {
     Event ev = {
