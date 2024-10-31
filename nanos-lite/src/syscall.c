@@ -11,10 +11,12 @@ void do_syscall(Context *c)
   switch (a[0])
   {
   case SYS_yield:
+    printf("SYS_YIELD\n");
     yield();
-    c->GPRx = 1;
+    c->GPRx = 0;
     break;
   case SYS_exit:
+    printf("SYS_EXIT\n");
     halt(a[0]);
     break;
   default:
