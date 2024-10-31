@@ -10,7 +10,7 @@
 
 #if _SHARE
 // do not enable these features while building a reference design
-#define DIFF_TEST
+// #define DIFF_TEST
 #undef DEBUG
 #endif
 
