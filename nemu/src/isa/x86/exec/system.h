@@ -35,7 +35,7 @@ static inline def_EHelper(mov_cr2r)
 static inline def_EHelper(int)
 {
   // TODO();
-  isa_reg_display();
+
   rtl_mv(s, t0, ddest);
   void raise_intr(DecodeExecState * s, uint32_t NO, vaddr_t ret_addr);
   raise_intr(s, *t0, s->seq_pc);
