@@ -30,7 +30,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
       memset((uint8_t *)(v_s + phdr.p_filesz), 0, (phdr.p_memsz - phdr.p_filesz));
     }
   }
-  return (void *)0x3000000;
+  return (uintptr_t)(DEFAULT_ENTRY);
 }
 
 void naive_uload(PCB *pcb, const char *filename)
