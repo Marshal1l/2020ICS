@@ -44,7 +44,7 @@ static inline def_EHelper(pop_esp)
 static inline def_EHelper(pusha)
 {
   // TODO();
-  isa_reg_display();
+  // isa_reg_display();
   rtl_mv(s, t0, &reg_l(R_ESP));
   rtl_push(s, &reg_l(R_EAX));
   rtl_push(s, &reg_l(R_ECX));
