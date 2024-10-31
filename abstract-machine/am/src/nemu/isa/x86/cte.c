@@ -40,10 +40,13 @@ Context *__am_irq_handle(Context *c)
     {
     case EVENT_YIELD:
       ev.event = EVENT_YIELD;
+      break;
     case EVENT_ERROR:
       ev.event = EVENT_ERROR;
+      break;
     default:
       ev.event = EVENT_ERROR;
+      break;
       break;
     }
 
