@@ -1,6 +1,5 @@
 #include <proc.h>
 #include <elf.h>
-#include <fs.h>
 #ifdef __LP64__
 #define Elf_Ehdr Elf64_Ehdr
 #define Elf_Phdr Elf64_Phdr
@@ -8,9 +7,14 @@
 #define Elf_Ehdr Elf32_Ehdr
 #define Elf_Phdr Elf32_Phdr
 #endif
+extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
+extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 
 static uintptr_t loader(PCB *pcb, const char *filename)
 {
+  Elf_Ehdr ehdr;
+  size_t ehdr_size = ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
+  printf("ehdr_size=%lu\n", ehdr_size);
   return 0;
   // const char *file_name = filename;
   // file_name = "/home/mzh/2020PA/ics2020/nanos-lite/build/ramdisk.img";
