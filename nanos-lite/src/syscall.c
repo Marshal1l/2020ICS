@@ -16,12 +16,12 @@ void do_syscall(Context *c)
     c->GPRx = fs_write(a[1], (const void *)a[2], a[3]);
     break;
   case SYS_yield:
-    printf("SYS_YIELD\n");
+    printf("SYS_YIELD------%d\n", SYS_yield);
     yield();
     c->GPRx = 0;
     break;
   case SYS_exit:
-    printf("SYS_EXIT\n");
+    printf("SYS_EXIT------%d\n", SYS_exit);
     halt(a[0]);
     break;
   default:
