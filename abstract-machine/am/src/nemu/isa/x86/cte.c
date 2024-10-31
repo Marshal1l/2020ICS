@@ -16,7 +16,14 @@ void __am_vecnull();
 Context *__am_irq_handle(Context *c)
 {
 
-  printf("c->irq\t%d\n", c->irq);
+  printf("c->eax\t%x\n", c->eax);
+  printf("c->ecx\t%x\n", c->ecx);
+  printf("c->edx\t%x\n", c->edx);
+  printf("c->ebx\t%x\n", c->ebx);
+  printf("c->esp\t%x\n", c->esp);
+  printf("c->ebp\t%x\n", c->ebp);
+  printf("c->esi\t%x\n", c->esi);
+  printf("c->edi\t%x\n", c->edi);
   if (user_handler)
   {
     Event ev = {
