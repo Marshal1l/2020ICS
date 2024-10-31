@@ -15,7 +15,7 @@ void __am_vecnull();
 
 Context *__am_irq_handle(Context *c)
 {
-  printf("c->irq%x", c->irq);
+  printf("c->irq%d\n", c->irq);
   if (user_handler)
   {
     Event ev = {0};
