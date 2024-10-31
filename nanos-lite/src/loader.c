@@ -15,31 +15,21 @@ static uintptr_t loader(PCB *pcb, const char *filename)
   Elf_Ehdr ehdr;
   size_t ehdr_size = ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
   printf("ehdr_size=%d\n", ehdr_size);
-  printf("ehdr_e_ident=%d\n", *(uint32_t *)ehdr.e_ident);
-  assert(*(uint32_t *)ehdr.e_ident == 0x464c457f);
-  return 0;
+  // printf("ehdr_e_ident=%d\n", *(uint32_t *)ehdr.e_ident);
 
-  // const char *file_name = filename;
-  // file_name = "/home/mzh/2020PA/ics2020/nanos-lite/build/ramdisk.img";
-  // if (file_name == NULL)
-  // {
-  //   assert(0);
-  //   return 0;
-  // }
-  // int fd;
-  // fd = fs_open(file_name, "rb");
-  // if (fd == -1)
-  // {
-  //   assert(0);
-  //   return 0;
-  // }
-  // Elf_Ehdr ehdr;
-  // if (fs_read(&ehdr, sizeof(Elf32_Ehdr), 1, fd) <= 0)
-  // {
-  //   assert(0);
-  //   return 0;
-  // }
-  // assert(*(uint32_t *)ehdr.e_ident == 0x7f454c46);
+  assert(*(uint32_t *)(ehdr.e_ident) == 0x464c457f);
+  Elf_Phdr phdr;
+  for (int i = 0; i < ehdr.e_phnum; i++)
+  {
+    ramdisk_read(&phdr, ehdr.e_phoff, sizeof(Elf_Phdr));
+    if (phdr.p_type == PT_LOAD)
+    {
+      uint32_t v_s = phdr.p_vaddr;
+      ramdisk_read((void *)v_s, phdr.p_offset, phdr.p_filesz);
+      printf("read=%d\n", phdr.p_type);
+    }
+  }
+  return 0;
 }
 
 void naive_uload(PCB *pcb, const char *filename)
