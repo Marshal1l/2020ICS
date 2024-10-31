@@ -5,7 +5,9 @@ static Context *do_event(Event e, Context *c)
   switch (e.event)
   {
   case EVENT_YIELD:
-    printf("sys get yield!\n");
+    printf("sys get YEILD!\n");
+  case EVENT_ERROR:
+    printf("sys get ERROR!\n");
   default:
     panic("Unhandled event ID = %d", e.event);
   }
