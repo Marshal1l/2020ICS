@@ -15,8 +15,8 @@ void __am_vecnull();
 
 Context *__am_irq_handle(Context *c)
 {
-  printf("c->eflags=\t%x\n", c->eflags);
-  printf("c->cs\t%x\n", c->cs);
+  printf("c->eflags=\t%d\n", c->eflags);
+  printf("c->cs\t%d\n", c->cs);
   printf("c->eip=\t%x\n", c->eip);
   printf("c->error_code=\t%x\n", c->error_code);
   printf("c->irq=\t%x\n", c->irq);

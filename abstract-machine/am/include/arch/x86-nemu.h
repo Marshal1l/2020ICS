@@ -3,7 +3,6 @@
 
 struct Context
 {
-
   uintptr_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
   int irq;
   uintptr_t error_code, eip, cs, eflags;
