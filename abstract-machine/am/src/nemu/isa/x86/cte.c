@@ -18,7 +18,12 @@ Context *__am_irq_handle(Context *c)
   printf("c->irq\t%d\n", c->irq);
   if (user_handler)
   {
-    Event ev = {0};
+    Event ev = {
+        .event = EVENT_NULL,
+        .cause = 0,
+        .ref = 0,
+        .msg = "(no message)",
+    };
     switch (c->irq)
     {
     default:
