@@ -38,6 +38,9 @@ Context *__am_irq_handle(Context *c)
     };
     switch (c->irq)
     {
+    case 0x80:
+      ev.event = EVENT_SYSCALL;
+      break;
     case 0x81:
       ev.event = EVENT_YIELD;
       break;
