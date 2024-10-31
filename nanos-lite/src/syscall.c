@@ -12,7 +12,7 @@ void do_syscall(Context *c)
   {
   case SYS_write:
     printf("SYS_WRITE\n");
-    fs_write(a[1], (const void *)a[2], a[3]);
+    c->GPRx = fs_write(a[1], (const void *)a[2], a[3]);
     break;
   case SYS_yield:
     printf("SYS_YIELD\n");
