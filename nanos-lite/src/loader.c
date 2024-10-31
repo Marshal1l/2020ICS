@@ -9,7 +9,7 @@
 #endif
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
-
+#define DEFAULT_ENTRY ((void *)0x3000000)
 static uintptr_t loader(PCB *pcb, const char *filename)
 {
   Elf_Ehdr ehdr;
@@ -30,7 +30,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
       memset((uint8_t *)(v_s + phdr.p_filesz), 0, (phdr.p_memsz - phdr.p_filesz));
     }
   }
-  return 0;
+  return (void *)0x3000000;
 }
 
 void naive_uload(PCB *pcb, const char *filename)
