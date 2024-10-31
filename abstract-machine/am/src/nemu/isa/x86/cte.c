@@ -38,7 +38,7 @@ Context *__am_irq_handle(Context *c)
     };
     switch (c->irq)
     {
-    case EVENT_YIELD:
+    case 0x81:
       ev.event = EVENT_YIELD;
       break;
     case EVENT_ERROR:
