@@ -11,6 +11,7 @@ void do_syscall(Context *c)
   switch (a[0])
   {
   case SYS_brk:
+    printf("SYS_BRK------%d\n", SYS_brk);
     c->GPRx = 0;
     break;
   case SYS_write:
