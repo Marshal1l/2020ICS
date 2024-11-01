@@ -42,6 +42,18 @@ static Finfo file_table[] __attribute__((used)) = {
     [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, invalid_write},
 #include "files.h"
 };
+int fs_open(const char *pathname, int flags, int mode)
+{
+  for (int i = 0; i < sizeof(file_table) / sizeof(Finfo); i++)
+  {
+    if (pathname == file_table[i].name)
+    {
+      return i;
+    }
+  }
+  panic("open file error!\n");
+  return -1;
+}
 int fs_close(int fd) { return 0; }
 void init_fs()
 {

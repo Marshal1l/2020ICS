@@ -7,13 +7,21 @@
 #define Elf_Ehdr Elf32_Ehdr
 #define Elf_Phdr Elf32_Phdr
 #endif
+extern int fs_open(const char *pathname, int flags, int mode);
+extern size_t fs_read(int fd, void *buf, size_t len);
+extern size_t fs_write(int fd, const void *buf, size_t len);
+extern size_t fs_lseek(int fd, size_t offset, int whence);
+extern int fs_close(int fd);
+//
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 #define DEFAULT_ENTRY ((void *)0x3000000)
 static uintptr_t loader(PCB *pcb, const char *filename)
 {
+  int file_id = -1;
+  file_id = fs_open(filename, 0, 0);
   Elf_Ehdr ehdr;
-  size_t ehdr_size = ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
+  size_t ehdr_size = fs_read(file_id, &ehdr, sizeof(Elf_Ehdr));
   printf("ehdr_size=%d\n", ehdr_size);
   printf("ehdr_phnum=%d\n", ehdr.e_phnum);
   assert(*(uint32_t *)(ehdr.e_ident) == 0x464c457f);
