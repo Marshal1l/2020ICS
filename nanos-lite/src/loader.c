@@ -28,6 +28,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
   printf("ehdr_e_ident=%s\n", ehdr.e_ident);
   assert(*(uint32_t *)(ehdr.e_ident) == 0x464c457f);
   Elf_Phdr phdr;
+  printf("Number of program headers:%d\n", ehdr.e_phnum);
   for (int i = 0; i < ehdr.e_phnum; i++)
   {
     fs_lseek(file_id, ehdr.e_phoff + i * sizeof(Elf_Phdr), SEEK_SET);
