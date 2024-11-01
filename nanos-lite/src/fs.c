@@ -52,7 +52,7 @@ int fs_open(const char *pathname, int flags, int mode)
       return i;
     }
   }
-  printf("file name =%s\n", pathname);
+  // printf("file name =%s\n", pathname);
   panic("open file error!\n");
   return -1;
 }
