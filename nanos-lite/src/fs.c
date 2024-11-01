@@ -75,9 +75,9 @@ size_t fs_write(int fd, const void *buf, size_t len)
     }
     return size;
   }
-  Finfo des_file = file_table[fd];
-  size_t write_pos = des_file.disk_offset + des_file.open_offset;
-  if (write_pos + len > des_file.disk_offset + des_file.size)
+  Finfo *des_file = &file_table[fd];
+  size_t write_pos = des_file->disk_offset + des_file->open_offset;
+  if (write_pos + len > des_file->disk_offset + des_file->size)
   {
     panic("write out of the file!\n");
     return -1;
@@ -87,18 +87,18 @@ size_t fs_write(int fd, const void *buf, size_t len)
     panic("write file error!\n");
     return -1;
   }
-  des_file.open_offset += size;
+  des_file->open_offset += size;
   return size;
 }
 size_t fs_read(int fd, void *buf, size_t len)
 {
   if (len == 0)
     return 0;
-  Finfo des_file = file_table[fd];
-  // printf("offset%d\n", des_file.open_offset);
+  Finfo *des_file = &file_table[fd];
+  // printf("offset%d\n", des_file->open_offset);
   size_t size = 0;
-  size_t read_pos = des_file.disk_offset + des_file.open_offset;
-  if (read_pos + len > des_file.disk_offset + des_file.size)
+  size_t read_pos = des_file->disk_offset + des_file->open_offset;
+  if (read_pos + len > des_file->disk_offset + des_file->size)
   {
     panic("read out of the file!\n");
     return -1;
@@ -108,7 +108,7 @@ size_t fs_read(int fd, void *buf, size_t len)
     panic("read file error!\n");
     return -1;
   }
-  des_file.open_offset += size;
+  des_file->open_offset += size;
   return size;
 }
 size_t fs_lseek(int fd, size_t offset, int whence)
