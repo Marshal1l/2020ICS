@@ -22,10 +22,10 @@ static uintptr_t loader(PCB *pcb, const char *filename)
   int file_id = -1;
   file_id = fs_open(filename, 0, 0);
   Elf_Ehdr ehdr;
-  size_t ehdr_size = fs_read(file_id, &ehdr, sizeof(Elf_Ehdr));
-  printf("ehdr_size=%d\n", ehdr_size);
-  printf("ehdr_phnum=%d\n", ehdr.e_phnum);
-  printf("ehdr_e_ident=%s\n", ehdr.e_ident);
+  fs_read(file_id, &ehdr, sizeof(Elf_Ehdr));
+  // printf("ehdr_size=%d\n", ehdr_size);
+  // printf("ehdr_phnum=%d\n", ehdr.e_phnum);
+  // printf("ehdr_e_ident=%s\n", ehdr.e_ident);
   assert(*(uint32_t *)(ehdr.e_ident) == 0x464c457f);
   Elf_Phdr phdr;
   for (int i = 0; i < ehdr.e_phnum; i++)
