@@ -18,7 +18,7 @@ void do_syscall(Context *c)
   case SYS_yield:
     printf("SYS_YIELD------%d\n", SYS_yield);
     yield();
-    c->GPRx = 0;
+    c->GPRx = 1;
     break;
   case SYS_exit:
     printf("SYS_EXIT------%d\n", SYS_exit);

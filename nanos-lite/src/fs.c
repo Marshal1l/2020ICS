@@ -57,14 +57,6 @@ size_t fs_write(int fd, const void *buf, size_t len)
       size++;
     }
   }
-  if (fd == 2)
-  {
-    for (int i = 0; i < len && *(const uint8_t *)tmpbuf != '\0'; i++)
-    {
-      putch(*(const uint8_t *)tmpbuf);
-      tmpbuf++;
-      size++;
-    }
-  }
-  return 13;
+  printf("size=:%d\n", size);
+  return size;
 }
