@@ -46,11 +46,9 @@ int fs_open(const char *pathname, int flags, int mode)
 {
   for (int i = 0; i < sizeof(file_table) / sizeof(Finfo); i++)
   {
-    // printf("file:%s\n", file_table[i].name);
     if (strcmp(pathname, file_table[i].name) == 0)
     {
       file_table[i].open_offset = 0;
-      // printf("open file! filename=:%s\n", pathname);
       return i;
     }
   }
