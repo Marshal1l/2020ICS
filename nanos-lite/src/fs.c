@@ -46,7 +46,7 @@ int fs_open(const char *pathname, int flags, int mode)
 {
   for (int i = 0; i < sizeof(file_table) / sizeof(Finfo); i++)
   {
-    // printf("file:%s\n", file_table[i].name);
+    printf("file:%s\n", file_table[i].name);
     if (pathname == file_table[i].name)
     {
       return i;
