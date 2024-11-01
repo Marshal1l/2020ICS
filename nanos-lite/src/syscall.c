@@ -1,6 +1,7 @@
 #include <common.h>
 #include "syscall.h"
-size_t fs_write(int fd, const void *buf, size_t len);
+extern size_t fs_write(int fd, const void *buf, size_t len);
+extern size_t fs_read(int fd, void *buf, size_t len);
 void do_syscall(Context *c)
 {
   uintptr_t a[4];
@@ -13,6 +14,9 @@ void do_syscall(Context *c)
   case SYS_brk:
     // printf("SYS_BRK------%d\n", SYS_brk);
     c->GPRx = 0;
+    break;
+  case SYS_read:
+    c->GPRx = fs_read(a[1], (void *)a[2], a[3]);
     break;
   case SYS_write:
     // printf("SYS_WRITE------%d\n", SYS_write);
