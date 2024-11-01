@@ -32,6 +32,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
   {
     fs_lseek(file_id, ehdr.e_phoff + i * sizeof(Elf_Phdr), SEEK_SET);
     fs_read(file_id, &phdr, sizeof(Elf_Phdr));
+    printf("phdr.p_type:=%d\n", phdr.p_type);
     if (phdr.p_type == PT_LOAD)
     {
       printf("read PT_LOAD!\n", phdr.p_type);
