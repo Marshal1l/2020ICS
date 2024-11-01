@@ -14,6 +14,8 @@ void do_syscall(Context *c)
     printf("SYS_WRITE------%d\n", SYS_write);
     printf("fd=%d,len=%d\n", a[1], a[3]);
     c->GPRx = fs_write(a[1], (const void *)a[2], a[3]);
+    yield();
+
     break;
   case SYS_yield:
     printf("SYS_YIELD------%d\n", SYS_yield);
