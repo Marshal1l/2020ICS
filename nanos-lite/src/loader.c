@@ -21,7 +21,6 @@ static uintptr_t loader(PCB *pcb, const char *filename)
 {
   int file_id = -1;
   file_id = fs_open(filename, 0, 0);
-  printf("file id:=%d\n", file_id);
   Elf_Ehdr ehdr;
   size_t ehdr_size = fs_read(file_id, &ehdr, sizeof(Elf_Ehdr));
   printf("ehdr_size=%d\n", ehdr_size);

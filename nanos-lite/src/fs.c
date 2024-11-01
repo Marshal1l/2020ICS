@@ -115,6 +115,7 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   Finfo des_file = file_table[fd];
   if (whence == SEEK_SET)
   {
+    printf("file name =%s\n", des_file.name);
     if ((des_file.open_offset = offset) > des_file.size)
     {
       panic("offset out of file error!\n");
