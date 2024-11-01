@@ -11,9 +11,20 @@ void do_syscall(Context *c)
   switch (a[0])
   {
   case SYS_write:
-    printf("SYS_WRITE------%d\n", SYS_write);
-    printf("fd=%d,len=%d\n", a[1], a[3]);
-    c->GPRx = fs_write(a[1], (const void *)a[2], a[3]);
+    int fd = (int)c->GPR2;
+    void *buf = (void *)c->GPR3;
+    size_t count = (size_t)c->GPR4;
+    if (fd == 1 || fd == 2)
+    {
+      for (int i = 0; i < count; i++)
+      {
+        putch(((char *)buf)[i]);
+      }
+    }
+    c->GPRx = count;
+    // printf("SYS_WRITE------%d\n", SYS_write);
+    // printf("fd=%d,len=%d\n", a[1], a[3]);
+    // c->GPRx = fs_write(a[1], (const void *)a[2], a[3]);
     break;
   case SYS_yield:
     printf("SYS_YIELD------%d\n", SYS_yield);
