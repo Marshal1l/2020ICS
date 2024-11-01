@@ -10,6 +10,9 @@ void do_syscall(Context *c)
   a[3] = c->GPR4;
   switch (a[0])
   {
+  case SYS_brk:
+    c->GPRx = 0;
+    break;
   case SYS_write:
     // printf("SYS_WRITE------%d\n", SYS_write);
     // printf("fd=%d,len=%d\n", a[1], a[3]);
