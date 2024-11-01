@@ -66,53 +66,65 @@ size_t fs_write(int fd, const void *buf, size_t len)
 {
   if (len == 0)
     return 0;
-  size_t size = 0;
-  const void *tmpbuf = buf;
+  size_t writelen = 0;
   // if (fd == 1 || fd == 2)
   // {
-  //   for (int i = 0; i < len && *(const uint8_t *)tmpbuf != '\0'; i++)
+  //   for (int i = 0; i < len && *(const uint8_t *)buf != '\0'; i++)
   //   {
-  //     putch(*(const uint8_t *)tmpbuf);
-  //     tmpbuf++;
+  //     putch(*(const uint8_t *)buf);
+  //     buf++;
   //     size++;
   //   }
   //   return size;
   // }
-  Finfo *des_file = &file_table[fd];
-  size_t write_pos = des_file->disk_offset + des_file->open_offset;
-  if (des_file->open_offset >= des_file->size)
+  if (file_table[fd].open_offset > file_table[fd].size)
   {
     panic("write out of the file!\n");
     return -1;
   }
-  if ((size = ramdisk_write(tmpbuf, write_pos, len)) < 0)
+  if (len + file_table[fd].open_offset > file_table[fd].size)
+  {
+    writelen = file_table[fd].size - file_table[fd].open_offset;
+  }
+  else
+  {
+    writelen = len;
+  }
+  size_t write_pos = file_table[fd].disk_offset + file_table[fd].open_offset;
+  if (ramdisk_write(buf, write_pos, len) < 0)
   {
     panic("write file error!\n");
     return -1;
   }
-  file_table[fd].open_offset = file_table[fd].open_offset + size;
-  return size;
+  file_table[fd].open_offset += writelen;
+  return writelen;
 }
 size_t fs_read(int fd, void *buf, size_t len)
 {
   if (len == 0)
     return 0;
-  Finfo *des_file = &file_table[fd];
-  // printf("offset%d\n", des_file->open_offset);
-  size_t size = 0;
-  size_t read_pos = des_file->disk_offset + des_file->open_offset;
-  if (des_file->open_offset >= des_file->size)
+  size_t readlen = 0;
+  if (file_table[fd].open_offset > file_table[fd].size)
   {
     panic("read out of the file!\n");
     return -1;
   }
-  if ((size = ramdisk_read(buf, read_pos, len)) < 0)
+  if (len + file_table[fd].open_offset > file_table[fd].size)
+  {
+    readlen = file_table[fd].size - file_table[fd].open_offset;
+  }
+  else
+  {
+    readlen = len;
+  }
+  size_t read_pos = file_table[fd].disk_offset + file_table[fd].open_offset;
+  if (ramdisk_read(buf, read_pos, len) < 0)
   {
     panic("read file error!\n");
     return -1;
   }
-  file_table[fd].open_offset = file_table[fd].open_offset + size;
-  return size;
+  file_table[fd].open_offset += readlen;
+  return readlen;
 }
 size_t fs_lseek(int fd, size_t offset, int whence)
 {
