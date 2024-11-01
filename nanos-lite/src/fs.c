@@ -94,9 +94,8 @@ size_t fs_read(int fd, void *buf, size_t len)
 {
   if (len == 0)
     return 0;
-
   Finfo des_file = file_table[fd];
-  printf("offset%d\n", des_file.open_offset);
+  // printf("offset%d\n", des_file.open_offset);
   size_t size = 0;
   size_t read_pos = des_file.disk_offset + des_file.open_offset;
   if (read_pos + len > des_file.disk_offset + des_file.size)
