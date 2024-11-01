@@ -30,7 +30,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
   Elf_Phdr phdr;
   for (int i = 0; i < ehdr.e_phnum; i++)
   {
-    printf("lseek:=", fs_lseek(file_id, ehdr.e_phoff + i * sizeof(Elf_Phdr), SEEK_SET));
+    fs_lseek(file_id, ehdr.e_phoff + i * sizeof(Elf_Phdr), SEEK_SET);
     fs_read(file_id, &phdr, sizeof(Elf_Phdr));
     if (phdr.p_type == PT_LOAD)
     {
