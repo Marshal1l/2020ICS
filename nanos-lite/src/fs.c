@@ -113,33 +113,33 @@ size_t fs_read(int fd, void *buf, size_t len)
 }
 size_t fs_lseek(int fd, size_t offset, int whence)
 {
-  Finfo des_file = file_table[fd];
+  Finfo *des_file = &file_table[fd];
   if (whence == SEEK_SET)
   {
-    if ((des_file.open_offset = offset) > des_file.size)
+    if ((des_file->open_offset = offset) > des_file->size)
     {
       panic("offset out of file error!\n");
       return -1;
     }
-    return des_file.open_offset;
+    return des_file->open_offset;
   }
   if (whence == SEEK_CUR)
   {
-    if ((des_file.open_offset = des_file.open_offset + offset) > des_file.size)
+    if ((des_file->open_offset = des_file->open_offset + offset) > des_file->size)
     {
       panic("offset out of file error!\n");
       return -1;
     }
-    return des_file.open_offset;
+    return des_file->open_offset;
   }
   if (whence == SEEK_END)
   {
-    if ((des_file.open_offset = des_file.size + offset) > des_file.size)
+    if ((des_file->open_offset = des_file->size + offset) > des_file->size)
     {
       panic("offset out of file error!\n");
       return -1;
     }
-    return des_file.open_offset;
+    return des_file->open_offset;
   }
   return -1;
 }
