@@ -141,7 +141,7 @@ size_t fs_lseek(int fd, size_t offset, int whence)
       panic("offset out of file error!\n");
       return -1;
     }
-    return (des_file->open_offset) / sizeof(uint8_t);
+    return (des_file->open_offset);
   }
   return -1;
 }
