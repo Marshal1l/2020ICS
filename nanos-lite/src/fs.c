@@ -50,7 +50,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
   const void *tmpbuf = buf;
   if (fd == 1)
   {
-    for (int i = 0; i < len && *(const uint8_t *)tmpbuf != '\0'; i++)
+    for (int i = 0; i < len; i++)
     {
       putch(*(const uint8_t *)tmpbuf);
       tmpbuf++;
