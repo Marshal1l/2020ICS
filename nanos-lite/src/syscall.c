@@ -11,12 +11,12 @@ void do_syscall(Context *c)
   switch (a[0])
   {
   case SYS_brk:
-    printf("SYS_BRK------%d\n", SYS_brk);
+    // printf("SYS_BRK------%d\n", SYS_brk);
     c->GPRx = 0;
     break;
   case SYS_write:
-    printf("SYS_WRITE------%d\n", SYS_write);
-    // printf("fd=%d,len=%d\n", a[1], a[3]);
+    // printf("SYS_WRITE------%d\n", SYS_write);
+    //  printf("fd=%d,len=%d\n", a[1], a[3]);
     c->GPRx = fs_write(a[1], (const void *)a[2], a[3]);
     break;
   case SYS_yield:
