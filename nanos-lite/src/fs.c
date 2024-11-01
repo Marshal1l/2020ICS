@@ -103,8 +103,9 @@ size_t fs_read(int fd, void *buf, size_t len)
   size_t read_pos = des_file->disk_offset + des_file->open_offset;
   if (read_pos + len > des_file->disk_offset + des_file->size)
   {
-    panic("read out of the file!\n");
-    return -1;
+    ;
+    // panic("read out of the file!\n");
+    // return -1;
   }
   if ((size = ramdisk_read(buf, read_pos, len)) < 0)
   {
