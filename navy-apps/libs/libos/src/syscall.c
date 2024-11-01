@@ -72,11 +72,13 @@ int _write(int fd, void *buf, size_t count)
 
 void *_sbrk(intptr_t increment)
 {
-  intptr_t tmp_end = end + increment;
+  intptr_t old_end = end;
+
   if (_syscall_(SYS_write, end, 0, 0) == 0)
   {
+    intptr_t tmp_end = end + increment;
     end = tmp_end;
-    return (void *)(tmp_end - increment);
+    return (void *)old_end;
   }
   return (void *)(-1);
 }
