@@ -35,7 +35,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
     {
       printf("read PT_LOAD!\n");
       fs_lseek(file_id, phdr.p_offset, SEEK_SET);
-      fs_write(file_id, (void *)phdr.p_vaddr, phdr.p_filesz);
+      fs_read(file_id, (void *)phdr.p_vaddr, phdr.p_filesz);
       memset((void *)(phdr.p_vaddr + phdr.p_filesz), 0, (phdr.p_memsz - phdr.p_filesz));
     }
   }
