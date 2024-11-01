@@ -7,6 +7,7 @@ int main()
   assert(fp);
 
   fseek(fp, 0, SEEK_END);
+  printf("stage 0\n");
   long size = ftell(fp);
   assert(size == 5000);
   printf("stage 1\n");

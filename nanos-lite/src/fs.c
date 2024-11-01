@@ -49,7 +49,7 @@ int fs_open(const char *pathname, int flags, int mode)
     // printf("file:%s\n", file_table[i].name);
     if (strcmp(pathname, file_table[i].name) == 0)
     {
-      printf("open file! filename=:%s\n", pathname);
+      // printf("open file! filename=:%s\n", pathname);
       return i;
     }
   }
