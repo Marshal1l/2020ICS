@@ -7,7 +7,7 @@ int main()
   int i = 2;
   volatile int j = 0;
   printf("Success!\n");
-  pause();
+  // pause();
   // while (1)
   // {
   //   j++;
