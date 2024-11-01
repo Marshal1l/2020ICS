@@ -7,7 +7,6 @@ static Context *do_event(Event e, Context *c)
   case EVENT_SYSCALL:
     // printf("sys get SYSCALL!\n");
     do_syscall(c);
-    printf("\n");
     break;
   case EVENT_YIELD:
     // printf("sys get YEILD!\n");
