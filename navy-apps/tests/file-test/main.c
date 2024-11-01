@@ -25,20 +25,21 @@ int main()
   {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
-
+  printf("stage 4\n");
   for (i = 500; i < 1000; i++)
   {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
-
+  printf("stage 5\n");
   fseek(fp, 0, SEEK_SET);
+  printf("stage 6\n");
   for (i = 0; i < 500; i++)
   {
     fscanf(fp, "%d", &n);
     assert(n == i + 1 + 1000);
   }
-
+  printf("stage 7\n");
   fclose(fp);
 
   printf("PASS!!!\n");
