@@ -47,21 +47,22 @@ void init_fs()
 size_t fs_write(int fd, const void *buf, size_t len)
 {
   size_t size = 0;
+  const void *tmpbuf = buf;
   if (fd == 1)
   {
-    for (int i = 0; i < len && *(const uint8_t *)buf != '\0'; i++)
+    for (int i = 0; i < len && *(const uint8_t *)tmpbuf != '\0'; i++)
     {
-      putch(*(const uint8_t *)buf);
-      buf++;
+      putch(*(const uint8_t *)tmpbuf);
+      tmpbuf++;
       size++;
     }
   }
   if (fd == 2)
   {
-    for (int i = 0; i < len && *(const uint8_t *)buf != '\0'; i++)
+    for (int i = 0; i < len && *(const uint8_t *)tmpbuf != '\0'; i++)
     {
-      putch(*(const uint8_t *)buf);
-      buf++;
+      putch(*(const uint8_t *)tmpbuf);
+      tmpbuf++;
       size++;
     }
   }
