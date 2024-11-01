@@ -49,6 +49,7 @@ int fs_open(const char *pathname, int flags, int mode)
     // printf("file:%s\n", file_table[i].name);
     if (strcmp(pathname, file_table[i].name) == 0)
     {
+      file_table[i].open_offset = 0;
       // printf("open file! filename=:%s\n", pathname);
       return i;
     }
@@ -79,18 +80,17 @@ size_t fs_write(int fd, const void *buf, size_t len)
   }
   Finfo *des_file = &file_table[fd];
   size_t write_pos = des_file->disk_offset + des_file->open_offset;
-  if (write_pos + len > des_file->disk_offset + des_file->size)
+  if (des_file->open_offset >= des_file->size)
   {
-    ;
-    // panic("write out of the file!\n");
-    // return -1;
+    panic("write out of the file!\n");
+    return -1;
   }
   if ((size = ramdisk_write(tmpbuf, write_pos, len)) < 0)
   {
     panic("write file error!\n");
     return -1;
   }
-  des_file->open_offset += size;
+  file_table[fd].open_offset += size;
   return size;
 }
 size_t fs_read(int fd, void *buf, size_t len)
@@ -101,11 +101,10 @@ size_t fs_read(int fd, void *buf, size_t len)
   // printf("offset%d\n", des_file->open_offset);
   size_t size = 0;
   size_t read_pos = des_file->disk_offset + des_file->open_offset;
-  if (read_pos + len > des_file->disk_offset + des_file->size)
+  if (des_file->open_offset >= des_file->size)
   {
-    ;
-    // panic("read out of the file!\n");
-    // return -1;
+    panic("read out of the file!\n");
+    return -1;
   }
   if ((size = ramdisk_read(buf, read_pos, len)) < 0)
   {
@@ -120,7 +119,8 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   Finfo *des_file = &file_table[fd];
   if (whence == SEEK_SET)
   {
-    if ((des_file->open_offset = offset) > des_file->size)
+    des_file->open_offset = offset;
+    if (des_file->open_offset >= des_file->size || des_file->open_offset < 0)
     {
       panic("offset out of file error! offset=:%d\n", des_file->open_offset);
       return -1;
@@ -129,7 +129,8 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   }
   if (whence == SEEK_CUR)
   {
-    if ((des_file->open_offset = des_file->open_offset + offset) > des_file->size)
+    des_file->open_offset = des_file->open_offset + offset;
+    if (des_file->open_offset >= des_file->size || des_file->open_offset < 0)
     {
       panic("offset out of file error! offset=:%d\n", des_file->open_offset);
       return -1;
@@ -138,7 +139,8 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   }
   if (whence == SEEK_END)
   {
-    if ((des_file->open_offset = des_file->size + offset) > des_file->size)
+    des_file->open_offset = des_file->size + offset;
+    if (des_file->open_offset >= des_file->size || des_file->open_offset < 0)
     {
       panic("offset out of file error! offset=:%d\n", des_file->open_offset);
       return -1;
