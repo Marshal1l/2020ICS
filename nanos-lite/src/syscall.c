@@ -25,7 +25,6 @@ void do_syscall(Context *c)
     c->GPRx = fs_close(a[1]);
     break;
   case SYS_lseek:
-    printf("expect offset=:%d\n", a[2]);
     c->GPRx = fs_lseek(a[1], (size_t)a[2], a[3]);
     break;
   case SYS_read:
