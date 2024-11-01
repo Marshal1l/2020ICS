@@ -1,7 +1,10 @@
 #include <common.h>
 #include "syscall.h"
-extern size_t fs_write(int fd, const void *buf, size_t len);
+extern int fs_open(const char *pathname, int flags, int mode);
 extern size_t fs_read(int fd, void *buf, size_t len);
+extern size_t fs_write(int fd, const void *buf, size_t len);
+extern size_t fs_lseek(int fd, size_t offset, int whence);
+extern int fs_close(int fd);
 void do_syscall(Context *c)
 {
   uintptr_t a[4];
@@ -14,6 +17,9 @@ void do_syscall(Context *c)
   case SYS_brk:
     // printf("SYS_BRK------%d\n", SYS_brk);
     c->GPRx = 0;
+    break;
+  case SYS_open:
+    c->GPRx = fs_open((const char *)a[1], a[2], a[3]);
     break;
   case SYS_read:
     c->GPRx = fs_read(a[1], (void *)a[2], a[3]);
