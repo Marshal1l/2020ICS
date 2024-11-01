@@ -81,8 +81,9 @@ size_t fs_write(int fd, const void *buf, size_t len)
   size_t write_pos = des_file->disk_offset + des_file->open_offset;
   if (write_pos + len > des_file->disk_offset + des_file->size)
   {
-    panic("write out of the file!\n");
-    return -1;
+    ;
+    // panic("write out of the file!\n");
+    // return -1;
   }
   if ((size = ramdisk_write(tmpbuf, write_pos, len)) < 0)
   {
