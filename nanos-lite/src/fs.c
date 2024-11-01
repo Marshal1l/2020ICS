@@ -66,5 +66,5 @@ size_t fs_write(int fd, const void *buf, size_t len)
       size++;
     }
   }
-  return 1;
+  return 13;
 }
