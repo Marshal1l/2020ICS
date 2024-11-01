@@ -122,7 +122,7 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   {
     if ((des_file->open_offset = offset) > des_file->size)
     {
-      panic("offset out of file error!\n");
+      panic("offset out of file error! offset=:%d\n", des_file->open_offset);
       return -1;
     }
     return des_file->open_offset;
@@ -131,7 +131,7 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   {
     if ((des_file->open_offset = des_file->open_offset + offset) > des_file->size)
     {
-      panic("offset out of file error!\n");
+      panic("offset out of file error! offset=:%d\n", des_file->open_offset);
       return -1;
     }
     return des_file->open_offset;
@@ -140,7 +140,7 @@ size_t fs_lseek(int fd, size_t offset, int whence)
   {
     if ((des_file->open_offset = des_file->size + offset) > des_file->size)
     {
-      panic("offset out of file error!\n");
+      panic("offset out of file error! offset=:%d\n", des_file->open_offset);
       return -1;
     }
     return (des_file->open_offset);
