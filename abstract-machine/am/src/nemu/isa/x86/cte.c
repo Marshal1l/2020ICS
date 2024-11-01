@@ -19,7 +19,7 @@ Context *__am_irq_handle(Context *c)
   // printf("c->cs=\t%d\n", c->cs);
   // printf("c->eip=\t%d\n", c->eip);
   // printf("c->error_code=\t%x\n", c->error_code);
-  printf("c->irq=\t%d\n", c->irq);
+  // printf("c->irq=\t%d\n", c->irq);
   // printf("c->eax=\t%d\n", c->eax);
   // printf("c->ecx=\t%d\n", c->ecx);
   // printf("c->edx=\t%d\n", c->edx);
