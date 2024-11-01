@@ -65,16 +65,15 @@ size_t fs_write(int fd, const void *buf, size_t len)
   if (len == 0)
     return 0;
   size_t writelen = 0;
-  // if (fd == 1 || fd == 2)
-  // {
-  //   for (int i = 0; i < len && *(const uint8_t *)buf != '\0'; i++)
-  //   {
-  //     putch(*(const uint8_t *)buf);
-  //     buf++;
-  //     size++;
-  //   }
-  //   return size;
-  // }
+  if (fd == 1 || fd == 2)
+  {
+    for (int i = 0; i < len; i++)
+    {
+      putch(*(const uint8_t *)buf);
+      buf++;
+    }
+    return len;
+  }
   if (file_table[fd].open_offset > file_table[fd].size)
   {
     panic("write out of the file!\n");
