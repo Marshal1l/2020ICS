@@ -1,5 +1,6 @@
 #include <fs.h>
 #include <unistd.h>
+extern size_t serial_write(const void *buf, size_t offset, size_t len);
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 typedef size_t (*ReadFn)(void *buf, size_t offset, size_t len);
@@ -38,8 +39,8 @@ size_t invalid_write(const void *buf, size_t offset, size_t len)
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
     [FD_STDIN] = {"stdin", 0, 0, 0, invalid_read, invalid_write},
-    [FD_STDOUT] = {"stdout", 0, 0, 0, invalid_read, invalid_write},
-    [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, invalid_write},
+    [FD_STDOUT] = {"stdout", 0, 0, 0, invalid_read, serial_write},
+    [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, serial_write},
 #include "files.h"
 };
 int fs_open(const char *pathname, int flags, int mode)
@@ -62,18 +63,13 @@ void init_fs()
 }
 size_t fs_write(int fd, const void *buf, size_t len)
 {
-  if (len == 0)
+  if (len == 0 || fd == 0)
     return 0;
-  size_t writelen = 0;
   if (fd == 1 || fd == 2)
   {
-    for (int i = 0; i < len; i++)
-    {
-      putch(*(const uint8_t *)buf);
-      buf++;
-    }
-    return len;
+    return file_table[fd].write(buf, 0, len);
   }
+  size_t writelen = 0;
   if (file_table[fd].open_offset > file_table[fd].size)
   {
     panic("write out of the file!\n");
