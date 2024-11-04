@@ -20,7 +20,7 @@ int sys_gettimeofday(struct timeval *tv, struct timezone *tz)
   int sec = tv->tv_sec = uptime.us / 10000;
   tv->tv_usec = uptime.us - sec * 10000;
   tz = NULL;
-  printf("tv_sec:=%d\n", tv->tv_sec);
+  printf("tv_sec:=%ld\n", tv->tv_sec);
   printf("tv_usec:=%d\n", tv->tv_usec);
   return 0;
 }
