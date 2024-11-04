@@ -15,7 +15,6 @@ static const char *keyname[256] __attribute__((used)) = {
     AM_KEYS(NAME)};
 int sys_gettimeofday(struct timeval *tz, struct timezone *tv)
 {
-  printf("gettim\n");
   tz->tv_sec = io_read(AM_TIMER_UPTIME).us / 1000000;
   tz->tv_usec = io_read(AM_TIMER_UPTIME).us % 1000000;
   return 0;

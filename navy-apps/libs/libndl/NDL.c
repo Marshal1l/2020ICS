@@ -73,6 +73,7 @@ int NDL_Init(uint32_t flags)
   {
     evtdev = 3;
   }
+  now.tv_sec = now.tv_usec = 0;
   return 0;
 }
 
