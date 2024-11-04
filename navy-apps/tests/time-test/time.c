@@ -1,9 +1,7 @@
 
-
 #include <stdio.h>
 #include <sys/time.h>
 #include <assert.h>
-
 int main()
 {
   struct timeval num;
@@ -14,7 +12,7 @@ int main()
   {
     while (num.tv_sec <= sec)
     {
-      int t = gettimeofday(&num, NULL);
+      int t = _gettimeofday(&num, NULL);
       assert(t == 0);
     }
     printf("time: seconds = %d   sec=%d usec%d\n", sec, num.tv_sec, num.tv_usec);
