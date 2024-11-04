@@ -13,12 +13,15 @@
 static const char *keyname[256] __attribute__((used)) = {
     [AM_KEY_NONE] = "NONE",
     AM_KEYS(NAME)};
-int sys_gettimeofday(struct timeval *tz, struct timezone *tv)
+int sys_gettimeofday(struct timeval *tv, struct timezone *tz)
 {
-  tz->tv_sec = io_read(AM_TIMER_UPTIME).us;
-  tz->tv_usec = io_read(AM_TIMER_UPTIME).us % 10000;
-  printf("tv_sec%ld\n", tz->tv_sec);
-  printf("tv_usec%ld\n", tz->tv_usec);
+  AM_TIMER_UPTIME_T uptime;
+  uptime = io_read(AM_TIMER_UPTIME);
+  int sec = tv->tv_sec = uptime.us / 1000000;
+  tv->tv_usec = uptime.us - sec * 1000000;
+  tz = NULL;
+  printf("tv_sec%ld\n", tv->tv_sec);
+  printf("tv_usec%ld\n", tv->tv_usec);
   return 0;
 }
 size_t serial_write(const void *buf, size_t offset, size_t len)

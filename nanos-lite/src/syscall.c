@@ -7,7 +7,7 @@ extern size_t fs_write(int fd, const void *buf, size_t len);
 extern size_t fs_lseek(int fd, size_t offset, int whence);
 extern int fs_close(int fd);
 
-int sys_gettimeofday(struct timeval *tz, struct timezone *tv);
+int sys_gettimeofday(struct timeval *tv, struct timezone *tz);
 void do_syscall(Context *c)
 {
   uintptr_t a[4];
