@@ -50,7 +50,7 @@ void NDL_OpenCanvas(int *w, int *h)
   read(fd, &buf, sizeof(buf));
   printf("buf: %s\n", buf);
 
-  sscanf(buf, "%d%d", &FB_W, &FB_H);
+  sscanf(buf, "%d\n%d", &FB_W, &FB_H);
   printf("w is %d h is %d\n", FB_W, FB_H);
   assert(FB_W >= 0);
 
