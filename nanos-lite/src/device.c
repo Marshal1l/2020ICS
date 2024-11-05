@@ -109,7 +109,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len)
   init_fs();
   int w = inl(VGACTL_ADDR) >> 16;
 
-  printf("fb_write\n");
+  // printf("fb_write\n");
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   // int h = inl(VGACTL_ADDR)&0xffff;
 
