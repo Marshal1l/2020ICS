@@ -72,7 +72,7 @@ size_t events_read(void *buf, size_t offset, size_t len)
     // {
     //   change_fg(3);
     // }
-    // printf("event : %s\n",buf);
+    printf("event : %s\n", buf);
     return res;
   }
 }
