@@ -31,6 +31,12 @@ size_t serial_write(const void *buf, size_t offset, size_t len)
 }
 #define KEYDOWN_MASK 0x8000
 #define KBD_ADDR 0xa1000060
+
+void init_fs();
+static inline void outl(int port, uint32_t data)
+{
+  asm volatile("outl %%eax, %%dx" : : "a"(data), "d"((uint16_t)port));
+}
 static inline uint32_t inl(int port)
 {
   uint32_t data;
@@ -85,15 +91,42 @@ int sys_gettimeofday(struct timeval *tv, struct timezone *tz)
   tz = NULL;
   return 0;
 }
-
+#define VGACTL_ADDR 0xa1000100
+#define SYNC_ADDR (VGACTL_ADDR + 4)
+#define FB_ADDR 0xa0000000
 size_t dispinfo_read(void *buf, size_t offset, size_t len)
 {
-  return 0;
+  int w = io_read(AM_GPU_CONFIG).width;
+  int h = io_read(AM_GPU_CONFIG).height;
+  int res = snprintf(buf, len, "WIDTH : %d\nHEIGHT : %d\n", w, h);
+  // printf("disp  buf %s\n",buf);
+  // printf("disp read W:%d H:%d\n",w,h);
+
+  return res;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len)
 {
-  return 0;
+#ifndef HAS_TIMER_IRQ
+  yield();
+#endif
+  init_fs();
+  int w = inl(VGACTL_ADDR) >> 16;
+
+  // printf("fb_write\n");
+  uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
+  // int h = inl(VGACTL_ADDR)&0xffff;
+
+  int num = len;
+  for (int i = 0; i < num; i++)
+  {
+    int x = (offset + i) % w;
+    int y = (offset + i) / w;
+    *(fb + y * w + x) = *((uint32_t *)(buf + 4 * i));
+    outl(SYNC_ADDR, 1);
+  }
+
+  return len;
 }
 
 void init_device()
