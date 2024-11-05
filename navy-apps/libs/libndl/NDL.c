@@ -53,7 +53,6 @@ void NDL_OpenCanvas(int *w, int *h)
   sscanf(buf, "%d%c%d", &FB_W, &uuse, &FB_H);
 
   assert(FB_W >= 0);
-
   if (getenv("NWM_APP"))
   {
     int fbctl = 4;
@@ -64,8 +63,8 @@ void NDL_OpenCanvas(int *w, int *h)
       *h = FB_H;
     }
     printf("w is %d h is %d\n", FB_W, FB_H);
-    screen_w = *w * 2;
-    screen_h = *h * 2;
+    screen_w = *w;
+    screen_h = *h;
 
     char buf[64];
     int len = sprintf(buf, "%d %d", screen_w, screen_h);
@@ -87,6 +86,7 @@ void NDL_OpenCanvas(int *w, int *h)
   {
     if (*w == 0 || *h == 0)
     {
+      printf("w is %d h is %d\n", FB_W, FB_H);
       *w = FB_W;
       *h = FB_H;
       // printf("hw == 0\n");
