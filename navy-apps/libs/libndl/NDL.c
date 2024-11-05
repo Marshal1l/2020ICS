@@ -173,7 +173,7 @@ int NDL_Init(uint32_t flags)
   // printf("NDL_init\n");
   gettimeofday(&boottime, NULL);
 
-  NDL_updatefb();
+  // NDL_updatefb();
   return 0;
 }
 
