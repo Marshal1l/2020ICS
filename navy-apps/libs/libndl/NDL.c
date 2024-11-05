@@ -158,9 +158,10 @@ void NDL_updatefb()
   int fd = open("/proc/dispinfo", 0, 0);
   char buf[128] = {0};
   printf("read dispinfo \n");
-  read(fd, buf, sizeof(buf));
+  read(fd, &buf, sizeof(buf));
   printf("buf: %s\n", buf);
-  sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &FB_W, &FB_H);
+  char uuse;
+  sscanf(buf, "%d%c%d", &FB_W, &uuse, &FB_H);
   printf("w is %d h is %d\n", FB_W, FB_H);
   assert(FB_W >= 0);
   close(fd);
@@ -175,7 +176,7 @@ int NDL_Init(uint32_t flags)
   // printf("NDL_init\n");
   gettimeofday(&boottime, NULL);
 
-  // NDL_updatefb();
+  NDL_updatefb();
   return 0;
 }
 
