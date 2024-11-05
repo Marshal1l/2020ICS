@@ -160,7 +160,7 @@ void NDL_updatefb()
   // printf("buf: %s\n",buf);
   sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &FB_W, &FB_H);
   // printf("w is %d h is %d\n",FB_W,FB_H);
-  // assert(FB_W >= 0);
+  assert(FB_W >= 0);
   close(fd);
 }
 
