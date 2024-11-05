@@ -17,8 +17,8 @@ int sys_gettimeofday(struct timeval *tv, struct timezone *tz)
 {
   AM_TIMER_UPTIME_T uptime;
   uptime = io_read(AM_TIMER_UPTIME);
-  int sec = tv->tv_sec = uptime.us >> 32;
-  tv->tv_usec = (uint64_t)uptime.us + ((uint64_t)sec << 32);
+  tv->tv_sec = uptime.us >> 32;
+  tv->tv_usec = (uint64_t)uptime.us;
   tz = NULL;
   return 0;
 }
