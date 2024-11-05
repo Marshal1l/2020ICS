@@ -6,7 +6,7 @@
 
 #include <sys/time.h>
 #include <assert.h>
-int FB_W = 1200;
+int FB_W = 1000;
 int FB_H = 600;
 void NDL_updatefb();
 int cen_off_w = 0;
