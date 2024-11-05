@@ -6,8 +6,8 @@
 
 #include <sys/time.h>
 #include <assert.h>
-int FB_W = -1;
-int FB_H = -1;
+int FB_W = 800;
+int FB_H = 400;
 void NDL_updatefb();
 int cen_off_w = 0;
 int cen_off_h = 0;
