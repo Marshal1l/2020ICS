@@ -1,21 +1,27 @@
 #include <common.h>
-Context* do_syscall(Context *c) ;
-Context* schedule(Context *prev);
-
-static Context* do_event(Event e, Context* c) {
-  //printf("do_event %d\n",e);
-  
-  switch (e.event) {
-    case EVENT_SYSCALL:return do_syscall(c);break;
-    case EVENT_YIELD:return schedule(c);break;
-    case EVENT_IRQ_TIMER: Log("EventIrq_Timer");yield();break;
-    default: panic("Unhandled event ID = %d", e.event);
+void do_syscall(Context *c);
+static Context *do_event(Event e, Context *c)
+{
+  switch (e.event)
+  {
+  case EVENT_SYSCALL:
+    // printf("sys get SYSCALL!\n");
+    do_syscall(c);
+    break;
+  case EVENT_YIELD:
+    // printf("sys get YEILD!\n");
+    break;
+  case EVENT_ERROR:
+    // printf("sys get ERROR!\n");
+    break;
+  default:
+    panic("Unhandled event ID = %d", e.event);
   }
-
   return c;
 }
 
-void init_irq(void) {
+void init_irq(void)
+{
   Log("Initializing interrupt/exception handler...");
   cte_init(do_event);
 }

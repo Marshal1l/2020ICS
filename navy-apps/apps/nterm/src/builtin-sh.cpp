@@ -22,57 +22,7 @@ static void sh_prompt() {
   sh_printf("sh> ");
 }
 
-char* get_arg(char* p){
-  while((*p !=' ')&&(*p != '\0')){
-    p  = (char*)((int)p+1);
-  }
-  char* tem = p;
-  if(*tem == '\0') return NULL;
-  else{
-    *p = '\0';p  = (char*)((int)p+1);
-    while((*p ==' ')&&(*p != '\0')){p  = (char*)((int)p+1);}
-  }
-  if(*p== '\0') return NULL;
-  else{return p;}
-  
-}
-
 static void sh_handle_cmd(const char *cmd) {
-//printf("pa4-version\n");
-if(strcmp(cmd,"exit\n")== 0){
-    exit(0);
-  }
-  if(strcmp(cmd,"clear\n")== 0){
-    SDL_Clear();
-  }
-  int n = strlen(cmd);
-  char buf[100]={'\0'};
-  strncpy(buf,cmd,n-1);
-  char* file =buf;
-  while(*file ==' '){file=(char*)(int(file) +1);}
-  int i;
-  
-  char* empty[]={NULL};
-  static char* argv[10] = {};
-  char** args = argv;
-  for(i=0;i<10;i++){
-    char* tem = get_arg(file);
-    if(tem != NULL){argv[i] = tem;}
-    else{argv[i]=NULL;break;}
-  }  
-
-  //printf("file %s\n",file);
-  //printf("-----\n");
-  if(i>0){
-  for (int t=0;t<i;t++){
-  //printf("arg%d %s\n",t,argv[t]);
-  }
-  }
-  else{args=empty;}
-  //printf("-----\n");
-
-
-  execvpe(file,args,empty);
 }
 
 void builtin_sh_run() {

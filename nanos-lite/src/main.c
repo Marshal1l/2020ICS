@@ -8,14 +8,12 @@ void init_fs(void);
 void init_proc(void);
 
 int main() {
- // extern const char logo[];
-  //printf("%s", logo);
+  extern const char logo[];
+  printf("%s", logo);
   Log("'Hello World!' from Nanos-lite");
   Log("Build time: %s, %s", __TIME__, __DATE__);
 
-
   init_mm();
-
 
   init_device();
 
@@ -24,7 +22,6 @@ int main() {
 #ifdef HAS_CTE
   init_irq();
 #endif
-
 
   init_fs();
 
