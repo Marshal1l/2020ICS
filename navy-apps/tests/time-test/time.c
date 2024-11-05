@@ -10,7 +10,7 @@ int main()
   gettimeofday(&num, NULL);
   int boot_time = num.tv_sec;
   printf("time-test starts begin = %ld\n", num.tv_sec);
-  int sec = num.tv_sec + 1;
+  int sec = num.tv_sec + 2;
   while (1)
   {
     while (num.tv_sec <= sec)
