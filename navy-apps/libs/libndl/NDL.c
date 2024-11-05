@@ -11,12 +11,12 @@ static struct timeval now;
 uint32_t NDL_GetTicks()
 {
   gettimeofday(&now, NULL);
-  return now.tv_sec * 1000 + now.tv_usec / 1000;
+  return now.tv_sec << 32 + now.tv_usec;
 }
 
 int NDL_PollEvent(char *buf, int len)
 {
-  return 0;
+  return read(evtdev, buf, len);
 }
 
 void NDL_OpenCanvas(int *w, int *h)
