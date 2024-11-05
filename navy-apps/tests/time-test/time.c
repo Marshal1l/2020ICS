@@ -10,7 +10,7 @@ int main()
   int sec = 1;
   while (1)
   {
-    while (num.tv_sec <= sec)
+    while (num.tv_sec < sec)
     {
       int t = gettimeofday(&num, NULL);
       assert(t == 0);
