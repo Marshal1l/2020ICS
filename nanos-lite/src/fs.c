@@ -135,8 +135,8 @@ size_t fs_read(int fd, void *buf, size_t len)
   else
   {
     printf("read from key\n");
+    printf("read from key %x\n", file_table[fd].read);
     int ret = file_table[fd].read(buf, 0, len);
-    printf("read from key1\n");
     return ret;
   }
 }
