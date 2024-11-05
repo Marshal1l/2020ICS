@@ -49,6 +49,7 @@ void NDL_OpenCanvas(int *w, int *h)
   char buf[128] = {0};
   read(fd, &buf, sizeof(buf));
   // printf("buf: %s\n",buf);
+
   sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &FB_W, &FB_H);
   // printf("w is %d h is %d\n",FB_W,FB_H);
   assert(FB_W >= 0);
