@@ -157,9 +157,9 @@ void NDL_updatefb()
   char buf[128] = {0};
   printf("read dispinfo \n");
   read(fd, buf, sizeof(buf));
-  // printf("buf: %s\n",buf);
+  printf("buf: %s\n", buf);
   sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &FB_W, &FB_H);
-  // printf("w is %d h is %d\n",FB_W,FB_H);
+  printf("w is %d h is %d\n", FB_W, FB_H);
   assert(FB_W >= 0);
   close(fd);
 }
