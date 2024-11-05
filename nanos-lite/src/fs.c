@@ -135,14 +135,10 @@ size_t fs_read(int fd, void *buf, size_t len)
   else
   {
     printf("read from key\n");
-    if (file_table[fd].read != 0)
-    {
-      int ret = file_table[fd].read(buf, file_table[fd].open_offset, len);
-      file_table[fd].open_offset += len;
-      return ret;
-    }
+    int ret = file_table[fd].read(buf, file_table[fd].open_offset, len);
+    file_table[fd].open_offset += len;
+    return ret;
   }
-  return -1;
 }
 size_t fs_lseek(int fd, size_t offset, int whence)
 {
