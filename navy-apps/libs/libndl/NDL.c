@@ -48,7 +48,7 @@ void NDL_OpenCanvas(int *w, int *h)
   int fd = open("/proc/dispinfo", 0, 0);
   char buf[128] = {0};
   read(fd, &buf, sizeof(buf));
-  // printf("buf: %s\n",buf);
+  printf("buf: %s\n", buf);
 
   sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &FB_W, &FB_H);
   printf("w is %d h is %d\n", FB_W, FB_H);
