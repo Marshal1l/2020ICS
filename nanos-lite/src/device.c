@@ -1,7 +1,6 @@
 #include <common.h>
 #include <sys/time.h>
 
-#include <common.h>
 #include <fs.h>
 
 #if defined(MULTIPROGRAM) && !defined(TIME_SHARING)
