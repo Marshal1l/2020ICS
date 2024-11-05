@@ -63,24 +63,42 @@ static inline def_EHelper(iret)
 
 static inline def_EHelper(in)
 {
-  // TODO();
-  rtl_li(s, s0, 0);
-  switch (id_src1->width)
+  *s0 = 0;
+  switch (id_dest->width)
   {
   case 1:
-    *s0 = pio_read_b(id_src1->val);
+    *s0 = pio_read_b(*dsrc1);
     break;
   case 2:
-    *s0 = pio_read_w(id_src1->val);
+    *s0 = pio_read_w(*dsrc1);
     break;
   case 4:
-    *s0 = pio_read_l(id_src1->val);
+    *s0 = pio_read_l(*dsrc1);
     break;
   default:
-    panic("Invalid width");
+    assert(0);
   }
+  // printf("s0 %x\n",*s0);
   operand_write(s, id_dest, s0);
   print_asm_template2(in);
+  // TODO();
+  // rtl_li(s, s0, 0);
+  // switch (id_src1->width)
+  // {
+  // case 1:
+  //   *s0 = pio_read_b(id_src1->val);
+  //   break;
+  // case 2:
+  //   *s0 = pio_read_w(id_src1->val);
+  //   break;
+  // case 4:
+  //   *s0 = pio_read_l(id_src1->val);
+  //   break;
+  // default:
+  //   panic("Invalid width");
+  // }
+  // operand_write(s, id_dest, s0);
+  // print_asm_template2(in);
 }
 
 static inline def_EHelper(out)

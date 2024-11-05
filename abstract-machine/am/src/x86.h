@@ -247,21 +247,21 @@ typedef struct
 static inline uint8_t inb(int port)
 {
   uint8_t data;
-  asm volatile("in %1, %0" : "=a"(data) : "d"((uint16_t)port));
+  asm volatile("inb %1, %0" : "=a"(data) : "d"((uint16_t)port));
   return data;
 }
 
 static inline uint16_t inw(int port)
 {
   uint16_t data;
-  asm volatile("in %1, %0" : "=a"(data) : "d"((uint16_t)port));
+  asm volatile("inw %1, %0" : "=a"(data) : "d"((uint16_t)port));
   return data;
 }
 
 static inline uint32_t inl(int port)
 {
   uint32_t data;
-  asm volatile("in %1, %0" : "=a"(data) : "d"((uint16_t)port));
+  asm volatile("inl %1, %0" : "=a"(data) : "d"((uint16_t)port));
   return data;
 }
 
