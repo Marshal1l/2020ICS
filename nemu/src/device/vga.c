@@ -9,7 +9,7 @@
 #define SCREEN_W 800
 #define SCREEN_H 600
 #else
-#define SCREEN_W 1000
+#define SCREEN_W 400
 #define SCREEN_H 300
 #endif
 #define SCREEN_SIZE ((SCREEN_H * SCREEN_W) * sizeof(uint32_t))
