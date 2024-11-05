@@ -155,7 +155,7 @@ void NDL_updatefb()
 {
   int fd = open("/proc/dispinfo", 0, 0);
   char buf[128] = {0};
-  // printf("read dispinfo \n");
+  printf("read dispinfo \n");
   read(fd, buf, sizeof(buf));
   // printf("buf: %s\n",buf);
   sscanf(buf, "%*[^:]:%*[ ]%d\n%*[^:]:%*[ ]%d\n", &FB_W, &FB_H);
