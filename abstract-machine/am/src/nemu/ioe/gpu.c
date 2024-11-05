@@ -2,9 +2,9 @@
 #include <nemu.h>
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
-#define W 800
-#define H 600
-#define FPS 60
+// #define W 800
+// #define H 600
+// #define FPS 60
 void __am_gpu_init()
 {
 }
