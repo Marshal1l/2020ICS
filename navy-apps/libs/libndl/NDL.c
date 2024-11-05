@@ -106,7 +106,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h)
   x += cen_off_w;
   y += cen_off_h;
 
-  printf("x[%d]  W[%d]  w[%d]  y[%d]  H[%d]  h[%d]\n'", x, FB_W, w, y, FB_H, h);
+  // printf("x[%d]  W[%d]  w[%d]  y[%d]  H[%d]  h[%d]\n'",x,FB_W,w,y,FB_H,h);
   int fd = open("/dev/fb", 0, 0);
 
   // printf("fd is %d\n",fd);
