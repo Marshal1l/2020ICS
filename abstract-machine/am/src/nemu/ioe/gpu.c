@@ -9,11 +9,10 @@ void __am_gpu_init()
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg)
 {
-  uint32_t screen_wh = inl(VGACTL_ADDR);
-  uint32_t h = screen_wh & 0xffff;
-  uint32_t w = screen_wh >> 16;
+  int h = inl(VGACTL_ADDR) & 0xffff;
+  int w = inl(VGACTL_ADDR) >> 16;
   *cfg = (AM_GPU_CONFIG_T){
-      .present = true, .has_accel = false, .width = w, .height = h, .vmemsz = 0};
+      .present = true, .has_accel = false, .width = w, .height = h, .vmemsz = w * h * sizeof(uint32_t)};
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl)
