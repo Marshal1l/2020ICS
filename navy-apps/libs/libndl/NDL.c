@@ -7,11 +7,12 @@
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
+static struct timeval boot_time;
 static struct timeval now;
 uint32_t NDL_GetTicks()
 {
   gettimeofday(&now, NULL);
-  return now.tv_sec << 32 + now.tv_usec;
+  return (now.tv_sec - boot_time.tv_sec) << 32 + now.tv_usec - boot_time.tv_usec;
 }
 
 int NDL_PollEvent(char *buf, int len)
@@ -73,7 +74,9 @@ int NDL_Init(uint32_t flags)
   {
     evtdev = 3;
   }
+  gettimeofday(&boot_time, NULL);
   now.tv_sec = now.tv_usec = 0;
+
   return 0;
 }
 
