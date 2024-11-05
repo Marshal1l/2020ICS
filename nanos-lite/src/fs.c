@@ -2,13 +2,13 @@
 #include <unistd.h>
 
 typedef size_t (*ReadFn)(void *buf, size_t offset, size_t len);
-extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
-extern size_t events_read(void *buf, size_t offset, size_t len);
-extern size_t dispinfo_read(void *buf, size_t offset, size_t len);
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t events_read(void *buf, size_t offset, size_t len);
+size_t dispinfo_read(void *buf, size_t offset, size_t len);
 
 typedef size_t (*WriteFn)(const void *buf, size_t offset, size_t len);
-extern size_t serial_write(const void *buf, size_t offset, size_t len);
-extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
+size_t serial_write(const void *buf, size_t offset, size_t len);
+size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 
 typedef struct
 {
