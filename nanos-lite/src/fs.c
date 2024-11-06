@@ -71,9 +71,10 @@ size_t fs_open(const char *pathname, int flags, int mode)
 {
   for (int i = 0; i < FILENUM; i++)
   {
-    printf("path:=%s,this:=%s\n", pathname, file_table[i].name);
+    // printf("path:=%s,this:=%s\n", pathname, file_table[i].name);
     if (strcmp(pathname, file_table[i].name) == 0)
     {
+      printf("find the file%s\n", pathname);
       file_table[i].open_offset = 0;
       return i;
     }
