@@ -21,9 +21,10 @@ int SDL_PollEvent(SDL_Event *ev)
   int len = 0;
   char buf[64];
   len = NDL_PollEvent(buf, 64);
-  printf("11111111\n");
+
   if (len == 0)
   {
+    printf("11111111\n");
     return 0;
   }
   else
