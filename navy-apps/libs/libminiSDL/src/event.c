@@ -24,7 +24,6 @@ int SDL_PollEvent(SDL_Event *ev)
 
   if (len == 0)
   {
-    printf("22222222\n");
     return 0;
   }
   else
