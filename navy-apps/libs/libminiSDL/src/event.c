@@ -24,7 +24,7 @@ int SDL_PollEvent(SDL_Event *ev)
 
   if (len == 0)
   {
-
+    printf("22222222\n");
     return 0;
   }
   else
@@ -36,12 +36,10 @@ int SDL_PollEvent(SDL_Event *ev)
     if (buf[0] == 'k' && buf[1] == 'u')
     {
       ev->type = SDL_KEYUP;
-      printf("11111111\n");
     }
     else if (buf[0] == 'k' && buf[1] == 'd')
     {
       ev->type = SDL_KEYDOWN;
-      printf("22222222\n");
     }
     else
     {
