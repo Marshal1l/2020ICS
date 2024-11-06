@@ -90,7 +90,7 @@ int main(int argc, char *argv[], char *envp[])
     SDL_Event e;
     do
     {
-      SDL_WaitEvent(&e);
+      SDL_PollEvent(&e);
     } while (e.type != SDL_KEYDOWN);
     printf("11111111\n");
     int i = -1;
