@@ -64,7 +64,7 @@ size_t events_read(void *buf, size_t offset, size_t len)
     char kd[] = "kd";
     char *kstate = (char *)((kbd.keydown) ? &kd : &ku);
     int res = sprintf(buf, "%s %s\n", kstate, keyname[kbd.keycode]);
-    res = strlen(kstate) + strlen(keyname[kbd.keycode]);
+    res = strlen(keyname[kbd.keycode]);
     // if (kbd.keycode == AM_KEY_F1)
     // {
     //   change_fg(1);
