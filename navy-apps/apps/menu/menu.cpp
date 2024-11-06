@@ -92,7 +92,7 @@ int main(int argc, char *argv[], char *envp[])
     {
       SDL_WaitEvent(&e);
     } while (e.type != SDL_KEYDOWN);
-
+    printf("11111111\n");
     int i = -1;
     switch (e.key.keysym.sym)
     {
