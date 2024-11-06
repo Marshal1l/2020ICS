@@ -44,10 +44,10 @@ int SDL_PollEvent(SDL_Event *ev)
     char buf2[16];
     strcpy(buf2, buf + 3);
     buf2[strlen(buf2) - 1] = '\0';
-
+    printf("11111111\n");
     for (int i = 0; i < 83; i++)
     {
-      printf("%d [%s]||||[%s]||||\n", i, keyname[i], buf2);
+      // printf("%d [%s]||||[%s]||||\n",i,keyname[i],buf2);
       if (strcmp((const char *)buf2, (const char *)keyname[i]) == 0)
       {
         ev->key.keysym.sym = i;
