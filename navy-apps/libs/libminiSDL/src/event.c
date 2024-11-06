@@ -32,6 +32,7 @@ int SDL_PollEvent(SDL_Event *ev)
     if (buf[0] == 'k' && buf[1] == 'u')
     {
       ev->type = SDL_KEYUP;
+      printf("11111111\n");
     }
     else if (buf[0] == 'k' && buf[1] == 'd')
     {
@@ -44,7 +45,7 @@ int SDL_PollEvent(SDL_Event *ev)
     char buf2[16];
     strcpy(buf2, buf + 3);
     buf2[strlen(buf2) - 1] = '\0';
-    printf("11111111\n");
+
     for (int i = 0; i < 83; i++)
     {
       // printf("%d [%s]||||[%s]||||\n",i,keyname[i],buf2);
