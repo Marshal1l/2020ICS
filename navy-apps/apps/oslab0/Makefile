@@ -11,17 +11,11 @@ endif
 
 ALL_PATH = $(foreach app,$(ALL),./repo/$(app))
 
-ifeq ($(findstring $(MAKECMDGOALS),clean|clean-all|html),)
-libam:
+default $(MAKECMDGOALS):
 	$(MAKE) -C $(NAVY_HOME)/libs/libam archive
-else
-libam: ;
-endif
-
-default $(MAKECMDGOALS): libam
 	-for f in $(ALL_PATH); do AM_HOME=$(NAVY_HOME) LIBS=libam $(MAKE) -C $$f -f ../Makefile $(MAKECMDGOALS); done
 
-.PHONY: libam default $(MAKECMDGOALS)
+.PHONY: default $(MAKECMDGOALS)
 
 init:;
 .PHONY: init

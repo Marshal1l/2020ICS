@@ -10,7 +10,6 @@ endif
 NAME = busybox
 include $(NAVY_HOME)/Makefile
 
-CROSS_COMPILE := $(CCACHE) $(CROSS_COMPILE)
 ifeq ($(ISA), native)
 CFLAGS += -I$(WORK_DIR)/include/native/
 else
@@ -18,11 +17,11 @@ CFLAGS += -I$(WORK_DIR)/include/navy/ -D__GLIBC__ -fdata-sections -ffunction-sec
 comma = ,
 LDFLAGS := $(addprefix -Wl$(comma), $(LDFLAGS))
 export LDFLAGS
+export CROSS_COMPILE
 export LINKAGE
 endif
 
 export CFLAGS
-export CROSS_COMPILE
 
 # The busybox Makefile can not correctly handle the dependency when
 # $(LINKAGE) are updated. If it is the case, perform a fresh build.

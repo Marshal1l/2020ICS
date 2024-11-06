@@ -1,45 +1,43 @@
 #include <stdio.h>
 #include <assert.h>
 
-int main()
-{
+int main() {
+  printf("file test\n");
   FILE *fp = fopen("/share/files/num", "r+");
   assert(fp);
-  printf("stage open\n");
+  //printf("fp at %p\n",fp);
+
   fseek(fp, 0, SEEK_END);
-  printf("stage 0\n");
+  //printf("fp at %p\n",fp);
   long size = ftell(fp);
   assert(size == 5000);
-  printf("stage 1\n");
+
   fseek(fp, 500 * 5, SEEK_SET);
-  printf("stage 2\n");
+  //printf("fp at %p\n",fp);
   int i, n;
-  for (i = 500; i < 1000; i++)
-  {
+  for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
+    //printf("n is %d  i is %d\n",n,i);
     assert(n == i + 1);
   }
-  printf("stage 3\n");
+
   fseek(fp, 0, SEEK_SET);
-  for (i = 0; i < 500; i++)
-  {
+  //printf("fp at %p\n",fp);
+  for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
-  printf("stage 4\n");
-  for (i = 500; i < 1000; i++)
-  {
+
+  for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
-  printf("stage 5\n");
+
   fseek(fp, 0, SEEK_SET);
-  printf("stage 6\n");
-  for (i = 0; i < 500; i++)
-  {
+  for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1 + 1000);
   }
-  printf("stage 7\n");
+
   fclose(fp);
 
   printf("PASS!!!\n");
