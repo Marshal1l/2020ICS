@@ -77,7 +77,6 @@ size_t fs_open(const char *pathname, int flags, int mode)
       return i;
     }
   }
-
   printf("cannot find the file%s\n", pathname);
   return -1;
 }
