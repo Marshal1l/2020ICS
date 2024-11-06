@@ -136,6 +136,7 @@ int main(int argc, char *argv[], char *envp[])
 
     if (i != -1 && i <= i_max)
     {
+      printf("choose i:=%d\n", i);
       i += page * 10;
       auto *item = &items[i];
       const char *exec_argv[3];
