@@ -68,7 +68,7 @@ int SDL_PollEvent(SDL_Event *ev)
 int SDL_WaitEvent(SDL_Event *ev)
 {
 
-  while (!SDL_PollEvent(event))
+  while (!SDL_PollEvent(ev))
     ;
   return 1;
 }
