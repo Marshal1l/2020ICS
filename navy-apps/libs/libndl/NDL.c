@@ -48,7 +48,7 @@ void NDL_OpenCanvas(int *w, int *h)
   int fd = open("/proc/dispinfo", 0, 0);
   char buf[128] = {0};
   read(fd, &buf, sizeof(buf));
-  printf("buf: %s\n", buf);
+  // printf("buf: %s\n", buf);
   char uuse;
   sscanf(buf, "%d%c%d", &FB_W, &uuse, &FB_H);
 
@@ -62,7 +62,7 @@ void NDL_OpenCanvas(int *w, int *h)
       *w = FB_W;
       *h = FB_H;
     }
-    printf("w is %d h is %d\n", FB_W, FB_H);
+    // printf("w is %d h is %d\n", FB_W, FB_H);
     screen_w = *w;
     screen_h = *h;
 
@@ -86,7 +86,7 @@ void NDL_OpenCanvas(int *w, int *h)
   {
     if (*w == 0 || *h == 0)
     {
-      printf("w is %d h is %d\n", FB_W, FB_H);
+      // printf("w is %d h is %d\n", FB_W, FB_H);
       *w = FB_W;
       *h = FB_H;
       // printf("hw == 0\n");
@@ -157,12 +157,12 @@ void NDL_updatefb()
 {
   int fd = open("/proc/dispinfo", 0, 0);
   char buf[128] = {0};
-  printf("read dispinfo \n");
+  // printf("read dispinfo \n");
   read(fd, &buf, sizeof(buf));
-  printf("buf: %s\n", buf);
+  // printf("buf: %s\n", buf);
   char uuse;
   sscanf(buf, "%d%c%d", &FB_W, &uuse, &FB_H);
-  printf("w is %d h is %d\n", FB_W, FB_H);
+  // printf("w is %d h is %d\n", FB_W, FB_H);
   assert(FB_W >= 0);
   close(fd);
 }
