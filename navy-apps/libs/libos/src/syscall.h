@@ -1,7 +1,8 @@
 #ifndef __SYSCALL_H__
 #define __SYSCALL_H__
 
-enum {
+enum
+{
   SYS_exit,
   SYS_yield,
   SYS_open,

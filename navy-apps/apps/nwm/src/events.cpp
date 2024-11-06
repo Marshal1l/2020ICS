@@ -15,7 +15,6 @@ static struct EventHandler {
 
 void WindowManager::handle_event(const char *evt) {
   for (auto &h: handlers) {
-    printf("asd\n");
     if (strncmp(evt, h.pattern, h.length) == 0) {
       (this->*h.handler)(evt + h.length);
       break;
