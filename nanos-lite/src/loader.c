@@ -50,3 +50,8 @@ void naive_uload(PCB *pcb, const char *filename)
   Log("Jump to entry = %p", entry);
   ((void (*)())entry)();
 }
+int sys_execve(const char *filename, char *const argv[], char *const envp[])
+{
+  naive_uload(NULL, filename);
+  return -1;
+}

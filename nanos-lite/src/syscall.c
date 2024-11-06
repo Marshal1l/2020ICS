@@ -6,7 +6,7 @@ extern size_t fs_read(int fd, void *buf, size_t len);
 extern size_t fs_write(int fd, const void *buf, size_t len);
 extern size_t fs_lseek(int fd, size_t offset, int whence);
 extern int fs_close(int fd);
-
+extern int sys_execve(const char *filename, char *const argv[], char *const envp[]);
 int sys_gettimeofday(struct timeval *tv, struct timezone *tz);
 void do_syscall(Context *c)
 {
@@ -17,8 +17,12 @@ void do_syscall(Context *c)
   a[3] = c->GPR4;
   switch (a[0])
   {
+  case SYS_execve:
+    c->GPRx = sys_execve((const char *)a[1], (char **)a[2], (char **)a[3]);
+    break;
   case SYS_gettimeofday:
     c->GPRx = sys_gettimeofday((struct timeval *)a[1], (struct timezone *)a[2]);
+    break;
   case SYS_brk:
     c->GPRx = 0;
     break;
@@ -44,7 +48,7 @@ void do_syscall(Context *c)
     break;
   case SYS_exit:
     // printf("SYS_EXIT------%d\n", SYS_exit);
-    halt(a[0]);
+    sys_execve("/bin/menu", NULL, NULL);
     break;
   default:
     panic("Unhandled syscall ID = %d", a[0]);
