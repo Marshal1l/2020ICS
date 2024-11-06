@@ -40,10 +40,10 @@ int SDL_PollEvent(SDL_Event *ev)
     {
       ev->type = SDL_KEYDOWN;
     }
-    // else
-    // {
-    //   assert(0);
-    // }
+    else
+    {
+      assert(0);
+    }
     char buf2[16];
     strcpy(buf2, buf + 3);
     buf2[strlen(buf2) - 1] = '\0';
