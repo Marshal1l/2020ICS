@@ -91,6 +91,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg)
   kctx->cr3 = NULL;
   kctx->cs = 0x8;
   kctx->eflags = 0x200;
+  printf("context kctx = %d\n", kctx);
   return kctx;
   // Context *context = kstack.end - sizeof(Context) - 2 * sizeof(uintptr_t);
   // *(uintptr_t *)(kstack.end - sizeof(uintptr_t)) = (uintptr_t)arg;
