@@ -18,7 +18,7 @@ void hello_fun(void *arg)
   {
     Log("Hello World from Nanos-lite with arg '%p' for the %dth time!", (uintptr_t)arg, j);
     j++;
-    // yield();
+    yield();
   }
 }
 extern void context_kload(PCB *pcb, void (*entry)(void *), void *arg);
