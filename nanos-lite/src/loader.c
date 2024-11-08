@@ -46,6 +46,7 @@ extern Area heap;
 
 void context_kload(PCB *pcb, void (*entry)(void *), void *arg)
 {
+  Log("context Kload entry = %p", entry);
   Area stack;
   stack.start = pcb->stack;
   stack.end = pcb->stack + STACK_SIZE;
