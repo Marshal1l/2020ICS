@@ -8,6 +8,7 @@
 #define Elf_Ehdr Elf32_Ehdr
 #define Elf_Phdr Elf32_Phdr
 #endif
+extern Context *kcontext(Area kstack, void (*entry)(void *), void *arg);
 extern int fs_open(const char *pathname, int flags, int mode);
 extern size_t fs_read(int fd, void *buf, size_t len);
 extern size_t fs_write(int fd, const void *buf, size_t len);
@@ -42,9 +43,18 @@ static uintptr_t loader(PCB *pcb, const char *filename)
   }
   return ehdr.e_entry;
 }
-void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[])
+
+extern Area heap;
+// static char *argv_tem[10] = {NULL};
+
+void context_kload(PCB *pcb, void (*entry)(void *), void *arg)
 {
+  Area stack;
+  stack.start = pcb->stack;
+  stack.end = pcb->stack + STACK_SIZE;
+  pcb->cp = kcontext(stack, entry, arg);
 }
+
 void naive_uload(PCB *pcb, const char *filename)
 {
   uintptr_t entry = loader(pcb, filename);
