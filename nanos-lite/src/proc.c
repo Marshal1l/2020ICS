@@ -21,15 +21,15 @@ void hello_fun(void *arg)
     yield();
   }
 }
-
+extern void context_kload(PCB *pcb, void (*entry)(void *), void *arg);
 void init_proc()
 {
   // switch_boot_pcb();
 
   Log("Initializing processes...");
-
+  context_kload(&pcb[1], hello_fun, NULL);
   // load program here
-  naive_uload(NULL, "/bin/menu");
+  // naive_uload(NULL, "/bin/menu");
 }
 
 Context *schedule(Context *prev)
