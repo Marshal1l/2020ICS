@@ -11,7 +11,6 @@ static Context *do_event(Event e, Context *c)
     break;
   case EVENT_YIELD:
     // printf("sys get YEILD!\n");
-    printf("yield1\n");
     return schedule(c);
     break;
   case EVENT_ERROR:
