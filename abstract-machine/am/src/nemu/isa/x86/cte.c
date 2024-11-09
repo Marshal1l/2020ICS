@@ -29,6 +29,7 @@ Context *__am_irq_handle(Context *c)
       ev.event = EVENT_SYSCALL;
       break;
     case 0x81:
+      printf("yield1\n");
       ev.event = EVENT_YIELD;
       break;
     case EVENT_ERROR:
