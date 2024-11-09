@@ -10,7 +10,7 @@ static Context *do_event(Event e, Context *c)
     do_syscall(c);
     break;
   case EVENT_YIELD:
-    printf("sys get YEILD!\n");
+    // printf("sys get YEILD!\n");
     return schedule(c);
     break;
   case EVENT_ERROR:
