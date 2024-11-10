@@ -72,7 +72,13 @@ bool cte_init(Context *(*handler)(Event, Context *))
 
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg)
 {
-
+  Context *new_p = (Context *)(kstack.end - sizeof(Context) - 8);
+  void **temp = (void **)(kstack.end - 4);
+  *temp = arg;
+  new_p->eip = (uintptr_t)entry;
+  new_p->eflags = 0x2;
+  new_p->cs = 8;
+  return new_p;
   // Context *kctx = (Context *)(kstack.end - sizeof(Context));
   // kctx->eip = (uintptr_t)entry;
   // kctx->cr3 = NULL;
@@ -80,13 +86,6 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg)
   // kctx->eflags |= 0x200;
   // // printf("context kctx = %d\n", kctx);
   // return kctx;
-  Context *context = kstack.end - sizeof(Context) - 2 * sizeof(uintptr_t);
-  *(uintptr_t *)(kstack.end - sizeof(uintptr_t)) = (uintptr_t)arg;
-  context->cr3 = NULL;
-  context->eip = (uintptr_t)entry;
-  context->cs = 0x8;
-  context->eflags |= 0x200; // set IF 1
-  return context;
 }
 
 void yield()

@@ -50,6 +50,7 @@ static inline def_EHelper(int)
 static inline def_EHelper(iret)
 {
   // TODO();
+
   rtl_pop(s, &cpu.pc);
   rtl_pop(s, &cpu.SEGMENT_REG.CS);
   rtl_pop(s, &cpu.EFLAGS.val);
