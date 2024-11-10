@@ -29,8 +29,7 @@ void init_proc()
 
   Log("Initializing processes...");
   context_kload(&pcb[0], hello_fun, "A");
-  context_kload(&pcb[1], hello_fun, "B");
-  printf("pcb0 %d\n", pcb[0].cp);
+  // context_uload(&pcb[1], "/bin/bird");
   switch_boot_pcb();
 
   // load program here

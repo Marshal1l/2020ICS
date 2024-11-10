@@ -50,21 +50,7 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg)
   Area stack;
   stack.start = pcb->stack;
   stack.end = pcb->stack + sizeof(pcb->stack);
-  // int argnum = 0;
-  // argv = (const char *)argv;
-  // for (; argnum < 10 && argv[argnum] != NULL; argnum++)
-  // {
-  //   argv_tem[argnum] = argv[argnum];
-  // }
-  // char *tmp = (char *)stack.end;
-  // for (int i = argnum - 1; i > -1; i--)
-  // {
-  //   *(tmp--) = argv_tem[i];
-  // }
-  // char *arg_start = tmp;
-  // stack.end = tmp;
   pcb->cp = kcontext(stack, entry, arg);
-  // pcb->cp->eax = arg_start;
 }
 
 void naive_uload(PCB *pcb, const char *filename)
