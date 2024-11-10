@@ -79,13 +79,6 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg)
   new_p->eflags = 0x2;
   new_p->cs = 8;
   return new_p;
-  // Context *kctx = (Context *)(kstack.end - sizeof(Context));
-  // kctx->eip = (uintptr_t)entry;
-  // kctx->cr3 = NULL;
-  // kctx->cs = 0x8;
-  // kctx->eflags |= 0x200;
-  // // printf("context kctx = %d\n", kctx);
-  // return kctx;
 }
 
 void yield()
