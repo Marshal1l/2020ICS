@@ -70,6 +70,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot)
 Context *ucontext(AddrSpace *as, Area kstack, void *entry)
 {
   Context *new_p = (Context *)(kstack.end - 16 - sizeof(Context));
+  new_p->eax = (uintptr_t)new_p;
   new_p->eip = (uintptr_t)entry;
   new_p->cs = 8;
   new_p->eflags = 0x00000202;
