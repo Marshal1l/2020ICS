@@ -59,7 +59,7 @@ void context_uload(PCB *pcb, const char *filename)
   stack.start = pcb->stack;
   stack.end = pcb->stack + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
-  ucontext(NULL, stack, (void *)entry);
+  pcb->cp = ucontext(NULL, stack, (void *)entry);
 }
 void naive_uload(PCB *pcb, const char *filename)
 {
