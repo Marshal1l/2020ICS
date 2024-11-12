@@ -22,15 +22,16 @@ void hello_fun(void *arg)
     yield();
   }
 }
+extern void context_uload(PCB *pcb, const char *filename);
 extern void context_kload(PCB *pcb, void (*entry)(void *), void *arg);
 void init_proc()
 {
   // switch_boot_pcb();
 
   Log("Initializing processes...");
-  context_kload(&pcb[0], hello_fun, "A");
-  context_kload(&pcb[1], hello_fun, "V");
-  // context_uload(&pcb[1], "/bin/bird");
+  // context_kload(&pcb[0], hello_fun, "A");
+  // context_kload(&pcb[1], hello_fun, "V");
+  context_uload(&pcb[0], "/bin/bird");
   switch_boot_pcb();
 
   // load program here
@@ -42,7 +43,8 @@ Context *schedule(Context *prev)
   // save the context pointer
   current->cp = prev;
   // always select pcb[0] as the new process
-  current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  current = &pcb[0];
   // then return the new context
   return current->cp;
 }

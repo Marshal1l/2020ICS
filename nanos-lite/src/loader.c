@@ -8,6 +8,7 @@
 #define Elf_Ehdr Elf32_Ehdr
 #define Elf_Phdr Elf32_Phdr
 #endif
+extern Context *ucontext(AddrSpace *as, Area kstack, void *entry);
 extern Context *kcontext(Area kstack, void (*entry)(void *), void *arg);
 extern int fs_open(const char *pathname, int flags, int mode);
 extern size_t fs_read(int fd, void *buf, size_t len);
@@ -52,7 +53,14 @@ void context_kload(PCB *pcb, void (*entry)(void *), void *arg)
   stack.end = pcb->stack + sizeof(pcb->stack);
   pcb->cp = kcontext(stack, entry, arg);
 }
-
+void context_uload(PCB *pcb, const char *filename)
+{
+  Area stack;
+  stack.start = pcb->stack;
+  stack.end = pcb->stack + sizeof(pcb->stack);
+  uintptr_t entry = loader(pcb, filename);
+  ucontext(NULL, stack, (void *)entry);
+}
 void naive_uload(PCB *pcb, const char *filename)
 {
   uintptr_t entry = loader(pcb, filename);
