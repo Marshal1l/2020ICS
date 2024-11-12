@@ -22,7 +22,7 @@ void hello_fun(void *arg)
     yield();
   }
 }
-extern void context_uload(PCB *pcb, const char *filename);
+extern void context_uload(PCB *pcb, const char *filename, char *const argv[], char *const envp[]);
 extern void context_kload(PCB *pcb, void (*entry)(void *), void *arg);
 void init_proc()
 {
@@ -31,7 +31,7 @@ void init_proc()
   Log("Initializing processes...");
   // context_kload(&pcb[0], hello_fun, "A");
   // context_kload(&pcb[1], hello_fun, "V");
-  context_uload(&pcb[0], "/bin/bird");
+  context_uload(&pcb[0], "/bin/bird", NULL, NULL);
   switch_boot_pcb();
 
   // load program here
