@@ -31,8 +31,9 @@ void init_proc()
   Log("Initializing processes...");
   // context_kload(&pcb[0], hello_fun, "A");
   // context_kload(&pcb[1], hello_fun, "V");
-  char *argv[] = {"123", "456", NULL};
-  context_uload(&pcb[0], "/bin/bird", argv, NULL);
+  char *argvs[] = {"123", "456", NULL};
+  char *envs[] = {"evir", "there", NULL};
+  context_uload(&pcb[0], "/bin/bird", argvs, envs);
   switch_boot_pcb();
 
   // load program here
