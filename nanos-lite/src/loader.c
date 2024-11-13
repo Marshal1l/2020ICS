@@ -65,6 +65,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   int size_argv = 0, size_envp = 0, argc = 0, envc = 0;
   void *start = new_page(stack_num);
   void *end = start + stack_num * PGSIZE;
+  printf("end:=%x\n", end);
   Area ustack = {start, end};
   uintptr_t *user_stack = ustack.end;
   uintptr_t *ptr_argv = user_stack;
