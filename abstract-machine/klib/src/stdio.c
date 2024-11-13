@@ -50,7 +50,6 @@ int i2s(int num)
 
 int vsprintf(char *out, const char *fmt, va_list ap)
 {
-  size_t j = 0, k = 0;
   uint32_t v;
   char *buf_ptr = out;
   char nums[20];
@@ -66,7 +65,8 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       {
       case 'x':
         // int i = va_arg(ap, uint32_t);
-        k = 0;
+        int j = 0;
+        int k = 0;
         buf_ptr[j++] = '0';
         buf_ptr[j++] = 'x';
         if (v == 0)
