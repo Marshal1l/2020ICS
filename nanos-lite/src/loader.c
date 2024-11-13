@@ -70,13 +70,13 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
       argc++;
     }
   }
-  if (envp != NULL)
-  {
-    while (envp[envc] != NULL)
-    {
-      envc++;
-    }
-  }
+  // if (envp != NULL)
+  // {
+  //   while (envp[envc] != NULL)
+  //   {
+  //     envc++;
+  //   }
+  // }
   printf("argc:=%d\tenvc:=%d\n", argc, envc);
   // uintptr_t *user_stack = (uintptr_t *)heap.end;
 
