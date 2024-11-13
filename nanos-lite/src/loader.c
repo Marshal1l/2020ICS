@@ -79,7 +79,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     size_envp += strlen(envp[envc]) + 1;
     envc++;
   }
-  printf("argc:=%d\tenvc:=%d\n", argc, envc);
+  // printf("argc:=%d\tenvc:=%d\n", argc, envc);
   for (int i = argc - 1; i >= 0; i--)
   {
     size_t len = strlen(argv[i]) + 1; // 包括 '\0' 终止符
@@ -93,8 +93,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     user_stack -= len;
     strncpy((char *)user_stack, envp[i], len);
   }
-  printf("ptr_argv:=%x\n", ptr_argv);
-  printf("ptr_envp:=%x\n", ptr_envp);
+  // printf("ptr_argv:=%x\n", ptr_argv);
+  // printf("ptr_envp:=%x\n", ptr_envp);
   // user_stack -= strlen("NULL");
   // uintptr_t *ptr_null = user_stack;
   // strncpy((char *)user_stack, "NULL", strlen(NULL) + 1);
@@ -115,12 +115,11 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   user_stack--;
   *user_stack = argc;
   // return
-  // pcb->cp->GPRx = (uintptr_t)user_stack;
-  printf("ustack addr:=%x\n", (uintptr_t)user_stack);
-  for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)ustack.end; i++)
-  {
-    printf("%x\n", *i);
-  }
+  // printf("ustack addr:=%x\n", (uintptr_t)user_stack);
+  // for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)ustack.end; i++)
+  // {
+  //   printf("%x\n", *i);
+  // }
 
   pcb->cp = ucontext(NULL, stack, (void *)entry);
   pcb->cp->eax = (uintptr_t)user_stack;
