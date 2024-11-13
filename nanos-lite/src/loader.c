@@ -73,6 +73,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
     user_stack -= len;
     strncpy((char *)user_stack, argv[i], len);
+    printf("str n cpy:=%s\n", argv);
   }
 
   pcb->cp = ucontext(NULL, stack, (void *)entry);
