@@ -73,7 +73,8 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         buf_ptr += sizeof(char);
         if (v == 0)
         {
-          buf_ptr[j++] = '0';
+          *(char *)buf_ptr = '0';
+          buf_ptr += sizeof(char);
           fmt_ptr++;
           break;
         }
