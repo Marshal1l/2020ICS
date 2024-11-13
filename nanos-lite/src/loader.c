@@ -62,6 +62,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   int size = 0, size_argv = 0, size_envp = 0, argc = 0, envc = 0;
   while (argv[argc] != NULL)
   {
+    printf("arg %d:=%s\n", argc, argv);
     size_argv += strlen(argv[argc]) + 1;
     argc++;
   }
