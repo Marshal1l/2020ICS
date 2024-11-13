@@ -65,7 +65,6 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       {
       case 'x':
         v = va_arg(ap, uint32_t);
-        int j = 0;
         int k = 0;
         *(char *)buf_ptr = '0';
         buf_ptr += sizeof(char);
@@ -85,7 +84,8 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         }
         for (int ii = k - 1; ii >= 0; ii--)
         {
-          buf_ptr[j++] = nums[ii];
+          *(char *)buf_ptr = nums[ii];
+          buf_ptr += sizeof(char);
         }
         fmt_ptr++;
         break;
