@@ -59,16 +59,19 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   stack.start = pcb->stack;
   stack.end = pcb->stack + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
-
-  int argc = 0;
-  int envc = 0;
-  if (argv != NULL)
+  int size = 0, size_argv = 0, size_envp = 0, argc = 0, envc = 0;
+  while (argv[argc] != NULL)
   {
-    for (int i = 0; argv[i] != NULL; i++)
-    {
-      printf("arg:=%s\n", argv[i]);
-    }
+    size_argv += strlen(argv[argc]) + 1;
+    argc++;
   }
+  while (envp[envc] != NULL)
+  {
+    size_envp += strlen(envp[envc]) + 1;
+    envc++;
+  }
+  size = size_envp + size_argv + sizeof(uintptr_t) * (argc + 4 + envc);
+  size = size - size % sizeof(uintptr_t);
   // if (envp != NULL)
   // {
   //   while (envp[envc] != NULL)
