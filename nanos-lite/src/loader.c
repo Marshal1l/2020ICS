@@ -59,27 +59,20 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   stack.start = pcb->stack;
   stack.end = pcb->stack + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
-  int size = 0, size_argv = 0, size_envp = 0, argc = 0, envc = 0;
-  while (argv[argc] != NULL)
-  {
-    size_argv += strlen(argv[argc]) + 1;
-    argc++;
-  }
-  while (envp[envc] != NULL)
-  {
-    size_envp += strlen(envp[envc]) + 1;
-    envc++;
-  }
-  size = size_envp + size_argv + sizeof(uintptr_t) * (argc + 4 + envc);
-  size = size - size % sizeof(uintptr_t);
-  // if (envp != NULL)
+  // int size = 0, size_argv = 0, size_envp = 0, argc = 0, envc = 0;
+  // while (argv[argc] != NULL)
   // {
-  //   while (envp[envc] != NULL)
-  //   {
-  //     envc++;
-  //   }
+  //   size_argv += strlen(argv[argc]) + 1;
+  //   argc++;
   // }
-  printf("argc:=%d\tenvc:=%d\n", argc, envc);
+  // while (envp[envc] != NULL)
+  // {
+  //   size_envp += strlen(envp[envc]) + 1;
+  //   envc++;
+  // }
+  // size = size_envp + size_argv + sizeof(uintptr_t) * (argc + 4 + envc);
+  // size = size - size % sizeof(uintptr_t);
+  // printf("argc:=%d\tenvc:=%d\n", argc, envc);
   // uintptr_t *user_stack = (uintptr_t *)heap.end;
 
   // for (int i = argc - 1; i >= 0; i--)
