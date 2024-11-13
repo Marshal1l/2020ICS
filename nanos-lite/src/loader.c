@@ -60,6 +60,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   stack.end = pcb->stack + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
   int size_argv = 0, size_envp = 0, argc = 0, envc = 0;
+
   while (argv[argc] != NULL)
   {
     // printf("arg %d:=%s\n", argc, argv[argc]);
@@ -73,20 +74,20 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   }
   printf("argc:=%d\tenvc:=%d\n", argc, envc);
   uintptr_t *user_stack = (uintptr_t *)heap.end;
+  uintptr_t *ptr_argv = user_stack;
   for (int i = argc - 1; i >= 0; i--)
   {
     size_t len = strlen(argv[i]) + 1; // 包括 '\0' 终止符
     user_stack -= len;
     strncpy((char *)user_stack, argv[i], len);
   }
-  uintptr_t *ptr_argv = user_stack;
+  uintptr_t *ptr_envp = user_stack;
   for (int i = envc - 1; i >= 0; i--)
   {
     size_t len = strlen(envp[i]) + 1; // 包括 '\0' 终止符
     user_stack -= len;
     strncpy((char *)user_stack, envp[i], len);
   }
-  uintptr_t *ptr_envp = user_stack;
   printf("ptr_argv:=%x\n", ptr_argv);
   printf("ptr_envp:=%x\n", ptr_envp);
   // user_stack -= strlen("NULL");
@@ -95,12 +96,14 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   for (int i = argc - 1; i >= 0; i--)
   {
     (uintptr_t **)user_stack--;
-    *(uintptr_t **)user_stack = ptr_argv++;
+    ptr_argv -= (strlen(argv[i]) + 1);
+    *(uintptr_t **)user_stack = ptr_argv;
   }
   for (int i = envc - 1; i >= 0; i--)
   {
     (uintptr_t **)user_stack--;
-    *(uintptr_t **)user_stack = ptr_envp++;
+    ptr_envp -= (strlen(envp[i]) + 1);
+    *(uintptr_t **)user_stack = ptr_envp;
   }
   user_stack--;
   *user_stack = envc;
