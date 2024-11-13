@@ -12,8 +12,12 @@ void call_main(uintptr_t *args)
   int argc = *args;
   args++;
   int envc = *args;
+  args++;
+  uintptr_t *envp = *(uintptr_t **)args;
   printf("ptr_argc:=%x\n", args);
   printf("argc:=%d\n", argc);
+  printf("envc:=%d\n", envc);
+  printf("envp 0:=%s", envp[0]);
   exit(main(0, empty, empty));
   assert(0);
 }
