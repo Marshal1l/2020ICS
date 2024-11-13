@@ -60,23 +60,23 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   stack.end = pcb->stack + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
 
-  // int argc = 0;
-  // while (argv[argc] != NULL)
-  //   argc++;
-  // int envc = 0;
-  // while (envp[envc] != NULL)
-  //   envc++;
-  // uintptr_t *user_stack = (uintptr_t *)heap.end;
+  int argc = 0;
+  while (argv[argc] != NULL)
+    argc++;
+  int envc = 0;
+  while (envp[envc] != NULL)
+    envc++;
+  uintptr_t *user_stack = (uintptr_t *)heap.end;
 
-  // for (int i = argc - 1; i >= 0; i--)
-  // {
-  //   size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
-  //   user_stack -= len;
-  //   strncpy((char *)user_stack, argv[i], len);
-  // }
+  for (int i = argc - 1; i >= 0; i--)
+  {
+    size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
+    user_stack -= len;
+    strncpy((char *)user_stack, argv[i], len);
+  }
 
-  // // 对齐到 uintptr_t 边界
-  // user_stack = (uintptr_t *)((uintptr_t)user_stack & ~(sizeof(uintptr_t) - 1));
+  // 对齐到 uintptr_t 边界
+  user_stack = (uintptr_t *)((uintptr_t)user_stack & ~(sizeof(uintptr_t) - 1));
   // // 将 envp 字符串逆序拷贝到用户栈
   // for (int i = envc - 1; i >= 0; i--)
   // {
