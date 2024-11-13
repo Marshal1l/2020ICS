@@ -22,7 +22,6 @@ extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename)
 {
   int file_id = -1;
-  printf("load file-- %s\n", filename);
   file_id = fs_open(filename, 0, 0);
   Elf_Ehdr ehdr;
   fs_read(file_id, &ehdr, sizeof(Elf_Ehdr));
@@ -39,6 +38,7 @@ static uintptr_t loader(PCB *pcb, const char *filename)
       memset((void *)(phdr.p_vaddr + phdr.p_filesz), 0, (phdr.p_memsz - phdr.p_filesz));
     }
   }
+  printf("load file-- %s\n", filename);
   return ehdr.e_entry;
 }
 
