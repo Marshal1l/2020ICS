@@ -33,7 +33,7 @@ void init_proc()
   // context_kload(&pcb[1], hello_fun, "V");
   char *argvs[] = {"123", "456", NULL};
   char *envs[] = {"evir", "there", NULL};
-  context_uload(&pcb[0], "/bin/bird", argvs, envs);
+  context_uload(&pcb[0], "/bin/hello", argvs, envs);
   switch_boot_pcb();
 
   // load program here
