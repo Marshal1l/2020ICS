@@ -61,13 +61,15 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   uintptr_t entry = loader(pcb, filename);
 
   int argc = 0;
-  while (argv[argc] != NULL)
-    argc++;
+  if (argv != NULL)
+    while (argv[argc] != NULL)
+      argc++;
   int envc = 0;
-  while (envp[envc] != NULL)
-    envc++;
+  if (envp != NULL)
+    while (envp[envc] != NULL)
+      envc++;
   uintptr_t *user_stack = (uintptr_t *)heap.end;
-  printf("argc:=%d\tenvc:=%d\n",argc,envc);
+  printf("argc:=%d\tenvc:=%d\n", argc, envc);
   for (int i = argc - 1; i >= 0; i--)
   {
     size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
