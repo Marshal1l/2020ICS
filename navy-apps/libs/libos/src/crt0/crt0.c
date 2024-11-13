@@ -10,6 +10,7 @@ void call_main(uintptr_t *args)
   char *empty[] = {NULL};
   environ = empty;
   int argc = *args;
+  printf("ptr_argc:=%x\n", args);
   printf("argc:=%d\n", argc);
   exit(main(0, empty, empty));
   assert(0);
