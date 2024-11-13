@@ -74,14 +74,19 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   size = size_envp + size_argv + sizeof(uintptr_t) * (argc + 4 + envc);
   size = size - size % sizeof(uintptr_t);
   printf("argc:=%d\tenvc:=%d\n", argc, envc);
-  uintptr_t *user_stack = (uintptr_t *)heap.end;
-
+  uintptr_t *user_stack = (uintptr_t *)heap.end - 0x10;
   for (int i = argc - 1; i >= 0; i--)
   {
-    size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
+    size_t len = strlen(argv[i]) + 1; // 包括 '\0' 终止符
     user_stack -= len;
     strncpy((char *)user_stack, argv[i], len);
-    printf("str n cpy:=%s\n", argv[i]);
+    // printf("str n cpy:=%s\n", argv[i]);
+  }
+  for (int i = envc - 1; i >= 0; i--)
+  {
+    size_t len = strlen(envp[i]) + 1; // 包括 null 终止符
+    user_stack -= len;
+    strncpy((char *)user_stack, envp[i], len);
   }
 
   // return
