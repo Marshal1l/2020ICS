@@ -1,12 +1,12 @@
 #include <memory.h>
 
-static void *pf = 0;
+static void *pf = NULL;
 #define PGSIZE 4096
 void *new_page(size_t nr_page)
 {
-  void *tmp = pf;
-  pf += nr_page * PGSIZE;
-  return tmp;
+  void *p = pf;
+  pf = pf + nr_page * PGSIZE;
+  return p;
 }
 
 static inline void *pg_alloc(int n)
