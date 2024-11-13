@@ -69,10 +69,15 @@ void map(AddrSpace *as, void *va, void *pa, int prot)
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry)
 {
-  Context *new_p = (Context *)(kstack.end - 16 - sizeof(Context));
-  new_p->eip = (uintptr_t)entry;
-  new_p->cs = 8;
-  new_p->eflags = 0x00000202;
+  // Context *new_p = (Context *)(kstack.end - 16 - sizeof(Context));
+  // new_p->eip = (uintptr_t)entry;
+  // new_p->cs = 8;
+  // new_p->eflags = 0x00000202;
   // new_p->as = as;
-  return new_p;
+  Context *c = (Context *)((uint8_t *)(kstack.end) - sizeof(Context) - sizeof(uintptr_t));
+  c->eip = (uintptr_t)entry;
+  c->cs = KSEL(1);
+  c->cr3 = NULL;
+  c->eflags = 0x200;
+  return c;
 }
