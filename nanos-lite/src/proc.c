@@ -9,7 +9,7 @@ PCB *current = NULL;
 void switch_boot_pcb()
 {
   current = &pcb_boot;
-  printf("switch_boot_pcb current %d\n", current);
+  printf("switch_boot_pcb current %x\n", current);
 }
 
 void hello_fun(void *arg)
