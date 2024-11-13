@@ -67,7 +67,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   while (envp[envc] != NULL)
     envc++;
   uintptr_t *user_stack = (uintptr_t *)heap.end;
-
+  printf("argc:=%d\tenvc:=%d\n",argc,envc);
   for (int i = argc - 1; i >= 0; i--)
   {
     size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
