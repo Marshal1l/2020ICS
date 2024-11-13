@@ -117,7 +117,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   // return
   // pcb->cp->GPRx = (uintptr_t)user_stack;
   printf("ustack addr:=%x\n", (uintptr_t)user_stack);
-  for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)heap.end; i++)
+  for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)ustack.end; i++)
   {
     printf("%x\n", *i);
   }
