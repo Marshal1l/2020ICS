@@ -64,12 +64,10 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   int envc = 0;
   if (argv != NULL)
   {
-    while (argv[argc] != NULL)
+    for (int i = 0; argv[i] != NULL; i++)
     {
-      printf("arg:=%s\n", argv[argc]);
-      argc++;
+      printf("arg:=%s\n", argv[i]);
     }
-    printf("finish/n");
   }
   // if (envp != NULL)
   // {
