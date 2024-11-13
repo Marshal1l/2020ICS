@@ -19,17 +19,18 @@ void call_main(uintptr_t *args)
   {
     envp[i] = *(char **)args;
     (char **)args++;
-    printf("envp%d:=%s\n", i, envp[i]);
+    // printf("envp%d:=%s\n", i, envp[i]);
   }
   for (int i = 0; i < envc; i++)
   {
     argv[i] = *(char **)args;
     (char **)args++;
-    printf("argv%d:=%s\n", i, argv[i]);
+    // printf("argv%d:=%s\n", i, argv[i]);
   }
-  printf("argc:=%d\n", argc);
-  printf("envc:=%d\n", envc);
-
-  exit(main(0, empty, empty));
+  // printf("argc:=%d\n", argc);
+  // printf("envc:=%d\n", envc);
+  argv[argc] = NULL;
+  envp[envc] = NULL;
+  exit(main(0, argv, envp));
   assert(0);
 }
