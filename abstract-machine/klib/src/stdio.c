@@ -50,8 +50,10 @@ int i2s(int num)
 
 int vsprintf(char *out, const char *fmt, va_list ap)
 {
+  size_t j = 0, k = 0;
+  uint32_t v;
   char *buf_ptr = out;
-
+  char nums[20];
   const char *fmt_ptr = fmt;
   int print_count = 0;
   // putstr("into vsprintf\n")
@@ -62,6 +64,28 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       ++fmt_ptr;
       switch (*fmt_ptr)
       {
+      case 'x':
+        // int i = va_arg(ap, uint32_t);
+        k = 0;
+        buf_ptr[j++] = '0';
+        buf_ptr[j++] = 'x';
+        if (v == 0)
+        {
+          buf_ptr[j++] = '0';
+          fmt_ptr++;
+          break;
+        }
+        while (v != 0)
+        {
+          nums[k++] = v % 16 < 10 ? v % 16 + '0' : 'a' + v % 16 - 10;
+          v = v / 16;
+        }
+        for (int ii = k - 1; ii >= 0; ii--)
+        {
+          buf_ptr[j++] = nums[ii];
+        }
+        fmt_ptr++;
+        break;
       case 'd':
       {
         int i = va_arg(ap, int);
