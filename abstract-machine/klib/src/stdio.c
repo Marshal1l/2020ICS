@@ -87,7 +87,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
           *(char *)buf_ptr = nums[ii];
           buf_ptr += sizeof(char);
         }
-        (uint32_t *)fmt_ptr++;
+        print_count++;
         break;
       case 'd':
       {
