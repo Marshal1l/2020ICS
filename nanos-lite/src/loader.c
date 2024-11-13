@@ -62,7 +62,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   int size = 0, size_argv = 0, size_envp = 0, argc = 0, envc = 0;
   while (argv[argc] != NULL)
   {
-    printf("arg %d:=%s\n", argc, argv[argc]);
+    // printf("arg %d:=%s\n", argc, argv[argc]);
     size_argv += strlen(argv[argc]) + 1;
     argc++;
   }
@@ -74,15 +74,15 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   size = size_envp + size_argv + sizeof(uintptr_t) * (argc + 4 + envc);
   size = size - size % sizeof(uintptr_t);
   printf("argc:=%d\tenvc:=%d\n", argc, envc);
-  // uintptr_t *user_stack = (uintptr_t *)heap.end;
+  uintptr_t *user_stack = (uintptr_t *)heap.end;
 
-  // for (int i = argc - 1; i >= 0; i--)
-  // {
-  //   size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
-  //   user_stack -= len;
-  //   strncpy((char *)user_stack, argv[i], len);
-  //   printf("str n cpy:=%s\n", argv);
-  // }
+  for (int i = argc - 1; i >= 0; i--)
+  {
+    size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
+    user_stack -= len;
+    strncpy((char *)user_stack, argv[i], len);
+    printf("str n cpy:=%s\n", argv);
+  }
 
   // return
   pcb->cp = ucontext(NULL, stack, (void *)entry);
