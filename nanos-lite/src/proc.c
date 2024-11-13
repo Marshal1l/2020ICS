@@ -50,3 +50,13 @@ Context *schedule(Context *prev)
   // then return the new context
   return current->cp;
 }
+int sys_execve(const char *filename, char *const argv[], char *const envp[])
+{
+  context_uload(current, filename, argv, envp);
+  // printf("%s %s %s\n",filename,argv[0],envp[0]);
+  switch_boot_pcb();
+  // printf("has loaded\n");
+  yield();
+  // naive_uload(NULL,filename);
+  return 0;
+}
