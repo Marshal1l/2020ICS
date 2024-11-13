@@ -2,5 +2,5 @@
 _start:
   movl $0, %ebp
   movl %eax, %esp
-  pushl $1
+  pushl %esp
   call call_main

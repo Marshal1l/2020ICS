@@ -118,6 +118,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   }
 
   pcb->cp = ucontext(NULL, stack, (void *)entry);
+  pcb->cp->eax = (uintptr_t)user_stack;
 }
 void naive_uload(PCB *pcb, const char *filename)
 {
