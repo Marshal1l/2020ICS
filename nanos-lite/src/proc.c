@@ -33,7 +33,7 @@ void init_proc()
   // context_kload(&pcb[1], hello_fun, "V");
   char *argvs[] = {NULL};
   char *envs[] = {NULL};
-  context_uload(&pcb[0], "/bin/lua", argvs, envs);
+  context_uload(&pcb[0], "/bin/menu", argvs, envs);
   switch_boot_pcb();
 
   // load program here
