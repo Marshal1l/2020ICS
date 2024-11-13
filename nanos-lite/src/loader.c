@@ -66,46 +66,45 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   int envc = 0;
   while (envp[envc] != NULL)
     envc++;
-  // uintptr_t *user_stack = (uintptr_t *)heap.end;
+  uintptr_t *user_stack = (uintptr_t *)heap.end;
 
-  // for (int i = argc - 1; i >= 0; i--)
-  // {
-  //   size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
-  //   user_stack -= len;
-  //   strncpy((char *)user_stack, argv[i], len);
-  // }
-  // user_stack = (uintptr_t *)((uintptr_t)user_stack & ~(sizeof(uintptr_t) - 1));
-  // 将 envp 字符串逆序拷贝到用户栈
-  // for (int i = envc - 1; i >= 0; i--)
-  // {
-  //   size_t len = strlen(envp[i]) + 1; // 包括 null 终止符
-  //   user_stack -= len;
-  //   strncpy((char *)user_stack, envp[i], len);
-  // }
-  // // 对齐到 uintptr_t 边界
-  // user_stack = (uintptr_t *)((uintptr_t)user_stack & ~(sizeof(uintptr_t) - 1));
-  // // 将 argv 和 envp 指针拷贝到用户栈
-  // user_stack -= (argc + envc + 4); // +4 为 NULL 结尾和 argc/envc 的值
-  // // uintptr_t *user_argv = user_stack;
-  // //  设置 argc 的值
-  // user_stack[0] = argc;
-  // // 设置 argv 指针
-  // for (int i = 0; i < argc; i++)
-  // {
-  //   user_stack[i + 1] = (uintptr_t)heap.end - (argc - i - 1) * sizeof(uintptr_t);
-  // }
-  // // 设置 argv 的 NULL 终止符
-  // user_stack[argc + 1] = 0;
-  // // 设置 envc 的值
-  // user_stack[argc + 2] = envc;
-  // // 设置 envp 指针
-  // for (int i = 0; i < envc; i++)
-  // {
-  //   user_stack[argc + 3 + i] = (uintptr_t)heap.end - (argc + 3 + envc - i - 1) * sizeof(uintptr_t);
-  // }
-  // // 设置 envp 的 NULL 终止符
-  // user_stack[argc + 3 + envc] = 0;
-
+  for (int i = argc - 1; i >= 0; i--)
+  {
+    size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
+    user_stack -= len;
+    strncpy((char *)user_stack, argv[i], len);
+  }
+  user_stack = (uintptr_t *)((uintptr_t)user_stack & ~(sizeof(uintptr_t) - 1));
+  for (int i = envc - 1; i >= 0; i--)
+  {
+    size_t len = strlen(envp[i]) + 1; // 包括 null 终止符
+    user_stack -= len;
+    strncpy((char *)user_stack, envp[i], len);
+  }
+  // 对齐到 uintptr_t 边界
+  user_stack = (uintptr_t *)((uintptr_t)user_stack & ~(sizeof(uintptr_t) - 1));
+  // 将 argv 和 envp 指针拷贝到用户栈
+  user_stack -= (argc + envc + 4); // +4 为 NULL 结尾和 argc/envc 的值
+  // uintptr_t *user_argv = user_stack;
+  //  设置 argc 的值
+  user_stack[0] = argc;
+  // 设置 argv 指针
+  for (int i = 0; i < argc; i++)
+  {
+    user_stack[i + 1] = (uintptr_t)heap.end - (argc - i - 1) * sizeof(uintptr_t);
+  }
+  // 设置 argv 的 NULL 终止符
+  user_stack[argc + 1] = 0;
+  // 设置 envc 的值
+  user_stack[argc + 2] = envc;
+  // 设置 envp 指针
+  for (int i = 0; i < envc; i++)
+  {
+    user_stack[argc + 3 + i] = (uintptr_t)heap.end - (argc + 3 + envc - i - 1) * sizeof(uintptr_t);
+  }
+  // 设置 envp 的 NULL 终止符
+  user_stack[argc + 3 + envc] = 0;
+  pcb->cp->eax = (uintptr_t)user_stack;
   pcb->cp = ucontext(NULL, stack, (void *)entry);
 }
 void naive_uload(PCB *pcb, const char *filename)
