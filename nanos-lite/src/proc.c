@@ -31,9 +31,9 @@ void init_proc()
   Log("Initializing processes...");
   // context_kload(&pcb[0], hello_fun, "A");
   // context_kload(&pcb[1], hello_fun, "V");
-  char *argvs[] = {"/bin", NULL};
+  char *argvs[] = {NULL};
   char *envs[] = {NULL};
-  context_uload(&pcb[0], "/bin/cat", argvs, envs);
+  context_uload(&pcb[0], "/bin/hello", argvs, envs);
   switch_boot_pcb();
 
   // load program here
