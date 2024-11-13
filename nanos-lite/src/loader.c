@@ -69,6 +69,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
       printf("arg:=%s\n", argv[argc]);
       argc++;
     }
+    printf("finish/n");
   }
   // if (envp != NULL)
   // {
