@@ -74,7 +74,7 @@ Context *ucontext(AddrSpace *as, Area kstack, void *entry)
   // new_p->cs = 8;
   // new_p->eflags = 0x00000202;
   // new_p->as = as;
-  Context *c = (Context *)((uint8_t *)(kstack.end) - sizeof(Context) - sizeof(uintptr_t));
+  Context *c = (Context *)(kstack.end - sizeof(Context) - sizeof(uintptr_t));
   c->eip = (uintptr_t)entry;
   c->cs = KSEL(1);
   c->cr3 = NULL;
