@@ -61,29 +61,34 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   uintptr_t entry = loader(pcb, filename);
 
   int argc = 0;
-  printf("argc:=%d\n", argc);
+  int envc = 0;
   if (argv != NULL)
+  {
     while (argv[argc] != NULL)
     {
       printf("arg:=%s\n", argv[argc]);
       argc++;
     }
-
-  int envc = 0;
-  if (envp != NULL)
-    while (envp[envc] != NULL)
-      envc++;
-  printf("argc:=%d\tenvc:=%d\n", argc, envc);
-  uintptr_t *user_stack = (uintptr_t *)heap.end;
-
-  for (int i = argc - 1; i >= 0; i--)
-  {
-    size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
-    user_stack -= len;
-    strncpy((char *)user_stack, argv[i], len);
-    printf("str n cpy:=%s\n", argv);
   }
+  if (envp != NULL)
+  {
+    while (envp[envc] != NULL)
+    {
+      envc++;
+    }
+  }
+  printf("argc:=%d\tenvc:=%d\n", argc, envc);
+  // uintptr_t *user_stack = (uintptr_t *)heap.end;
 
+  // for (int i = argc - 1; i >= 0; i--)
+  // {
+  //   size_t len = strlen(argv[i]) + 1; // 包括 null 终止符
+  //   user_stack -= len;
+  //   strncpy((char *)user_stack, argv[i], len);
+  //   printf("str n cpy:=%s\n", argv);
+  // }
+
+  // return
   pcb->cp = ucontext(NULL, stack, (void *)entry);
 }
 void naive_uload(PCB *pcb, const char *filename)
