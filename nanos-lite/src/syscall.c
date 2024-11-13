@@ -48,7 +48,7 @@ void do_syscall(Context *c)
     break;
   case SYS_exit:
     // printf("SYS_EXIT------%d\n", SYS_exit);
-    sys_execve("/bin/nterm", NULL, NULL);
+    sys_execve("/bin/bird", NULL, NULL);
     break;
   default:
     panic("Unhandled syscall ID = %d", a[0]);
