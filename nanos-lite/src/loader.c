@@ -61,13 +61,14 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   uintptr_t entry = loader(pcb, filename);
 
   int argc = 0;
+  printf("argc:=%d\n", argc);
   if (argv != NULL)
     while (argv[argc] != NULL)
     {
       printf("arg:=%s\n", argv[argc]);
       argc++;
     }
-  printf("argc:=%d\n", argc);
+
   int envc = 0;
   if (envp != NULL)
     while (envp[envc] != NULL)
