@@ -87,6 +87,8 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     strncpy((char *)user_stack, envp[i], len);
   }
   uintptr_t *ptr_envp = user_stack;
+  printf("ptr_argv:=%x\n", ptr_argv);
+  printf("ptr_envp:=%x\n", ptr_envp);
   // user_stack -= strlen("NULL");
   // uintptr_t *ptr_null = user_stack;
   // strncpy((char *)user_stack, "NULL", strlen(NULL) + 1);
@@ -112,8 +114,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   {
     printf("%x\n", *i);
   }
-  printf("ptr_argv:=%x\n", ptr_argv);
-  printf("ptr_envp:=%x\n", ptr_envp);
 }
 void naive_uload(PCB *pcb, const char *filename)
 {
