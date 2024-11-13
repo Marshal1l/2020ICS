@@ -19,10 +19,11 @@ void call_main(uintptr_t *args)
   {
     envp[i] = *(char **)args;
     (char **)args++;
+    printf("envp%d:=%s\n", i, envp[i]);
   }
   printf("argc:=%d\n", argc);
   printf("envc:=%d\n", envc);
-  printf("envp 0:=%x\n", envp);
+
   exit(main(0, empty, empty));
   assert(0);
 }
