@@ -16,7 +16,7 @@ void call_main(uintptr_t *args)
   char *envp = *(char **)args;
   printf("argc:=%d\n", argc);
   printf("envc:=%d\n", envc);
-  printf("envp 0:=%x\n", envp[0]);
+  printf("envp 0:=%x\n", envp);
   exit(main(0, empty, empty));
   assert(0);
 }
