@@ -11,6 +11,6 @@ void call_main(uintptr_t *args)
   environ = empty;
   int argc = *args;
   printf("argc:=%d\n", argc);
-  exit(main(0, empty, empty));
+  // exit(main(0, empty, empty));
   assert(0);
 }
