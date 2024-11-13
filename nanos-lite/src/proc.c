@@ -31,7 +31,7 @@ void init_proc()
   Log("Initializing processes...");
   // context_kload(&pcb[0], hello_fun, "A");
   // context_kload(&pcb[1], hello_fun, "V");
-  char *argvs[] = {"/bin/exec-test", "/bin/exec-test", NULL};
+  char *argvs[] = {NULL};
   char *envs[] = {NULL};
   context_uload(&pcb[0], "/bin/busybox", argvs, envs);
   switch_boot_pcb();
