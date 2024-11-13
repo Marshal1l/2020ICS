@@ -110,7 +110,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   printf("ustack\n");
   for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)heap.end; i++)
   {
-    printf("%s\n", *i);
+    printf("%x\n", *i);
   }
 }
 void naive_uload(PCB *pcb, const char *filename)
