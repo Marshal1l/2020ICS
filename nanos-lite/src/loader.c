@@ -111,12 +111,13 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   *user_stack = argc;
   // return
   // pcb->cp->GPRx = (uintptr_t)user_stack;
-  pcb->cp = ucontext(NULL, stack, (void *)entry);
   printf("ustack addr:=%x\n", (uintptr_t)user_stack);
   for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)heap.end; i++)
   {
     printf("%x\n", *i);
   }
+
+  pcb->cp = ucontext(NULL, stack, (void *)entry);
 }
 void naive_uload(PCB *pcb, const char *filename)
 {
