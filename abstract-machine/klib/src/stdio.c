@@ -67,8 +67,10 @@ int vsprintf(char *out, const char *fmt, va_list ap)
         v = va_arg(ap, uint32_t);
         int j = 0;
         int k = 0;
-        buf_ptr[j++] = '0';
-        buf_ptr[j++] = 'x';
+        *(char *)buf_ptr = '0';
+        buf_ptr += sizeof(char);
+        *(char *)buf_ptr = 'x';
+        buf_ptr += sizeof(char);
         if (v == 0)
         {
           buf_ptr[j++] = '0';
