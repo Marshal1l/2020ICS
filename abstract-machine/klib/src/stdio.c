@@ -64,7 +64,7 @@ int vsprintf(char *out, const char *fmt, va_list ap)
       switch (*fmt_ptr)
       {
       case 'x':
-        // int i = va_arg(ap, uint32_t);
+        v = va_arg(ap, uint32_t);
         int j = 0;
         int k = 0;
         buf_ptr[j++] = '0';
