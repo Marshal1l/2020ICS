@@ -82,7 +82,7 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   uintptr_t *ptr_argv = user_stack;
   for (int i = envc - 1; i >= 0; i--)
   {
-    size_t len = strlen(envp[i]) + 1; // 包括 null 终止符
+    size_t len = strlen(envp[i]) + 1; // 包括 '\0' 终止符
     user_stack -= len;
     strncpy((char *)user_stack, envp[i], len);
   }
@@ -110,8 +110,10 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   printf("ustack\n");
   for (uintptr_t *i = (uintptr_t *)user_stack; i != (uintptr_t *)heap.end; i++)
   {
-    printf("%s\n", *i);
+    printf("%x\n", *i);
   }
+  printf("ptr_argv:=%x\n", ptr_argv);
+  printf("ptr_envp:=%x\n", ptr_envp);
 }
 void naive_uload(PCB *pcb, const char *filename)
 {
