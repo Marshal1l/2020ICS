@@ -47,8 +47,10 @@ void do_syscall(Context *c)
     c->GPRx = 1;
     break;
   case SYS_exit:
-    // printf("SYS_EXIT------%d\n", SYS_exit);
-    sys_execve("/bin/bird", NULL, NULL);
+    // printf("SYS_EXIT------%d\n", SYS_exit);'
+    char *argv_sys[] = {NULL};
+    char *envs_sys[] = {NULL};
+    sys_execve("/bin/nterm", argv_sys, envs_sys);
     break;
   default:
     panic("Unhandled syscall ID = %d", a[0]);
