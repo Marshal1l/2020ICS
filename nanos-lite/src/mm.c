@@ -1,11 +1,11 @@
 #include <memory.h>
 
 static void *pf = NULL;
-
+#define PGSIZE 4096
 void *new_page(size_t nr_page)
 {
   void *tmp = pf;
-  pf += nr_page;
+  pf += nr_page * PGSIZE;
   return tmp;
 }
 
