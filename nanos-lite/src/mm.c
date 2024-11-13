@@ -1,6 +1,6 @@
 #include <memory.h>
 
-static void *pf = NULL;
+static void *pf = 0;
 #define PGSIZE 4096
 void *new_page(size_t nr_page)
 {
