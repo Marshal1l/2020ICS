@@ -7,8 +7,6 @@ extern char **environ;
 void call_main(uintptr_t *args)
 {
   printf("-----------call main-----------\n");
-  char *empty[] = {NULL};
-  environ = empty;
   int argc = *args;
   args++;
   int envc = *args;

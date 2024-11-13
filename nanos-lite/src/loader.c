@@ -8,6 +8,9 @@
 #define Elf_Ehdr Elf32_Ehdr
 #define Elf_Phdr Elf32_Phdr
 #endif
+#define PGSIZE 4096
+#define stack_num 8
+extern void *new_page(size_t);
 extern Context *ucontext(AddrSpace *as, Area kstack, void *entry);
 extern Context *kcontext(Area kstack, void (*entry)(void *), void *arg);
 extern int fs_open(const char *pathname, int flags, int mode);
@@ -60,7 +63,11 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
   stack.end = pcb->stack + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
   int size_argv = 0, size_envp = 0, argc = 0, envc = 0;
-
+  void *start = new_page(stack_num);
+  void *end = start + stack_num * PGSIZE;
+  Area ustack = {start, end};
+  uintptr_t *user_stack = ustack.end;
+  uintptr_t *ptr_argv = user_stack;
   while (argv[argc] != NULL)
   {
     // printf("arg %d:=%s\n", argc, argv[argc]);
@@ -73,8 +80,6 @@ void context_uload(PCB *pcb, const char *filename, char *const argv[], char *con
     envc++;
   }
   printf("argc:=%d\tenvc:=%d\n", argc, envc);
-  uintptr_t *user_stack = (uintptr_t *)heap.end;
-  uintptr_t *ptr_argv = user_stack;
   for (int i = argc - 1; i >= 0; i--)
   {
     size_t len = strlen(argv[i]) + 1; // 包括 '\0' 终止符
