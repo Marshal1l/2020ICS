@@ -13,8 +13,7 @@ void call_main(uintptr_t *args)
   args++;
   int envc = *args;
   args++;
-  uintptr_t *envp = *(uintptr_t **)args;
-  printf("ptr_argc:=%x\n", args);
+  char *envp = *(char **)args;
   printf("argc:=%d\n", argc);
   printf("envc:=%d\n", envc);
   printf("envp 0:=%s", (char *)envp[0]);
