@@ -140,7 +140,7 @@ void cpu_exec(uint64_t n)
         nemu_state.halt_pc);
     // fall through
   case NEMU_QUIT:
-    // print_ring();
+    print_ring();
     monitor_statistic();
   }
 }
