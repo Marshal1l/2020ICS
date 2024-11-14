@@ -101,7 +101,6 @@ void cpu_exec(uint64_t n)
     g_nr_guest_instr++;
 
 #ifdef DEBUG
-    printf("11111\n");
     if (check_wp())
     {
       asm_print(this_pc, seq_pc - this_pc, true);
