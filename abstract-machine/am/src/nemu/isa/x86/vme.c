@@ -18,7 +18,7 @@ bool vme_init(void *(*pgalloc_f)(int), void (*pgfree_f)(void *))
   pgfree_usr = pgfree_f;
 
   kas.ptr = pgalloc_f(PGSIZE);
-  printf("alloc page finish\n");
+  printf("kernel alloc page finish\n");
   int i;
   for (i = 0; i < LENGTH(segments); i++)
   {
@@ -28,7 +28,7 @@ bool vme_init(void *(*pgalloc_f)(int), void (*pgfree_f)(void *))
       map(&kas, va, va, 0);
     }
   }
-
+  printf("kernel map finish\n");
   set_cr3(kas.ptr);
   set_cr0(get_cr0() | CR0_PG);
   vme_enable = 1;
