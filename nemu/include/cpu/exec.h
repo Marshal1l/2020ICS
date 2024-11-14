@@ -54,7 +54,7 @@ static inline void update_pc(DecodeExecState *s)
     strcatf(log_asmbuf, __VA_ARGS__); \
     extern void add2ring();           \
     add2ring(cpu.pc, __VA_ARGS__);    \
-  } while (1)
+  } while (0)
 #else
 #define print_asm(...)
 #endif
