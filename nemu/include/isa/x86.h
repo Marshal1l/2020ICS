@@ -43,7 +43,7 @@ typedef struct
   };
 
   vaddr_t pc;
-
+  rtlreg_t cr3, cr0;
   union
   {
     struct
@@ -85,7 +85,7 @@ typedef struct
     uint32_t base;
     uint16_t limit;
   } IDTR;
-  rtlreg_t cr3, cr0;
+
 } x86_CPU_state;
 
 // decode
