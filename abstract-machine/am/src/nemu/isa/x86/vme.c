@@ -65,6 +65,17 @@ void __am_switch(Context *c)
 
 void map(AddrSpace *as, void *va, void *pa, int prot)
 {
+  assert(NULL != as->ptr);
+  uint32_t off_dir = (uint32_t)va >> 22;
+  uint32_t off_pte = ((uint32_t)va & 0x003ff000) >> 12;
+  uint32_t *dir = (uint32_t *)as->ptr;
+  uint32_t *pte = &dir[off_dir];
+  if ((*pte & 1) == 0)
+  {
+    uint32_t *tem = (uint32_t *)pgalloc_usr(1024 * 4);
+    *pte = ((uint32_t)tem & 0xfffff000) | 1;
+  }
+  *(uint32_t *)((int)(*pte & 0xfffff000) + off_pte * 4) = ((uint32_t)pa & 0xfffff000) | 1;
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry)

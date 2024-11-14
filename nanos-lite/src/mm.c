@@ -12,8 +12,8 @@ void *new_page(size_t nr_page)
 
 static inline void *pg_alloc(int n)
 {
-  int pages = n % PGSIZE == 0 ? n / PGSIZE : n / PGSIZE + 1;
-  return new_page(pages);
+  int page_num = (n + PGSIZE - 1) / PGSIZE;
+  return new_page(page_num);
 }
 
 void free_page(void *p)
