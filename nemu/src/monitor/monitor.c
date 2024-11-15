@@ -136,7 +136,7 @@ void init_monitor(int argc, char *argv[])
 
   /* Perform ISA dependent initialization. */
   init_isa();
-  printf("cpu.cr3:=%x", cpu.cr3);
+
   /* Load the image to memory. This will overwrite the built-in image. */
   long img_size = load_img();
 
@@ -148,7 +148,7 @@ void init_monitor(int argc, char *argv[])
 
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
-
+  printf("cpu.cr3:=%x", cpu.cr3);
   /* Display welcome message. */
   welcome();
 }
