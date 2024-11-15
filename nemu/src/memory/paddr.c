@@ -92,7 +92,7 @@ inline void paddr_write(paddr_t addr, word_t data, int len)
     map_write(addr, data, len, fetch_mmio_map(addr));
 }
 
-word_t vaddr_mmu_read(vaddr_t addr, int len, int type) { return 1; };
+word_t vaddr_mmu_read(vaddr_t addr, int len, int type);
 void vaddr_mmu_write(vaddr_t addr, word_t data, int len);
 
 #define def_vaddr_template(bytes)                            \
