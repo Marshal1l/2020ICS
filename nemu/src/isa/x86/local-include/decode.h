@@ -263,7 +263,7 @@ static inline def_DHelper(SI_E2G)
 static inline def_DHelper(mov_cr)
 {
   uint32_t v = instr_fetch(&s->seq_pc, 1);
-  printf("mov_cr decode %x\n", v);
+  // printf("mov_cr decode %x\n", v);
   dsrc1 = &reg_l(v & 0x7);
 
   // printf("index %x\n", v & 0x7);
