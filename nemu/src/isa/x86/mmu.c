@@ -30,19 +30,19 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int type, int len)
   return MEM_RET_FAIL;
 }
 
-// int isa_vaddr_check(vaddr_t vaddr, int type, int len)
-// {
-//   int vm_open = ((cpu.cr0 & CR0_PG) != 0);
-//   if (vm_open)
-//   {
-//     return MEM_RET_NEED_TRANSLATE;
-//   }
-//   else
-//   {
-//     return MEM_RET_OK;
-//   }
-//   return MEM_RET_OK;
-// }
+int isa_vaddr_check(vaddr_t vaddr, int type, int len)
+{
+  int vm_open = ((cpu.cr0 & CR0_PG) != 0);
+  if (vm_open)
+  {
+    return MEM_RET_NEED_TRANSLATE;
+  }
+  else
+  {
+    return MEM_RET_OK;
+  }
+  return MEM_RET_OK;
+}
 
 word_t vaddr_mmu_read(vaddr_t vaddr, int len, int type)
 {
