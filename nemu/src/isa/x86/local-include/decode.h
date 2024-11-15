@@ -272,15 +272,17 @@ static inline def_DHelper(mov_cr)
   {
   case 0:
     ddest = &cpu.cr0;
+    id_dest->reg = 0;
     break;
   case 3:
     ddest = &cpu.cr3;
+    id_dest->reg = 3;
     break;
   default:
     assert(0);
     break;
   }
-  printf("ddest->reg=:%d", id_dest->reg);
+  printf("ddest->reg=:%d\n", id_dest->reg);
 }
 
 static inline def_DHelper(gp2_1_E)
