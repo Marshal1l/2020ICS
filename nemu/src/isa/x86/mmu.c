@@ -58,19 +58,19 @@ word_t vaddr_mmu_read(vaddr_t vaddr, int len, int type)
     paddr_t limit = ((vaddr / PAGE_SIZE) + 1) * PAGE_SIZE;
     if (vaddr + len > limit)
     {
-      // printf("vaddr mmu read %x :cross_page\n",vaddr);
-      word_t res1 = 0;
-      word_t res2 = 0;
-      int len_in = limit - vaddr;
-      int len_over = vaddr + len - limit;
-      uint32_t paddr_in = isa_mmu_translate(vaddr, MEM_TYPE_READ, len_in);
-      res1 = paddr_read(paddr_in, len_in);
-      uint32_t paddr_over = isa_mmu_translate(vaddr + len_in, MEM_TYPE_READ, len_over);
-      res2 = paddr_read(paddr_over, len_over);
+      printf("vaddr mmu read %x :cross_page\n", vaddr);
+      assert(0);
+      // word_t res1 = 0;
+      // word_t res2 = 0;
+      // int len_in = limit - vaddr;
+      // int len_over = vaddr + len - limit;
+      // uint32_t paddr_in = isa_mmu_translate(vaddr, MEM_TYPE_READ, len_in);
+      // res1 = paddr_read(paddr_in, len_in);
+      // uint32_t paddr_over = isa_mmu_translate(vaddr + len_in, MEM_TYPE_READ, len_over);
+      // res2 = paddr_read(paddr_over, len_over);
 
-      // printf("cross page handled\n");
-      return (res2 << (len_in * 8)) | res1;
-      // assert(0);
+      // // printf("cross page handled\n");
+      // return (res2 << (len_in * 8)) | res1;
     }
   }
   return paddr_read(paddr, len);
@@ -89,14 +89,14 @@ void vaddr_mmu_write(vaddr_t vaddr, word_t data, int len)
     paddr_t limit = ((vaddr / PAGE_SIZE) + 1) * PAGE_SIZE;
     if (vaddr + len > limit)
     {
-      // printf("vaddr mmu write %x:cross_page\n",vaddr);
-
-      int len_in = limit - vaddr;
-      int len_over = vaddr + len - limit;
-      uint32_t paddr_in = isa_mmu_translate(vaddr, MEM_TYPE_READ, len_in);
-      uint32_t paddr_over = isa_mmu_translate(vaddr + len_in, MEM_TYPE_READ, len_over);
-      paddr_write(paddr_in, data, len_in);
-      paddr_write(paddr_over, data >> (len_in * 8), len_over);
+      printf("vaddr mmu write %x:cross_page\n", vaddr);
+      assert(0);
+      // int len_in = limit - vaddr;
+      // int len_over = vaddr + len - limit;
+      // uint32_t paddr_in = isa_mmu_translate(vaddr, MEM_TYPE_READ, len_in);
+      // uint32_t paddr_over = isa_mmu_translate(vaddr + len_in, MEM_TYPE_READ, len_over);
+      // paddr_write(paddr_in, data, len_in);
+      // paddr_write(paddr_over, data >> (len_in * 8), len_over);
     }
   }
 
