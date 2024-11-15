@@ -1,6 +1,9 @@
 #include <isa.h>
 #include <memory/vaddr.h>
 #include <memory/paddr.h>
+
+#define CR0_PG 0x80000000
+
 paddr_t isa_mmu_translate(vaddr_t vaddr, int type, int len)
 {
   uint32_t off_page = vaddr & 0xfff;
@@ -23,8 +26,23 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int type, int len)
     else
       return ((pagebase & 0xfffff000) + off_page);
   }
+
   return MEM_RET_FAIL;
 }
+
+// int isa_vaddr_check(vaddr_t vaddr, int type, int len)
+// {
+//   int vm_open = ((cpu.cr0 & CR0_PG) != 0);
+//   if (vm_open)
+//   {
+//     return MEM_RET_NEED_TRANSLATE;
+//   }
+//   else
+//   {
+//     return MEM_RET_OK;
+//   }
+//   return MEM_RET_OK;
+// }
 
 word_t vaddr_mmu_read(vaddr_t vaddr, int len, int type)
 {
