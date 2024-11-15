@@ -58,7 +58,7 @@ static inline const char *reg_name(int index, int width)
   }
   else
   {
-    printf("index %x\n", index);
+    printf("index error %x\n", index);
     assert(index >= 0 && index < 8);
   }
   switch (width)
