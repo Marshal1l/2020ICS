@@ -78,9 +78,9 @@ void map(AddrSpace *as, void *va, void *pa, int prot)
   *(uint32_t *)((int)(*pte & 0xfffff000) + off_pte * 4) = ((uint32_t)pa & 0xfffff000) | 1;
 }
 
-Context *ucontext(AddrSpace *as, Area kstack, void *entry)
+Context *ucontext(AddrSpace *as, Area stack, void *entry)
 {
-  Context *new_p = (Context *)(kstack.end - 16 - sizeof(Context));
+  Context *new_p = (Context *)(stack.end - 16 - sizeof(Context));
   new_p->eip = (uintptr_t)entry;
   new_p->cs = 8;
   new_p->cr3 = NULL;
