@@ -282,7 +282,7 @@ static inline def_DHelper(mov_cr)
     assert(0);
     break;
   }
-  printf("ddest->reg=:%d\n", id_dest->reg);
+  // printf("ddest->reg=:%d\n", id_dest->reg);
 }
 
 static inline def_DHelper(gp2_1_E)
