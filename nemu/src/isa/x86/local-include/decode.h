@@ -266,7 +266,7 @@ static inline def_DHelper(mov_cr)
   printf("mov_cr decode %x\n", v);
   dsrc1 = &reg_l(v & 0x7);
 
-  // printf("index %x\n",v&0x7);
+  printf("index %x\n", v & 0x7);
   switch ((v >> 3) & 0x7)
   {
   case 0:
