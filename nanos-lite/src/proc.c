@@ -26,7 +26,7 @@ extern void context_uload(PCB *pcb, const char *filename, char *const argv[], ch
 extern void context_kload(PCB *pcb, void (*entry)(void *), void *arg);
 void init_proc()
 {
-  // switch_boot_pcb();
+  switch_boot_pcb();
 
   Log("Initializing processes...");
   // context_kload(&pcb[0], hello_fun, "A");
