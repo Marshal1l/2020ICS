@@ -19,7 +19,7 @@ static inline def_EHelper(lidt)
 static inline def_EHelper(mov_r2cr)
 {
   *ddest = *dsrc1;
-  printf("cpu.cr3:=%x", cpu.cr3);
+  printf("cpu.cr3:=%x\n", cpu.cr3);
   // printf("mov r to cr\n");
   print_asm("movl %%%s,%%cr%d", reg_name(id_src1->reg, 4), id_dest->reg);
   // printf("movl %s,cr%d\n", reg_name(id_src1->reg, 4), id_dest->reg);
