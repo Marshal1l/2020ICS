@@ -148,7 +148,7 @@ void init_monitor(int argc, char *argv[])
 
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
-  printf("cpu.cr3:=%x", cpu.cr3);
+
   /* Display welcome message. */
   welcome();
 }
