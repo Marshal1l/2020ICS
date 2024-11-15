@@ -267,7 +267,7 @@ static inline def_DHelper(mov_cr)
   dsrc1 = &reg_l(v & 0x7);
 
   // printf("index %x\n", v & 0x7);
-  printf("%d\n", (v >> 3) & 0x7);
+  // printf("%d\n", (v >> 3) & 0x7);
   switch ((v >> 3) & 0x7)
   {
   case 0:
@@ -275,6 +275,7 @@ static inline def_DHelper(mov_cr)
     break;
   case 3:
     ddest = &cpu.cr3;
+    printf("sdada:%ls", ddest);
     break;
   default:
     assert(0);
